@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include"GameScreen.h"
 
 MainScene::MainScene()
 {
@@ -37,10 +38,18 @@ void MainScene::Release()
 
 void MainScene::Update(float deltaTime, float time)
 {
-	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Exit) && INPUT->GetButtonDown())
+
+	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown())
 	{
+		SceneDirector::GetInst()->ChangeScene(new GameScreen());
+		INPUT->ButtonDown(false);
+	}
+	else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Exit) && INPUT->GetButtonDown())
+	{
+		INPUT->ButtonDown(false);
 		exit(0);
 	}
+	
 }
 
 void MainScene::Render()
