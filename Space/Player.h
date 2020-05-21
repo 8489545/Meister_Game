@@ -10,10 +10,14 @@ public:
 	Player();
 	~Player();
 
+	float m_Speed;
+
 	void Init();
 	void Release();
 
 	void Update(float delatTime, float Time);
 	void Render();
+
+	void Move();
 };
 

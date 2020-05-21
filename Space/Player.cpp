@@ -24,7 +24,9 @@ void Player::Init()
 	m_Player = m_Front;
 	m_Player->SetParent(this);
 
-	m_Player->SetPosition(1920 / 2, 900);
+	SetPosition(1920 / 2, 900);
+
+	m_Speed = 300.f;
 
 }
 
@@ -34,10 +36,28 @@ void Player::Release()
 
 void Player::Update(float deltaTime, float Time)
 {
-	int i = 0;
+	Move();
 }
 
 void Player::Render()
 {
 	m_Player->Render();
+}
+
+void Player::Move()
+{
+	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
+	{
+		m_Position.x += m_Speed * dt;
+		m_Player = m_Right;
+	}
+	else if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
+	{
+		m_Position.x -= m_Speed * dt;
+		m_Player = m_Left;
+	}
+	else
+	{
+		m_Player = m_Front;
+	}
 }
