@@ -48,16 +48,25 @@ void Player::Move()
 {
 	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
 	{
-		m_Position.x += m_Speed * dt;
-		m_Player = m_Right;
+		m_Position.x -= m_Speed * dt;
+		m_Player = m_Left;
 	}
 	else if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
 	{
-		m_Position.x -= m_Speed * dt;
-		m_Player = m_Left;
+		m_Position.x += m_Speed * dt;
+		m_Player = m_Right;
 	}
 	else
 	{
 		m_Player = m_Front;
+	}
+
+	if (INPUT->GetKey(VK_UP) == KeyState::PRESS)
+	{
+		m_Position.y -= m_Speed * dt;
+	}
+	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS)
+	{
+		m_Position.y += m_Speed * dt;
 	}
 }
