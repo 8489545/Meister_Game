@@ -46,12 +46,12 @@ void Player::Render()
 
 void Player::Move()
 {
-	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
+	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_Position.x >= GameMgr::GetInst()->XMIN)
 	{
 		m_Position.x -= m_Speed * dt;
 		m_Player = m_Left;
 	}
-	else if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
+	else if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_Position.x <= GameMgr::GetInst()->XMAX)
 	{
 		m_Position.x += m_Speed * dt;
 		m_Player = m_Right;
@@ -61,11 +61,11 @@ void Player::Move()
 		m_Player = m_Front;
 	}
 
-	if (INPUT->GetKey(VK_UP) == KeyState::PRESS)
+	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_Position.y >= GameMgr::GetInst()->YMIN)
 	{
 		m_Position.y -= m_Speed * dt;
 	}
-	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS)
+	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS && m_Position.y <= GameMgr::GetInst()->YMAX)
 	{
 		m_Position.y += m_Speed * dt;
 	}

@@ -5,6 +5,7 @@ public:
 	GameMgr();
 	~GameMgr();
 
+	float XMAX, XMIN, YMAX, YMIN;
 
 	bool m_CreatePlayer;
 
@@ -12,5 +13,7 @@ public:
 	void Release();
 
 	void CreatePlayer();
+
+	void SetLimit(float xmax,float xmin,float ymax,float ymin);
 };
 
