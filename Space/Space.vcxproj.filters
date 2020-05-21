@@ -28,6 +28,9 @@
     <Filter Include="Game\Object\Mgrs">
       <UniqueIdentifier>{3721a37d-fd02-4e1c-a864-9f5bed654455}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\OBJ">
+      <UniqueIdentifier>{30b23daf-98a8-4f62-bd60-5768414785bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Space.cpp">
@@ -93,6 +96,9 @@
     <ClCompile Include="GameMgr.cpp">
       <Filter>Game\Object\Mgrs</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -157,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="GameMgr.h">
       <Filter>Game\Object\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
