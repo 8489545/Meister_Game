@@ -5,7 +5,12 @@ public:
 	GameMgr();
 	~GameMgr();
 
+
+	bool m_CreatePlayer;
+
 	void Init();
 	void Release();
+
+	void CreatePlayer();
 };
 

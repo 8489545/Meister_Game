@@ -30,6 +30,8 @@ void MainScene::Init()
 
 	m_Exit = Sprite::Create(L"Painting/MainScreen/Exit.png");
 	m_Exit->SetPosition(1629,827);
+
+	GameMgr::GetInst()->Init();
 }
 
 void MainScene::Release()

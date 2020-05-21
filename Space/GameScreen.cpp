@@ -8,6 +8,8 @@ void GameScreen::Init()
 
 	m_LBox = Sprite::Create(L"Painting/GameScreen/BlackBox.png");
 	m_LBox->SetPosition(3180 / 2, 1080 / 2);
+
+	GameMgr::GetInst()->CreatePlayer();
 }
 
 void GameScreen::Release()
