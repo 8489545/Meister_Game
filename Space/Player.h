@@ -6,6 +6,7 @@ class Player : public Object
 	Sprite* m_Front;
 	Sprite* m_Left;
 	Sprite* m_Right;
+	Sprite* m_Propel;
 public:
 	Player();
 	~Player();

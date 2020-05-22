@@ -21,6 +21,9 @@ void Player::Init()
 	m_Right = Sprite::Create(L"Painting/Object/Player/Right.png");
 	m_Right->SetParent(this);
 
+	m_Propel = Sprite::Create(L"Painting/Object/Player/Propel.png");
+	m_Propel->SetParent(this);
+
 	m_Player = m_Front;
 	m_Player->SetParent(this);
 
@@ -64,6 +67,7 @@ void Player::Move()
 	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_Position.y >= GameMgr::GetInst()->YMIN)
 	{
 		m_Position.y -= m_Speed * dt;
+		m_Player = m_Propel;
 	}
 	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS && m_Position.y <= GameMgr::GetInst()->YMAX)
 	{
