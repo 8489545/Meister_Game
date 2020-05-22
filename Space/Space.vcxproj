@@ -23,6 +23,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
+    <ClCompile Include="DirectBullet.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameScreen.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionMgr.h" />
+    <ClInclude Include="DirectBullet.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameScreen.h" />

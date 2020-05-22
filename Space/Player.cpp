@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include"DirectBullet.h"
 
 Player::Player()
 {
@@ -24,12 +25,24 @@ void Player::Init()
 	m_Propel = Sprite::Create(L"Painting/Object/Player/Propel.png");
 	m_Propel->SetParent(this);
 
+	m_LPropel = Sprite::Create(L"Painting/Object/Player/LeftPropel.png");
+	m_LPropel->SetParent(this);
+
+	m_RPropel = Sprite::Create(L"Painting/Object/Player/RightPropel.png");
+	m_RPropel->SetParent(this);
+
 	m_Player = m_Front;
 	m_Player->SetParent(this);
 
 	SetPosition(1920 / 2, 900);
 
 	m_Speed = 300.f;
+
+	if (m_ShotType == SHOTTYPE::DIRECT)
+	{
+		m_RPM = 400.f;
+		m_FireDelay = (60.f / m_RPM);
+	}
 
 }
 
@@ -39,7 +52,9 @@ void Player::Release()
 
 void Player::Update(float deltaTime, float Time)
 {
+	m_NowTick += deltaTime;
 	Move();
+	Shot();
 }
 
 void Player::Render()
@@ -53,24 +68,46 @@ void Player::Move()
 	{
 		m_Position.x -= m_Speed * dt;
 		m_Player = m_Left;
+
+		if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_Position.y >= GameMgr::GetInst()->YMIN)
+		{
+			m_Position.y -= m_Speed * dt;
+			m_Player = m_LPropel;
+		}
 	}
 	else if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_Position.x <= GameMgr::GetInst()->XMAX)
 	{
 		m_Position.x += m_Speed * dt;
 		m_Player = m_Right;
+
+		if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_Position.y >= GameMgr::GetInst()->YMIN)
+		{
+			m_Position.y -= m_Speed * dt;
+			m_Player = m_RPropel;
+		}
+	}
+	else if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_Position.y >= GameMgr::GetInst()->YMIN)
+	{
+		m_Position.y -= m_Speed * dt;
+		m_Player = m_Propel;
 	}
 	else
 	{
 		m_Player = m_Front;
 	}
 
-	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_Position.y >= GameMgr::GetInst()->YMIN)
-	{
-		m_Position.y -= m_Speed * dt;
-		m_Player = m_Propel;
-	}
 	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS && m_Position.y <= GameMgr::GetInst()->YMAX)
 	{
 		m_Position.y += m_Speed * dt;
+	}
+}
+
+void Player::Shot()
+{
+	if (INPUT->GetKey(VK_SPACE) == KeyState::PRESS && (m_NowTick - m_LastFireTick) > m_FireDelay)
+	{
+		ObjMgr->AddObject(new DirectBullet(Vec2(m_Position.x - 30,m_Position.y - 20), 1000), "Bullet");
+		ObjMgr->AddObject(new DirectBullet(Vec2(m_Position.x + 27,m_Position.y - 20), 1000), "Bullet");
+		m_LastFireTick = m_NowTick;
 	}
 }

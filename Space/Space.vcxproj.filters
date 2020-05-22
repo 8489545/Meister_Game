@@ -99,6 +99,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="DirectBullet.cpp">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -165,6 +168,9 @@
       <Filter>Game\Object\Mgrs</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectBullet.h">
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
   </ItemGroup>
