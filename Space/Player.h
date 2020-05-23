@@ -1,10 +1,4 @@
 #pragma once
-enum class SHOTTYPE
-{
-	DIRECT,
-	SPREAD,
-	NONE
-};
 class Player : public Object
 {
 	Sprite* m_Player;
@@ -18,8 +12,6 @@ class Player : public Object
 public:
 	Player();
 	~Player();
-
-	SHOTTYPE m_ShotType;
 
 	float m_Speed;
 	float m_RPM;
@@ -36,5 +28,6 @@ public:
 
 	void Move();
 	void Shot();
+	void ChangeFireMode();
 };
 

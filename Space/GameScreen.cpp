@@ -46,6 +46,7 @@ void GameScreen::Update(float deltaTime, float time)
 	{
 		m_Tutorials->SetDestroy(true);
 		GameMgr::GetInst()->CreatePlayer();
+		GameMgr::GetInst()->CreateUI();
 		m_isStart = true;
 		INPUT->ButtonDown(false);
 	}

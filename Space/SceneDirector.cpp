@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SceneDirector.h"
+#include"UI.h"
 
 
 SceneDirector::SceneDirector()
@@ -32,6 +33,9 @@ void SceneDirector::Update(float deltaTime, float time)
 	if (m_CurrentScene)
 		m_CurrentScene->Update(deltaTime, time);
 
+	if (GameMgr::GetInst()->m_CreatePlayer)
+		UI::GetInst()->Update();
+
 }
 
 void SceneDirector::Render()
@@ -39,5 +43,8 @@ void SceneDirector::Render()
 	if (m_CurrentScene)
 		m_CurrentScene->Render();
 	ObjMgr->Render();
+
+	if(GameMgr::GetInst()->m_CreatePlayer)
+		UI::GetInst()->Render();
 
 }
