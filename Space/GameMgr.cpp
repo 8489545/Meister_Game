@@ -37,6 +37,11 @@ void GameMgr::ChangeFireMode()
 	UI::GetInst()->ChangeFireMode();
 }
 
+void GameMgr::SetPlayerStatus(int level, int exp, int hp, float speed, int atk, float rpm)
+{
+	m_PlayerStatus = { level,exp,hp,speed,atk,rpm };
+}
+
 void GameMgr::SetLimit(float xmax, float xmin, float ymax, float ymin)
 {
 	XMAX = xmax;

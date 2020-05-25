@@ -49,6 +49,7 @@ void Player::Release()
 void Player::Update(float deltaTime, float Time)
 {
 	m_NowTick += deltaTime;
+	GameMgr::GetInst()->SetPlayerStatus(m_Level, m_Exp, m_HP, m_Speed, m_Atk, m_RPM);
 	ChangeFireMode();
 	Move();
 	Shot();

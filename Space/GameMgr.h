@@ -5,6 +5,16 @@ enum class SHOTTYPE
 	SPREAD,
 	NONE
 };
+struct PlayerStatus
+{
+public:
+	int m_Level;
+	int m_Exp;
+	int m_HP;
+	float m_Speed;
+	int m_Atk;
+	float m_RPM;
+};
 class GameMgr : public Singleton<GameMgr>
 {
 public:
@@ -16,6 +26,8 @@ public:
 	bool m_CreatePlayer;
 	SHOTTYPE m_PlayerShotType;
 
+	PlayerStatus m_PlayerStatus;
+
 	void Init();
 	void Release();
 
@@ -23,6 +35,8 @@ public:
 	void CreateUI();
 
 	void ChangeFireMode();
+
+	void SetPlayerStatus(int level, int exp, int hp, float speed, int atk, float rpm);
 
 	void SetLimit(float xmax,float xmin,float ymax,float ymin);
 };

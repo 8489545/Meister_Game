@@ -13,10 +13,14 @@ public:
 	Player();
 	~Player();
 
+	int m_Level;
+	int m_Exp;
+	int m_HP;
 	float m_Speed;
+	int m_Atk;
 	float m_RPM;
-	float m_FireDelay;
 
+	float m_FireDelay;
 	float m_LastFireTick;
 	float m_NowTick;
 
