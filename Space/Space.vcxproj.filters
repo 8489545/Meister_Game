@@ -105,6 +105,9 @@
     <ClCompile Include="UI.cpp">
       <Filter>Game\Object\OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="SpreadBullet.cpp">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -177,6 +180,9 @@
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="SpreadBullet.h">
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
   </ItemGroup>

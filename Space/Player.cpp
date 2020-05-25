@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include"DirectBullet.h"
+#include"SpreadBullet.h"
 
 Player::Player()
 {
@@ -108,6 +109,13 @@ void Player::Shot()
 		ObjMgr->AddObject(new DirectBullet(Vec2(m_Position.x + 27, m_Position.y - 20), 1000), "Bullet");
 		m_LastFireTick = m_NowTick;
 	}
+	if ((INPUT->GetKey(VK_SPACE) == KeyState::PRESS && (m_NowTick - m_LastFireTick) > m_FireDelay) && GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
+	{
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x, m_Position.y - 50), 700,20), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x, m_Position.y - 50), 700,0), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x, m_Position.y - 50), 700,-20), "Bullet");
+		m_LastFireTick = m_NowTick;
+	}
 }
 
 void Player::ChangeFireMode()
@@ -115,8 +123,12 @@ void Player::ChangeFireMode()
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		m_RPM = 400.f;
-		m_FireDelay = (60.f / m_RPM);
 	}
+	else if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
+	{
+		m_RPM = 250.f;
+	}
+	m_FireDelay = (60.f / m_RPM);
 	if (INPUT->GetKey('B') == KeyState::DOWN)
 	{
 		if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)

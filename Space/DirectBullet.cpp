@@ -20,7 +20,7 @@ void DirectBullet::Update(float delatTime, float Time)
 
 	if (m_Position.y <= -100.f)
 	{
-      		SetDestroy(true);
+      	SetDestroy(true);
 	}
 }
 
