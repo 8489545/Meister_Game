@@ -28,6 +28,7 @@ void GameScreen::Init()
 	ObjMgr->AddObject(m_Tutorials, "UI");
 
 	m_isStart = false;
+	m_CompleteTutorials = false;
 }
 
 void GameScreen::Release()
@@ -36,6 +37,7 @@ void GameScreen::Release()
 
 void GameScreen::Update(float deltaTime, float time)
 {
+	printf("%f\n", dt);
 	m_GameScreen1->m_Position.y += 500 * dt;
 	m_GameScreen2->m_Position.y += 500 * dt;
 
@@ -48,8 +50,9 @@ void GameScreen::Update(float deltaTime, float time)
 		m_GameScreen2->m_Position.y = m_GameScreen1->m_Position.y - 1080;
 	}
 
-	if (INPUT->GetButtonDown())
+	if (INPUT->GetButtonDown() && !m_CompleteTutorials)
 	{
+		m_CompleteTutorials = true;
 		m_Tutorials->SetDestroy(true);
 		GameMgr::GetInst()->CreatePlayer();
 		GameMgr::GetInst()->CreateUI();

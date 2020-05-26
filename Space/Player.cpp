@@ -39,12 +39,16 @@ void Player::Init()
 
 	m_FirstSkillAcq = false;
 	m_SecendSkillAcq = false;
+	m_willLevelUPReward = false;
 
-	m_HP = 100;
+	m_MAXHP = 100;
+	m_MAXExp = 100;
+	m_HP = m_MAXHP;
 	m_Exp = 0;
 	m_Level = 1;
 	m_Atk = 60;
 	m_Speed = 300.f;
+	m_RPMIncrease = 0.f;
 
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
 }
@@ -60,6 +64,9 @@ void Player::Update(float deltaTime, float Time)
 	ChangeFireMode();
 	Move();
 	Shot();
+	LevelUP();
+	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
+		m_Exp += 70;
 }
 
 void Player::Render()
@@ -130,11 +137,11 @@ void Player::ChangeFireMode()
 {
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
-		m_RPM = 400.f;
+		m_RPM = 400.f + m_RPMIncrease;
 	}
 	else if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
 	{
-		m_RPM = 250.f;
+		m_RPM = 250.f + (m_RPMIncrease * 0.375f);
 	}
 	m_FireDelay = (60.f / m_RPM);
 	if (INPUT->GetKey('B') == KeyState::DOWN)
@@ -156,4 +163,59 @@ void Player::DeliveringInformation()
 	GameMgr::GetInst()->m_FirstSkill = m_FirstSkillAcq;
 	GameMgr::GetInst()->m_SecendSkill = m_SecendSkillAcq;
 	GameMgr::GetInst()->SetPlayerStatus(m_Level, m_Exp, m_HP, m_Speed, m_Atk, m_RPM);
+}
+
+void Player::LevelUP()
+{
+	if (m_Exp >= m_MAXExp && m_Level < 5)
+	{
+		m_willLevelUPReward = true;
+	}
+	if (m_willLevelUPReward)
+	{
+		m_Level += 1;
+		ObjMgr->AddObject(new EffectMgr(L"Painting/UI/LevelUP/", 1, 5, 5, m_Position), "Effect");
+
+		switch (m_Level)
+		{
+		case 2:
+			m_MAXHP += m_MAXHP * 0.2;
+			m_Atk += m_Atk * 0.2;
+			m_RPMIncrease += m_RPM * 0.2;
+			m_HP = m_MAXHP;
+			m_MAXExp = 200;
+			m_Exp = 0;
+			break;
+		case 3:
+			m_MAXHP += m_MAXHP * 0.2;
+			m_Atk += m_Atk * 0.2;
+			m_RPMIncrease += m_RPM * 0.2;
+			m_HP = m_MAXHP;
+			m_FirstSkillAcq = true;
+			m_MAXExp = 300;
+			m_Exp = 0;
+			break;
+		case 4:
+			m_MAXHP += m_MAXHP * 0.2;
+			m_Atk += m_Atk * 0.2;
+			m_RPMIncrease += m_RPM * 0.2;
+			m_HP = m_MAXHP;
+			m_MAXExp = 400;
+			m_Exp = 0;
+			break;
+		case 5:
+			m_MAXHP += m_MAXHP * 0.2;
+			m_Atk += m_Atk * 0.2;
+			m_RPMIncrease += m_RPM * 0.2;
+			m_HP = m_MAXHP;
+			m_SecendSkillAcq = true;
+			m_MAXExp = 500;
+			m_Exp = 0;
+			break;
+		default:
+			break;
+		}
+
+		m_willLevelUPReward = false;
+	}
 }

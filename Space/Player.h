@@ -20,8 +20,14 @@ public:
 	int m_Atk;
 	float m_RPM;
 
+	int m_MAXHP;
+	int m_MAXExp;
+	float m_RPMIncrease;
+
 	bool m_FirstSkillAcq;
 	bool m_SecendSkillAcq;
+
+	bool m_willLevelUPReward;
 
 	float m_FireDelay;
 	float m_LastFireTick;
@@ -37,5 +43,7 @@ public:
 	void Shot();
 	void ChangeFireMode();
 	void DeliveringInformation();
+
+	void LevelUP();
 };
 

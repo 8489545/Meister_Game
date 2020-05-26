@@ -51,6 +51,7 @@ void UI::Release()
 
 void UI::Update()
 {
+	GameMgr::GetInst()->UnlockSkill();
 }
 
 void UI::Render()
@@ -61,7 +62,8 @@ void UI::Render()
 					"ATK : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Atk) + " \n" +
 					"LEVEL : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Level) + " \n" + 
 					"RPM : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_RPM) + " \n" +
-					"SPEED : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Speed) + " \n", 0, 0);
+					"SPEED : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Speed) + " \n" +
+					"EXP : " +std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Exp), 0, 0);
 	Renderer::GetInst()->GetSprite()->End();
 }
 
@@ -84,5 +86,5 @@ void UI::UnlockedFirstSkill()
 
 void UI::UnlockedSecendSkill()
 {
-	m_UISecendSkill->SetDestroy(true);
+	m_UISecendLock->SetDestroy(true);
 }

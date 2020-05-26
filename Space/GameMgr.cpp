@@ -14,6 +14,8 @@ GameMgr::~GameMgr()
 void GameMgr::Init()
 {
 	m_CreatePlayer = false;
+	m_FirstSkill = false;
+	m_SecendSkill = false;
 	m_PlayerShotType = SHOTTYPE::DIRECT;
 }
 
@@ -48,4 +50,12 @@ void GameMgr::SetLimit(float xmax, float xmin, float ymax, float ymin)
 	XMIN = xmin;
 	YMAX = ymax;
 	YMIN = ymin;
+}
+
+void GameMgr::UnlockSkill()
+{
+	if (m_FirstSkill)
+		UI::GetInst()->UnlockedFirstSkill();
+	if (m_SecendSkill)
+		UI::GetInst()->UnlockedSecendSkill();
 }

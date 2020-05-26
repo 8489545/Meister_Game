@@ -14,6 +14,7 @@ public:
 	void Release();
 
 	bool m_isStart;
+	bool m_CompleteTutorials;
 
 	void Update(float deltaTime, float time);
 	void Render();
