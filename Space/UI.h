@@ -5,6 +5,8 @@ class UI : public Singleton<UI>
 	Sprite* m_SpreadFire;
 
 	Sprite* m_UIFire;
+
+	TextMgr* m_UIText;
 public:
 	UI();
 	~UI();
