@@ -23,6 +23,7 @@ public:
 	int m_MAXHP;
 	int m_MAXExp;
 	float m_RPMIncrease;
+	int m_AtkIncrease;
 
 	bool m_FirstSkillAcq;
 	bool m_SecendSkillAcq;

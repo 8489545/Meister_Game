@@ -138,10 +138,13 @@ void Player::ChangeFireMode()
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		m_RPM = 400.f + m_RPMIncrease;
+		m_Atk = 100 + m_AtkIncrease;
 	}
 	else if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
 	{
 		m_RPM = 250.f + (m_RPMIncrease * 0.375f);
+		m_Atk = 60 + (m_AtkIncrease * 0.333f);
+		
 	}
 	m_FireDelay = (60.f / m_RPM);
 	if (INPUT->GetKey('B') == KeyState::DOWN)
@@ -180,7 +183,7 @@ void Player::LevelUP()
 		{
 		case 2:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_Atk += m_Atk * 0.2;
+			m_AtkIncrease += m_Atk * 0.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_MAXExp = 200;
@@ -188,7 +191,7 @@ void Player::LevelUP()
 			break;
 		case 3:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_Atk += m_Atk * 0.2;
+			m_AtkIncrease += m_Atk * 0.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_FirstSkillAcq = true;
@@ -197,7 +200,7 @@ void Player::LevelUP()
 			break;
 		case 4:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_Atk += m_Atk * 0.2;
+			m_AtkIncrease += m_Atk * 0.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_MAXExp = 400;
@@ -205,7 +208,7 @@ void Player::LevelUP()
 			break;
 		case 5:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_Atk += m_Atk * 0.2;
+			m_AtkIncrease += m_Atk * 0.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_SecendSkillAcq = true;
