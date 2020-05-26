@@ -17,8 +17,11 @@ void GameScreen::Init()
 	m_LBox = Sprite::Create(L"Painting/GameScreen/BlackBox.png");
 	m_LBox->SetPosition(3180 / 2, 1080 / 2);
 
-	ObjMgr->AddObject(m_RBox, "UI");
-	ObjMgr->AddObject(m_LBox, "UI");
+	ObjMgr->AddObject(m_RBox, "Obj");
+	ObjMgr->AddObject(m_LBox, "Obj");
+
+	m_RBox->m_Layer = 1;
+	m_LBox->m_Layer = 1;
 
 	GameMgr::GetInst()->SetLimit(1260 - 114 / 2, 660 + 114 / 2, 1080 - 110 / 2, 0 + 110 / 2);
 
