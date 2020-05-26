@@ -31,6 +31,11 @@ public:
 	bool m_FirstSkill;
 	bool m_SecendSkill;
 
+	float m_FirstSkillCooldown;
+	float m_SecendSkillCooldown;
+	float m_FirstSkillMaxCooldown;
+	float m_SecendSkillMaxCooldown;
+
 	void Init();
 	void Release();
 

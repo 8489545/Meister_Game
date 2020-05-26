@@ -28,6 +28,11 @@ public:
 	bool m_FirstSkillAcq;
 	bool m_SecendSkillAcq;
 
+	float m_FSkillCooldown;
+	float m_SSkillCooldown;
+	float m_FSkillMAXCooldown;
+	float m_SSkillMAXCooldown;
+
 	bool m_willLevelUPReward;
 
 	float m_FireDelay;
@@ -44,6 +49,7 @@ public:
 	void Shot();
 	void ChangeFireMode();
 	void DeliveringInformation();
+	void Skill();
 
 	void LevelUP();
 };

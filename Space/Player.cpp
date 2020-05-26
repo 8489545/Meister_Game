@@ -50,6 +50,12 @@ void Player::Init()
 	m_Speed = 300.f;
 	m_RPMIncrease = 0.f;
 
+	m_FSkillCooldown = 0.f;
+	m_SSkillCooldown = 0.f;
+
+	m_FSkillMAXCooldown = 10.f;
+	m_SSkillMAXCooldown = 25.f;
+
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
 }
 
@@ -65,6 +71,7 @@ void Player::Update(float deltaTime, float Time)
 	Move();
 	Shot();
 	LevelUP();
+	Skill();
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
 		m_Exp += 70;
 }
@@ -166,6 +173,37 @@ void Player::DeliveringInformation()
 	GameMgr::GetInst()->m_FirstSkill = m_FirstSkillAcq;
 	GameMgr::GetInst()->m_SecendSkill = m_SecendSkillAcq;
 	GameMgr::GetInst()->SetPlayerStatus(m_Level, m_Exp, m_HP, m_Speed, m_Atk, m_RPM);
+	GameMgr::GetInst()->m_FirstSkillCooldown = m_FSkillCooldown;
+	GameMgr::GetInst()->m_FirstSkillMaxCooldown = m_FSkillMAXCooldown;
+	GameMgr::GetInst()->m_SecendSkillCooldown = m_SSkillCooldown;
+	GameMgr::GetInst()->m_SecendSkillMaxCooldown = m_SSkillMAXCooldown;
+}
+
+void Player::Skill()
+{
+	if (m_FSkillCooldown > 0)
+	{
+		m_FSkillCooldown -= dt;
+
+		if (m_FSkillCooldown < 0)
+			m_FSkillCooldown = 0.f;
+	}
+	if (m_SSkillCooldown > 0)
+	{
+		m_SSkillCooldown -= dt;
+
+		if (m_SSkillCooldown < 0)
+			m_SSkillCooldown = 0.f;
+	}
+
+	if (m_FSkillCooldown <= 0.f && INPUT->GetKey('X') == KeyState::DOWN && m_FirstSkillAcq)
+	{
+		m_FSkillCooldown = m_FSkillMAXCooldown;
+	}
+	if (m_SSkillCooldown <= 0.f && INPUT->GetKey('Z') == KeyState::DOWN && m_SecendSkillAcq)
+	{
+		m_SSkillCooldown = m_SSkillMAXCooldown;
+	}
 }
 
 void Player::LevelUP()

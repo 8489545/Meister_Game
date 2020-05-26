@@ -11,12 +11,18 @@ class UI : public Singleton<UI>
 	Sprite* m_UISecendSkill;
 	Sprite* m_UIFire;
 
+	Sprite* m_UIFirstSkillCooldown;
+	Sprite* m_UISecendSkillCooldown;
+
 	TextMgr* m_UIText;
 public:
 	UI();
 	~UI();
 	void Init();
 	void Release();
+
+	float m_FSkillGage;
+	float m_SSkillGage;
 
 	void Update();
 	void Render();
