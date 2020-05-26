@@ -28,6 +28,9 @@ public:
 
 	PlayerStatus m_PlayerStatus;
 
+	bool m_FirstSkill;
+	bool m_SecendSkill;
+
 	void Init();
 	void Release();
 

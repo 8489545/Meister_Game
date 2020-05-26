@@ -20,6 +20,9 @@ public:
 	int m_Atk;
 	float m_RPM;
 
+	bool m_FirstSkillAcq;
+	bool m_SecendSkillAcq;
+
 	float m_FireDelay;
 	float m_LastFireTick;
 	float m_NowTick;
@@ -33,5 +36,6 @@ public:
 	void Move();
 	void Shot();
 	void ChangeFireMode();
+	void DeliveringInformation();
 };
 

@@ -37,6 +37,13 @@ void Player::Init()
 
 	SetPosition(1920 / 2, 900);
 
+	m_FirstSkillAcq = false;
+	m_SecendSkillAcq = false;
+
+	m_HP = 100;
+	m_Exp = 0;
+	m_Level = 1;
+	m_Atk = 60;
 	m_Speed = 300.f;
 
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
@@ -49,7 +56,7 @@ void Player::Release()
 void Player::Update(float deltaTime, float Time)
 {
 	m_NowTick += deltaTime;
-	GameMgr::GetInst()->SetPlayerStatus(m_Level, m_Exp, m_HP, m_Speed, m_Atk, m_RPM);
+	DeliveringInformation();
 	ChangeFireMode();
 	Move();
 	Shot();
@@ -142,4 +149,11 @@ void Player::ChangeFireMode()
 		}
 		GameMgr::GetInst()->ChangeFireMode();
 	}
+}
+
+void Player::DeliveringInformation()
+{
+	GameMgr::GetInst()->m_FirstSkill = m_FirstSkillAcq;
+	GameMgr::GetInst()->m_SecendSkill = m_SecendSkillAcq;
+	GameMgr::GetInst()->SetPlayerStatus(m_Level, m_Exp, m_HP, m_Speed, m_Atk, m_RPM);
 }
