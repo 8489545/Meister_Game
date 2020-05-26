@@ -145,12 +145,12 @@ void Player::ChangeFireMode()
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		m_RPM = 400.f + m_RPMIncrease;
-		m_Atk = 100 + m_AtkIncrease;
+		m_Atk = 60 + m_AtkIncrease;
 	}
 	else if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
 	{
 		m_RPM = 250.f + (m_RPMIncrease * 0.375f);
-		m_Atk = 60 + (m_AtkIncrease * 0.333f);
+		m_Atk = 45 + (m_AtkIncrease * 0.333f);
 		
 	}
 	m_FireDelay = (60.f / m_RPM);
@@ -200,9 +200,18 @@ void Player::Skill()
 	{
 		m_FSkillCooldown = m_FSkillMAXCooldown;
 	}
+	else if (m_FSkillCooldown > 0.f && INPUT->GetKey('X') == KeyState::DOWN)
+	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/UI/CooldownText/", 1, 8, 5, Vec2(1920 / 2,1080 / 2)), "Effect");
+	}
+
 	if (m_SSkillCooldown <= 0.f && INPUT->GetKey('Z') == KeyState::DOWN && m_SecendSkillAcq)
 	{
 		m_SSkillCooldown = m_SSkillMAXCooldown;
+	}
+	else if (m_SSkillCooldown > 0.f && INPUT->GetKey('Z') == KeyState::DOWN)
+	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/UI/CooldownText/", 1, 8, 5, Vec2(1920 / 2, 1080 / 2)), "Effect");
 	}
 }
 
