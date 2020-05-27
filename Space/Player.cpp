@@ -37,6 +37,8 @@ void Player::Init()
 	m_ColBox = Sprite::Create(L"Painting/Object/Player/ColiderBox.png");
 	m_ColBox->m_Visible = false;
 
+	m_CatchBox = Sprite::Create(L"Painting/Object/Player/CatchBox.png");
+
 	m_Player = m_Front;
 	m_Player->SetParent(this);
 
@@ -64,6 +66,7 @@ void Player::Init()
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
 
 	ObjMgr->AddObject(m_ColBox, "PlayerBox");
+	ObjMgr->AddObject(m_CatchBox, "CatchBox");
 }
 
 void Player::Release()
@@ -80,6 +83,7 @@ void Player::Update(float deltaTime, float Time)
 	LevelUP();
 	Skill();
 	m_ColBox->m_Position = m_Position;
+	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
 		m_Exp += 70;
 }

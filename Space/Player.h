@@ -11,6 +11,7 @@ class Player : public Object
 	Sprite* m_RPropel;
 
 	Sprite* m_ColBox;
+	Sprite* m_CatchBox;
 public:
 	Player();
 	~Player();

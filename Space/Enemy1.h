@@ -1,6 +1,7 @@
 #pragma once
 class Enemy1 : public Object
 {
+	Sprite* m_Enemy;
 public:
 	Enemy1(Vec2 Pos);
 	~Enemy1();
