@@ -9,6 +9,8 @@ class Player : public Object
 	Sprite* m_Propel;
 	Sprite* m_LPropel;
 	Sprite* m_RPropel;
+
+	Sprite* m_ColBox;
 public:
 	Player();
 	~Player();

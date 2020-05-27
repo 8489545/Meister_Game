@@ -34,6 +34,9 @@ void Player::Init()
 	m_RPropel = Sprite::Create(L"Painting/Object/Player/RightPropel.png");
 	m_RPropel->SetParent(this);
 
+	m_ColBox = Sprite::Create(L"Painting/Object/Player/ColiderBox.png");
+	m_ColBox->m_Visible = false;
+
 	m_Player = m_Front;
 	m_Player->SetParent(this);
 
@@ -59,6 +62,8 @@ void Player::Init()
 	m_SSkillMAXCooldown = 25.f;
 
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
+
+	ObjMgr->AddObject(m_ColBox, "PlayerBox");
 }
 
 void Player::Release()
@@ -74,6 +79,7 @@ void Player::Update(float deltaTime, float Time)
 	Shot();
 	LevelUP();
 	Skill();
+	m_ColBox->m_Position = m_Position;
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
 		m_Exp += 70;
 }
