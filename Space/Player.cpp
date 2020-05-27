@@ -217,6 +217,10 @@ void Player::Skill()
 
 void Player::LevelUP()
 {
+	if (m_Level == 5)
+	{
+		m_Exp = 0;
+	}
 	if (m_Exp >= m_MAXExp && m_Level < 5)
 	{
 		m_willLevelUPReward = true;
