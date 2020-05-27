@@ -3,6 +3,7 @@
 #include"DirectBullet.h"
 #include"SpreadBullet.h"
 #include"Shield.h"
+#include"Bomb.h"
 
 Player::Player()
 {
@@ -207,9 +208,9 @@ void Player::Skill()
 	{
 		ObjMgr->AddObject(new EffectMgr(L"Painting/UI/CooldownText/", 1, 8, 5, Vec2(1920 / 2,1080 / 2)), "Effect");
 	}
-
 	if (m_SSkillCooldown <= 0.f && INPUT->GetKey('Z') == KeyState::DOWN && m_SecendSkillAcq)
 	{
+		ObjMgr->AddObject(new Bomb(),"Bomb");
 		m_SSkillCooldown = m_SSkillMAXCooldown;
 	}
 	else if (m_SSkillCooldown > 0.f && INPUT->GetKey('Z') == KeyState::DOWN)
