@@ -64,7 +64,6 @@ void UI::Update()
 
 void UI::Render()
 {
-	printf("%f %f", GameMgr::GetInst()->m_FirstSkillCooldown, GameMgr::GetInst()->m_FirstSkillMaxCooldown);
 	m_UIFire->Render();
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_UIText->print("HP : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_HP) + " \n" + 

@@ -37,7 +37,6 @@ void GameScreen::Release()
 
 void GameScreen::Update(float deltaTime, float time)
 {
-	printf("%f\n", dt);
 	m_GameScreen1->m_Position.y += 500 * dt;
 	m_GameScreen2->m_Position.y += 500 * dt;
 

@@ -23,6 +23,7 @@ bool App::Init(int width, int height, bool windowMode)
 		return false;
 
 	Time = 0.0f;
+	srand(time(NULL));
 	return true;
 }
 

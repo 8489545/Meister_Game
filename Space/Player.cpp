@@ -4,6 +4,7 @@
 #include"SpreadBullet.h"
 #include"Shield.h"
 #include"Bomb.h"
+#include"Enemy1.h"
 
 Player::Player()
 {
@@ -135,8 +136,6 @@ void Player::Move()
 
 void Player::Shot()
 {
-	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
-		printf("Spread\n");
 	if ((INPUT->GetKey(VK_SPACE) == KeyState::PRESS && (m_NowTick - m_LastFireTick) > m_FireDelay) && GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		ObjMgr->AddObject(new DirectBullet(Vec2(m_Position.x - 30, m_Position.y - 20), 1000), "Bullet");
@@ -154,6 +153,10 @@ void Player::Shot()
 
 void Player::ChangeFireMode()
 {
+	if (INPUT->GetKey('A') == KeyState::DOWN)
+	{
+		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");
+	}
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		m_RPM = 400.f + m_RPMIncrease;
