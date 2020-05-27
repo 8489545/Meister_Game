@@ -27,6 +27,7 @@
     <ClCompile Include="DirectBullet.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="Enemy1.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="DirectBullet.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="Enemy1.h" />
+    <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Input.h" />

@@ -18,7 +18,7 @@ Enemy1::Enemy1(Vec2 Pos)
 	m_Distance = 0.f;
 
 	m_RandYPos = (rand() % 450) + 50;
-	m_RandXPos = (rand() % 300);
+	m_RandXPos = (rand() % 400);
 	m_RandSniffling = (rand() % 3);
 }
 
