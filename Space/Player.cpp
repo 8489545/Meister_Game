@@ -2,6 +2,7 @@
 #include "Player.h"
 #include"DirectBullet.h"
 #include"SpreadBullet.h"
+#include"Shield.h"
 
 Player::Player()
 {
@@ -177,6 +178,7 @@ void Player::DeliveringInformation()
 	GameMgr::GetInst()->m_FirstSkillMaxCooldown = m_FSkillMAXCooldown;
 	GameMgr::GetInst()->m_SecendSkillCooldown = m_SSkillCooldown;
 	GameMgr::GetInst()->m_SecendSkillMaxCooldown = m_SSkillMAXCooldown;
+	GameMgr::GetInst()->m_PlayerPos = m_Position;
 }
 
 void Player::Skill()
@@ -198,6 +200,7 @@ void Player::Skill()
 
 	if (m_FSkillCooldown <= 0.f && INPUT->GetKey('X') == KeyState::DOWN && m_FirstSkillAcq)
 	{
+		ObjMgr->AddObject(new Shield(m_Position), "Shield");
 		m_FSkillCooldown = m_FSkillMAXCooldown;
 	}
 	else if (m_FSkillCooldown > 0.f && INPUT->GetKey('X') == KeyState::DOWN)

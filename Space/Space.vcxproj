@@ -36,6 +36,7 @@
     <ClCompile Include="ResourceMgr.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneDirector.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="Space.cpp" />
     <ClCompile Include="SpreadBullet.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="ResourceMgr.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneDirector.h" />
+    <ClInclude Include="Shield.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="SpreadBullet.h" />

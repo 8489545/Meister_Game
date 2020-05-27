@@ -28,6 +28,8 @@ public:
 
 	PlayerStatus m_PlayerStatus;
 
+	Vec2 m_PlayerPos;
+
 	bool m_FirstSkill;
 	bool m_SecendSkill;
 
