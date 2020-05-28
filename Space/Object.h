@@ -21,6 +21,8 @@ public:
 	int m_Layer;
 	std::string m_Tag;
 
+	bool m_isCollision;
+
 public:
 	Object();
 	~Object();
