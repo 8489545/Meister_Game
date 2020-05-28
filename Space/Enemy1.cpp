@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Enemy1.h"
+#include"EnemyBullet.h"
 
 Enemy1::Enemy1(Vec2 Pos)
 {
@@ -10,7 +11,7 @@ Enemy1::Enemy1(Vec2 Pos)
 
 	m_HP = 500.f;
 	m_Speed = 250.f;
-	m_FireDelay = 0.5f;
+	m_FireDelay = 1.5f;
 	m_LastFireTime = 0.f;
 	m_Atk = 30.f;
 	m_HoldingTime = 7.f;
@@ -54,13 +55,20 @@ void Enemy1::Update(float deltaTime, float Time)
 		}
 	}
 
-	if (m_LastFireTime >= m_FireDelay)
+	if (m_LastFireTime >= m_FireDelay && m_NowTime <= m_HoldingTime)
 	{
-		//
+		ObjMgr->AddObject(new EnemyBullet(Vec2(m_Position.x, m_Position.y + 60), m_Atk, 700), "EnemyBullet");
+		m_LastFireTime = 0.f;
 	}
 	if (m_NowTime >= m_HoldingTime)
 	{
-		m_Position.y += m_Speed * 2 * dt;
+		if (m_Enemy->B > 0 && m_Enemy->G > 0)
+		{
+			m_Enemy->B -= 5;
+			m_Enemy->G -= 5;
+		}
+		if(m_Enemy->B == 0 && m_Enemy->G == 0)
+			m_Position.y += m_Speed * 5 * dt;
 
 		if (m_Position.y >= 1200)
 			SetDestroy(true);
