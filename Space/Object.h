@@ -12,6 +12,7 @@ public:
 
 	float m_Radius;
 	float m_Rotation;
+	float m_Atk;
 
 	bool m_Destroy;
 	RECT m_Collision;

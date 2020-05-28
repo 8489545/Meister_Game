@@ -8,9 +8,9 @@ public:
 
 	Vec2 StartPos, ArrivePos, Dire;
 	float m_Speed;
-	float m_Atk;
 
 	void Update(float deltaTime, float Time);
 	void Render();
+	void OnCollision(Object* other);
 };
 

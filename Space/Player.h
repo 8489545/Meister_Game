@@ -20,7 +20,6 @@ public:
 	int m_Exp;
 	int m_HP;
 	float m_Speed;
-	int m_Atk;
 	float m_RPM;
 
 	int m_MAXHP;
@@ -47,12 +46,14 @@ public:
 
 	void Update(float delatTime, float Time);
 	void Render();
+	void OnCollision(Object* other);
 
 	void Move();
 	void Shot();
 	void ChangeFireMode();
 	void DeliveringInformation();
 	void Skill();
+	void ColCheak();
 
 	void LevelUP();
 };

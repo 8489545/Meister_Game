@@ -83,6 +83,7 @@ void Player::Update(float deltaTime, float Time)
 	Shot();
 	LevelUP();
 	Skill();
+	ColCheak();
 	m_ColBox->m_Position = m_Position;
 	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
@@ -92,6 +93,22 @@ void Player::Update(float deltaTime, float Time)
 void Player::Render()
 {
 	m_Player->Render();
+}
+
+void Player::OnCollision(Object* other)
+{
+	if (other->m_Tag == "EnemyBullet")
+	{
+		ObjMgr->CollisionCheak(m_ColBox, "EnemyBullet");
+		printf("ASDF");
+	}
+	ObjMgr->CollisionCheak(m_ColBox, "Enemy");
+
+	if (m_ColBox->m_isCollision)
+	{
+		m_HP -= other->m_Atk;
+		other->SetDestroy(true);
+	}
 }
 
 void Player::Move()
@@ -230,6 +247,12 @@ void Player::Skill()
 	{
 		ObjMgr->AddObject(new EffectMgr(L"Painting/UI/CooldownText/", 1, 8, 5, Vec2(1920 / 2, 1080 / 2)), "Effect");
 	}
+}
+
+void Player::ColCheak()
+{
+	//ObjMgr->CollisionCheak(this, "Enemy");
+	//ObjMgr->CollisionCheak(m_CatchBox, "Enemy");
 }
 
 void Player::LevelUP()
