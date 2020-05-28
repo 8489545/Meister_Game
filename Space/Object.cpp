@@ -14,7 +14,6 @@ Object::Object() :
 	, m_RotationCenter(0.f, 0.f)
 	, m_Parent(nullptr)
 	, m_Radius(0.f)
-	, m_isCollision(false)
 {
 	D3DXMatrixIdentity(&m_wMat);
 }

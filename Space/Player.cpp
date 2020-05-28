@@ -102,17 +102,20 @@ void Player::OnCollision(Object* other)
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
 		{
-			m_HP -= other->m_Atk;
+			m_HP -= other->m_Atk / 2;
+			other->SetDestroy(true);
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
+		}
+	}
+	if (other->m_Tag == "Enemy")
+	{
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		{
+			m_HP -= other->m_Atk / 2;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
 			other->SetDestroy(true);
 		}
-	}
-	ObjMgr->CollisionCheak(m_ColBox, "Enemy");
-
-	if (m_ColBox->m_isCollision)
-	{
-		m_HP -= other->m_Atk;
-		other->SetDestroy(true);
 	}
 }
 
@@ -257,8 +260,8 @@ void Player::Skill()
 void Player::ColCheak()
 {
 	ObjMgr->CollisionCheak(this, "EnemyBullet");
-	//ObjMgr->CollisionCheak(this, "Enemy");
-	//ObjMgr->CollisionCheak(m_CatchBox, "Enemy");
+	ObjMgr->CollisionCheak(this, "Enemy");
+	ObjMgr->CollisionCheak(this, "Enemy");
 }
 
 void Player::LevelUP()
