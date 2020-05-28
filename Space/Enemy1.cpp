@@ -68,7 +68,7 @@ void Enemy1::Update(float deltaTime, float Time)
 			m_Enemy->G -= 5;
 		}
 		if(m_Enemy->B == 0 && m_Enemy->G == 0)
-			m_Position.y += m_Speed * 5 * dt;
+			m_Position.y += m_Speed * 3 * dt;
 
 		if (m_Position.y >= 1200)
 			SetDestroy(true);
