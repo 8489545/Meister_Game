@@ -39,6 +39,4 @@ void EnemyBullet::Render()
 
 void EnemyBullet::OnCollision(Object* other)
 {
-
-	SetDestroy(true);
 }

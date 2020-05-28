@@ -99,8 +99,13 @@ void Player::OnCollision(Object* other)
 {
 	if (other->m_Tag == "EnemyBullet")
 	{
-		ObjMgr->CollisionCheak(m_ColBox, "EnemyBullet");
-		printf("ASDF");
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		{
+			m_HP -= other->m_Atk;
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
+			other->SetDestroy(true);
+		}
 	}
 	ObjMgr->CollisionCheak(m_ColBox, "Enemy");
 
@@ -251,6 +256,7 @@ void Player::Skill()
 
 void Player::ColCheak()
 {
+	ObjMgr->CollisionCheak(this, "EnemyBullet");
 	//ObjMgr->CollisionCheak(this, "Enemy");
 	//ObjMgr->CollisionCheak(m_CatchBox, "Enemy");
 }
