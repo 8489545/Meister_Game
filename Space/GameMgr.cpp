@@ -19,6 +19,9 @@ void GameMgr::Init()
 	m_FirstSkillCooldown = 0;
 	m_SecendSkillCooldown = 0;
 	m_PlayerShotType = SHOTTYPE::DIRECT;
+	m_AcqExp = 0;
+
+	SetPlayerStatus(0, 0, 0, 0, 0, 0);
 }
 
 void GameMgr::Release()

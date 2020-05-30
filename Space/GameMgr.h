@@ -30,6 +30,8 @@ public:
 
 	Vec2 m_PlayerPos;
 
+	int m_AcqExp;
+
 	bool m_FirstSkill;
 	bool m_SecendSkill;
 

@@ -105,8 +105,8 @@ void Player::OnCollision(Object* other)
 			float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
 			float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
 			m_HP -= other->m_Atk / 2;
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 			other->SetDestroy(true);
-			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx,randy)), "Effect");
 		}
 	}
 	if (other->m_Tag == "Enemy")
@@ -220,6 +220,12 @@ void Player::DeliveringInformation()
 	GameMgr::GetInst()->m_SecendSkillCooldown = m_SSkillCooldown;
 	GameMgr::GetInst()->m_SecendSkillMaxCooldown = m_SSkillMAXCooldown;
 	GameMgr::GetInst()->m_PlayerPos = m_Position;
+
+	if (GameMgr::GetInst()->m_AcqExp > 0)
+	{
+		GameMgr::GetInst()->m_AcqExp -= 1;
+		m_Exp += 1;
+	}
 }
 
 void Player::Skill()

@@ -52,6 +52,7 @@ void EnemyBullet::Update(float deltaTime, float Time)
 	ObjMgr->CollisionCheak(this, "Player");
 	ObjMgr->CollisionCheak(this, "Shield");
 	ObjMgr->CollisionCheak(this, "Bomb");
+	ObjMgr->CollisionCheak(this, "ColBox");
 	Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
 
 	if (m_Position.y >= 1200)
