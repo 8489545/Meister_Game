@@ -21,6 +21,7 @@ public:
 
 	int m_Layer;
 	std::string m_Tag;
+	int m_State;
 
 public:
 	Object();

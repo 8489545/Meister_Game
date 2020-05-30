@@ -16,13 +16,21 @@ Item::Item(Vec2 Pos)
 
 	printf("%d", randitem);
 
-	if(randitem == 0)
+	if (randitem == 0)
+	{
 		m_Item = m_Heal;
+		m_State = 0;
+	}
 	else if (randitem == 1)
+	{
 		m_Item = m_Cooldown;
+		m_State = 1;
+	}
 	else if (randitem == 2)
+	{
 		m_Item = m_LevelUp;
-
+		m_State = 2;
+	}
 	m_Item->SetParent(this);
 
 	m_Position = Pos;
@@ -34,6 +42,7 @@ Item::~Item()
 
 void Item::Update(float deltaTime, float Time)
 {
+	printf("%s\n", m_Tag.c_str());
 	m_Position.y += 200 * dt;
 }
 

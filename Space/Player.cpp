@@ -90,9 +90,9 @@ void Player::Update(float deltaTime, float Time)
 	m_ColBox->m_Position = m_Position;
 	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
-		m_Exp += 70;
+		m_Exp += 50;
 	if (INPUT->GetKey('S') == KeyState::DOWN)
-		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "Item");
+		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "ITEM");
 	if (INPUT->GetKey('A') == KeyState::DOWN)
 	{
 		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");
@@ -102,6 +102,7 @@ void Player::Update(float deltaTime, float Time)
 void Player::Render()
 {
 	m_Player->Render();
+
 }
 
 void Player::OnCollision(Object* other)
@@ -125,6 +126,33 @@ void Player::OnCollision(Object* other)
 		{
 			m_HP -= other->m_Atk / 2;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
+			other->SetDestroy(true);
+		}
+	}
+
+	if (other->m_Tag == "ITEM")
+	{
+		if (other->m_State == 0)
+		{
+			if (m_HP + m_MAXHP * 0.2f >= m_MAXHP)
+			{
+				m_HP = m_MAXHP;
+			}
+			else
+			{
+				m_HP += m_MAXHP * 0.2f;
+			}
+			other->SetDestroy(true);
+		}
+		if (other->m_State == 1)
+		{
+			m_FSkillCooldown = 0.f;
+			m_SSkillCooldown = 0.f;
+			other->SetDestroy(true);
+		}
+		if (other->m_State == 2)
+		{
+			m_Exp = m_MAXExp - m_Exp;
 			other->SetDestroy(true);
 		}
 	}
@@ -274,6 +302,7 @@ void Player::ColCheak()
 {
 	ObjMgr->CollisionCheak(this, "EnemyBullet");
 	ObjMgr->CollisionCheak(this, "Enemy");
+	ObjMgr->CollisionCheak(this, "ITEM");
 }
 
 void Player::LevelUP()

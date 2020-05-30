@@ -117,8 +117,9 @@ void Enemy1::OnCollision(Object* other)
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 		other->SetDestroy(true);
 	}
-	if (m_Tag == "Bullet" && other->m_Tag == "Enemy")
+	if (other->m_Tag == "Enemy" && m_Tag == "Bullet")
 	{
+		m_Atk *= 10;
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
 		SetDestroy(true);
 	}
