@@ -55,12 +55,12 @@ void Enemy1::Update(float deltaTime, float Time)
 		}
 	}
 
-	if (m_LastFireTime >= m_FireDelay && m_NowTime <= m_HoldingTime)
+	if (m_LastFireTime >= m_FireDelay && m_NowTime <= m_HoldingTime && m_Tag != "Bullet")
 	{
 		ObjMgr->AddObject(new EnemyBullet(Vec2(m_Position.x, m_Position.y + 60), m_Atk, 700), "EnemyBullet");
 		m_LastFireTime = 0.f;
 	}
-	if (m_NowTime >= m_HoldingTime)
+	if (m_NowTime >= m_HoldingTime && m_Tag != "Bullet")
 	{
 		if (m_Enemy->B > 0 && m_Enemy->G > 0)
 		{
@@ -71,6 +71,15 @@ void Enemy1::Update(float deltaTime, float Time)
 			m_Position.y += m_Speed * 3 * dt;
 
 		if (m_Position.y >= 1200)
+			SetDestroy(true);
+	}
+
+	if (m_Tag == "Bullet")
+	{
+		m_Rotation = D3DXToRadian(180);
+		m_Position.y -= m_Speed * 3 * dt;
+
+		if (m_Position.y <= -100)
 			SetDestroy(true);
 	}
 }

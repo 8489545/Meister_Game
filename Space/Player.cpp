@@ -116,6 +116,14 @@ void Player::OnCollision(Object* other)
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
 			other->SetDestroy(true);
 		}
+		if (IntersectRect(&rc, &m_CatchBox->m_Collision, &other->m_Collision))
+		{
+			if (INPUT->GetKey(VK_SPACE) == KeyState::DOWN)
+			{
+				other->m_Tag = "Bullet";
+				other->m_Atk = m_Atk * 2;
+			}
+		}
 	}
 }
 
@@ -260,7 +268,6 @@ void Player::Skill()
 void Player::ColCheak()
 {
 	ObjMgr->CollisionCheak(this, "EnemyBullet");
-	ObjMgr->CollisionCheak(this, "Enemy");
 	ObjMgr->CollisionCheak(this, "Enemy");
 }
 
