@@ -10,5 +10,6 @@ public:
 
 	void Update(float delatTime, float Time);
 	void Render();
+	void OnCollision(Object* other);
 };
 

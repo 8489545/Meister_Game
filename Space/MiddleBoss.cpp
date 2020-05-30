@@ -10,7 +10,7 @@ MiddleBoss::MiddleBoss()
 	m_Body->SetParent(this);
 	m_Layer = -1;
 	
-	SetPosition(1920 / 2, -300);
+	SetPosition(1920 / 2, -500);
 
 	m_LeftCannon1 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/Cannon.png");
 	m_RightCannon1 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/Cannon.png");
@@ -29,7 +29,11 @@ MiddleBoss::MiddleBoss()
 
 	m_MidDecor2 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/MidDecor2.png");
 	m_MidCannon2 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/Cannon.png");
+
+	m_LeftDes1 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/leftDes1.png");
 	
+
+	ObjMgr->AddObject(m_LeftDes1, "Effect");
 
 	ObjMgr->AddObject(m_LeftCannon1, "MidBossObj");
 	ObjMgr->AddObject(m_RightCannon1, "MidBossObj");
@@ -49,7 +53,12 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_MidDecor2, "MidBossObj");
 	ObjMgr->AddObject(m_MidCannon2, "MidBossObj");
 
+
 	m_Phase = 1;
+
+	m_LeftCannon1->m_HP = 1.f;
+	m_RightCannon1->m_HP = 1;
+	m_MidDecor1->m_HP = 1;
 }
 
 
@@ -59,6 +68,10 @@ MiddleBoss::~MiddleBoss()
 
 void MiddleBoss::Update(float deltaTime, float Time)
 {
+	if (m_Phase == 1)
+	{
+		Phase1();
+	}
 	SetObjectsPosition();
 }
 
@@ -66,6 +79,31 @@ void MiddleBoss::Render()
 {
 	m_Body->Render();
 }
+
+void MiddleBoss::Phase1()
+{
+	if (m_Position.y <= -250)
+	{
+		m_Position.y += 100 * dt;
+	}
+
+	if (m_LeftCannon1->m_HP <= 0)
+	{
+    	ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
+		m_LeftCannon1->SetDestroy(true);
+
+	}
+	if (m_RightCannon1->m_HP <= 0)
+	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
+		m_RightCannon1->SetDestroy(true);
+	}
+	if (m_MidDecor1->m_HP <= 0)
+	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
+		m_MidDecor1->SetDestroy(true);
+	}
+}	  
 
 void MiddleBoss::SetObjectsPosition()
 {
@@ -86,4 +124,6 @@ void MiddleBoss::SetObjectsPosition()
 
 	m_MidDecor2->SetPosition(m_Position.x - 25, m_Position.y - 156);
 	m_MidCannon2->SetPosition(m_Position.x - 20, m_Position.y - 280);
+
+	m_LeftDes1->SetPosition(m_Position.x - 90, m_Position.y + 415);
 }

@@ -10,7 +10,7 @@ SpreadBullet::SpreadBullet(Vec2 Pos, float Speed, float Angle,float atk)
 	m_Rotation = D3DXToRadian(Angle - 90);
 	m_Speed = Speed;
 
-	m_Layer = 1;
+	m_Layer = 0;
 	m_StartPos = m_Position;
 	m_ArrivePos = Vec2(cos(m_Rotation), sin(m_Rotation));
 
@@ -33,9 +33,23 @@ void SpreadBullet::Update(float delatTime, float Time)
 	{
 		SetDestroy(true);
 	}
+	ObjMgr->CollisionCheak(this, "MidBossObj");
 }
 
 void SpreadBullet::Render()
 {
 	m_Bullet->Render();
+}
+
+void SpreadBullet::OnCollision(Object* other)
+{
+	if (other->m_Tag == "MidBossObj")
+	{
+		other->m_HP -= m_Atk;
+
+		float randx = (rand() % (int)other->m_Size.x) + other->m_Position.x - other->m_Size.x / 2;
+		float randy = (rand() % (int)other->m_Size.y) + other->m_Position.y - other->m_Size.y / 2;
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+		SetDestroy(true);
+	}
 }

@@ -41,6 +41,8 @@ public:
 	void Update(float deltaTime, float Time);
 	void Render();
 
+	void Phase1();
+
 
 	void SetObjectsPosition();
 };

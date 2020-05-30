@@ -12,8 +12,6 @@ EffectMgr::EffectMgr(std::wstring filename, int start, int end, int speed, Vec2 
 
 	Start = start;
 	End = end;
-
-	m_Layer = 2;
 }
 
 EffectMgr::~EffectMgr()
