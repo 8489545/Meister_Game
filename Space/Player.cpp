@@ -5,6 +5,7 @@
 #include"Shield.h"
 #include"Bomb.h"
 #include"Enemy1.h"
+#include"Item.h"
 
 Player::Player()
 {
@@ -63,6 +64,8 @@ void Player::Init()
 
 	m_FSkillMAXCooldown = 10.f;
 	m_SSkillMAXCooldown = 25.f;
+	m_CatchBox->m_Visible = false;
+	m_Layer = 1;
 
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
 
@@ -88,6 +91,12 @@ void Player::Update(float deltaTime, float Time)
 	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
 		m_Exp += 70;
+	if (INPUT->GetKey('S') == KeyState::DOWN)
+		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "Item");
+	if (INPUT->GetKey('A') == KeyState::DOWN)
+	{
+		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");
+	}
 }
 
 void Player::Render()
@@ -180,10 +189,6 @@ void Player::Shot()
 
 void Player::ChangeFireMode()
 {
-	if (INPUT->GetKey('A') == KeyState::DOWN)
-	{
-		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");
-	}
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		m_RPM = 400.f + m_RPMIncrease;

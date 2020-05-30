@@ -31,6 +31,7 @@
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectMgr.h" />

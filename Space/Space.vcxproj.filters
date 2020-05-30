@@ -120,6 +120,9 @@
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>Game\Object\OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -207,6 +210,9 @@
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBullet.h">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
   </ItemGroup>
