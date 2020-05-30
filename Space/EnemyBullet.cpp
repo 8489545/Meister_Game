@@ -6,9 +6,14 @@ EnemyBullet::EnemyBullet(Vec2 Pos, float atk,float speed)
 	m_Bullet = Sprite::Create(L"Painting/Object/Bullet/EnemyBullet.png");
 	m_Bullet->SetParent(this);
 
+	int randx = (rand() % 100) - 100;
+	int randy = (rand() % 100) - 100;
+
+	Vec2 RandPos(randx,randy);
+
 	m_Position = Pos;
 	StartPos = Pos;
-	ArrivePos = GameMgr::GetInst()->m_PlayerPos;
+	ArrivePos = GameMgr::GetInst()->m_PlayerPos + RandPos;
 	m_Speed = speed;
 	m_Atk = atk;
 

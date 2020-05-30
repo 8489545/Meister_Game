@@ -12,6 +12,8 @@ SpreadBullet::SpreadBullet(Vec2 Pos, float Speed, float Angle)
 
 	m_StartPos = m_Position;
 	m_ArrivePos = Vec2(cos(m_Rotation), sin(m_Rotation));
+
+	m_Atk = GameMgr::GetInst()->m_PlayerStatus.m_Atk;
 }
 
 SpreadBullet::~SpreadBullet()
