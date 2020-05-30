@@ -10,6 +10,7 @@ SpreadBullet::SpreadBullet(Vec2 Pos, float Speed, float Angle,float atk)
 	m_Rotation = D3DXToRadian(Angle - 90);
 	m_Speed = Speed;
 
+	m_Layer = 1;
 	m_StartPos = m_Position;
 	m_ArrivePos = Vec2(cos(m_Rotation), sin(m_Rotation));
 

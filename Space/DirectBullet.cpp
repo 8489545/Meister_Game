@@ -8,6 +8,7 @@ DirectBullet::DirectBullet(Vec2 Pos, float Speed)
 
 	m_Position = Pos;
 	m_Speed = Speed;
+	m_Layer = 1;
 
 	m_Atk = GameMgr::GetInst()->m_PlayerStatus.m_Atk;
 }

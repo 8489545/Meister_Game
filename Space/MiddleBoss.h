@@ -12,7 +12,7 @@ class MiddleBoss : public Object
 	Sprite* m_LeftBigCannon;
 	Sprite* m_RightBigCannon;
 
-	Sprite* m_MidCannon1;
+	Sprite* m_MidCannon;
 	Sprite* m_MidCannon2;
 
 	Sprite* m_MidDecor1;
@@ -35,6 +35,8 @@ class MiddleBoss : public Object
 public:
 	MiddleBoss();
 	~MiddleBoss();
+
+	int m_Phase;
 
 	void Update(float deltaTime, float Time);
 	void Render();

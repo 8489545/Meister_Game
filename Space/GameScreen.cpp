@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameScreen.h"
+#include"MiddleBoss.h"
 
 void GameScreen::Init()
 {
@@ -26,6 +27,7 @@ void GameScreen::Init()
 	GameMgr::GetInst()->SetLimit(1260 - 114 / 2, 660 + 114 / 2, 1080 - 110 / 2, 0 + 110 / 2);
 
 	ObjMgr->AddObject(m_Tutorials, "UI");
+	ObjMgr->AddObject(new MiddleBoss(), "MidBoss");
 
 	m_isStart = false;
 	m_CompleteTutorials = false;
