@@ -9,7 +9,6 @@ public:
 	float m_Speed;
 	float m_FireDelay;
 	float m_LastFireTime;
-	float m_HP;
 	float m_HoldingTime;
 	float m_NowTime;
 	float m_RandYPos;

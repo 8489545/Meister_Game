@@ -18,7 +18,6 @@ public:
 
 	int m_Level;
 	int m_Exp;
-	int m_HP;
 	float m_Speed;
 	float m_RPM;
 
