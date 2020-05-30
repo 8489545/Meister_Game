@@ -62,8 +62,6 @@ void GameScreen::Update(float deltaTime, float time)
 
 void GameScreen::Render()
 {
-	//m_RBox->Render();
-	//m_LBox->Render();
 	m_GameScreen1->Render();
 	m_GameScreen2->Render();
 }
