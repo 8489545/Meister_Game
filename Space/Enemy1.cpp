@@ -9,7 +9,7 @@ Enemy1::Enemy1(Vec2 Pos)
 
 	m_Position = Pos;
 
-	m_HP = 250.f;
+	m_HP = 300;
 	m_Speed = 250.f;
 	m_FireDelay = 1.5f;
 	m_LastFireTime = 0.f;
@@ -84,6 +84,7 @@ void Enemy1::Update(float deltaTime, float Time)
 	}
 	ObjMgr->CollisionCheak(this, "Enemy");
 	ObjMgr->CollisionCheak(this, "Bullet");
+	ObjMgr->CollisionCheak(this, "CatchBox");
 
 	if (m_HP <= 0)
 	{
@@ -99,6 +100,14 @@ void Enemy1::Render()
 
 void Enemy1::OnCollision(Object* other)
 {
+	if (other->m_Tag == "CatchBox" && m_Enemy->B == 0 && m_Enemy->G == 0)
+	{
+		if (INPUT->GetKey(VK_SPACE) == KeyState::DOWN)
+		{
+			m_Tag = "Bullet";
+			m_Atk = m_Atk * 2;
+		}
+	}
 	if (other->m_Tag == "Bullet" && m_Tag == "Enemy")
 	{
 		float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;

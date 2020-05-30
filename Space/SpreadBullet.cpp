@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SpreadBullet.h"
 
-SpreadBullet::SpreadBullet(Vec2 Pos, float Speed, float Angle)
+SpreadBullet::SpreadBullet(Vec2 Pos, float Speed, float Angle,float atk)
 {
 	m_Bullet = Sprite::Create(L"Painting/Object/Bullet/Spread.png");
 	m_Bullet->SetParent(this);
@@ -13,7 +13,7 @@ SpreadBullet::SpreadBullet(Vec2 Pos, float Speed, float Angle)
 	m_StartPos = m_Position;
 	m_ArrivePos = Vec2(cos(m_Rotation), sin(m_Rotation));
 
-	m_Atk = GameMgr::GetInst()->m_PlayerStatus.m_Atk;
+	m_Atk = atk;
 }
 
 SpreadBullet::~SpreadBullet()

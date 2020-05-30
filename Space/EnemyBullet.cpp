@@ -50,6 +50,8 @@ EnemyBullet::~EnemyBullet()
 void EnemyBullet::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Player");
+	ObjMgr->CollisionCheak(this, "Shield");
+	ObjMgr->CollisionCheak(this, "Bomb");
 	Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
 
 	if (m_Position.y >= 1200)
@@ -65,4 +67,12 @@ void EnemyBullet::Render()
 
 void EnemyBullet::OnCollision(Object* other)
 {
+	if (other->m_Tag == "Shield")
+	{
+		SetDestroy(this);
+	}
+	if (other->m_Tag == "Bomb")
+	{
+		SetDestroy(this);
+	}
 }

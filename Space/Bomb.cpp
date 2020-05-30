@@ -11,8 +11,9 @@ Bomb::Bomb()
 
 	SetPosition(1920 / 2, 1100);
 
-	m_FireDelay = 0.3f;
+	m_FireDelay = 0.2f;
 	m_LastFireTime = 0.f;
+	m_Atk = 200.f;
 }
 
 Bomb::~Bomb()
@@ -30,13 +31,13 @@ void Bomb::Update(float delatTime, float Time)
 
 	if (m_LastFireTime >= m_FireDelay)
 	{
-		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x - 70, m_Position.y - 130), 700, 0), "Bullet");
-		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x - 70, m_Position.y - 130), 700, 20), "Bullet");
-		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x - 70, m_Position.y - 130), 700, -20), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x - 70, m_Position.y - 130), 700, 0, m_Atk), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x - 70, m_Position.y - 130), 700, 20, m_Atk), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x - 70, m_Position.y - 130), 700, -20, m_Atk), "Bullet");
 
-		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x + 70, m_Position.y - 130), 700, 0), "Bullet");
-		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x + 70, m_Position.y - 130), 700, 20), "Bullet");
-		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x + 70, m_Position.y - 130), 700, -20), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x + 70, m_Position.y - 130), 700, 0, m_Atk), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x + 70, m_Position.y - 130), 700, 20, m_Atk), "Bullet");
+		ObjMgr->AddObject(new SpreadBullet(Vec2(m_Position.x + 70, m_Position.y - 130), 700, -20, m_Atk), "Bullet");
 		m_LastFireTime = 0.f;
 	}
 }
