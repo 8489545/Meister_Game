@@ -9,7 +9,7 @@ Enemy1::Enemy1(Vec2 Pos)
 
 	m_Position = Pos;
 
-	m_HP = 500.f;
+	m_HP = 250.f;
 	m_Speed = 250.f;
 	m_FireDelay = 1.5f;
 	m_LastFireTime = 0.f;
@@ -107,7 +107,7 @@ void Enemy1::OnCollision(Object* other)
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 		other->SetDestroy(true);
 	}
-	if (m_Tag == "Bullet")
+	if (m_Tag == "Bullet" && other->m_Tag == "Enemy")
 	{
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
 		SetDestroy(true);

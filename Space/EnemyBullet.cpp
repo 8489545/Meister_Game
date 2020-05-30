@@ -6,8 +6,29 @@ EnemyBullet::EnemyBullet(Vec2 Pos, float atk,float speed)
 	m_Bullet = Sprite::Create(L"Painting/Object/Bullet/EnemyBullet.png");
 	m_Bullet->SetParent(this);
 
-	int randx = (rand() % 100) - 100;
-	int randy = (rand() % 100) - 100;
+	int randx = (rand() % 200);
+	int randy = (rand() % 200);
+
+	int sign = rand() % 3;
+
+	switch (sign)
+	{
+	case 0:
+		break;
+	case 1:
+		randx *= -1;
+		break;
+	case 2:
+		randy *= 1;
+		break;
+	case 3:
+		randx *= -1;
+		randy *= -1;
+		break;
+	default:
+		break;
+	}
+	
 
 	Vec2 RandPos(randx,randy);
 
