@@ -33,7 +33,7 @@ void SpreadBullet::Update(float delatTime, float Time)
 	{
 		SetDestroy(true);
 	}
-	ObjMgr->CollisionCheak(this, "MidBossObj");
+	ObjMgr->CollisionCheak(this, "Enemy");
 }
 
 void SpreadBullet::Render()
@@ -43,7 +43,7 @@ void SpreadBullet::Render()
 
 void SpreadBullet::OnCollision(Object* other)
 {
-	if (other->m_Tag == "MidBossObj")
+	if (other->m_Tag == "Enemy")
 	{
 		other->m_HP -= m_Atk;
 

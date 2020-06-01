@@ -39,23 +39,23 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_RightDes1, "Effect");
 	ObjMgr->AddObject(m_MidDes1, "Effect");
 
-	ObjMgr->AddObject(m_LeftCannon1, "MidBossObj");
-	ObjMgr->AddObject(m_RightCannon1, "MidBossObj");
+	ObjMgr->AddObject(m_LeftCannon1, "Enemy");
+	ObjMgr->AddObject(m_RightCannon1, "Enemy");
 
-	ObjMgr->AddObject(m_MidCannon, "MidBossObj");
-	ObjMgr->AddObject(m_MidDecor1, "MidBossObj");
+	ObjMgr->AddObject(m_MidCannon, "Enemy");
+	ObjMgr->AddObject(m_MidDecor1, "Enemy");
 
-	ObjMgr->AddObject(m_LeftDecor, "MidBossObj");
-	ObjMgr->AddObject(m_RightDecor, "MidBossObj");
+	ObjMgr->AddObject(m_LeftDecor, "Enemy");
+	ObjMgr->AddObject(m_RightDecor, "Enemy");
 
-	ObjMgr->AddObject(m_LeftCannon2, "MidBossObj");
-	ObjMgr->AddObject(m_RightCannon2, "MidBossObj");
+	ObjMgr->AddObject(m_LeftCannon2, "Enemy");
+	ObjMgr->AddObject(m_RightCannon2, "Enemy");
 
-	ObjMgr->AddObject(m_LeftBigCannon, "MidBossObj");
-	ObjMgr->AddObject(m_RightBigCannon, "MidBossObj");
+	ObjMgr->AddObject(m_LeftBigCannon, "Enemy");
+	ObjMgr->AddObject(m_RightBigCannon, "Enemy");
 
-	ObjMgr->AddObject(m_MidDecor2, "MidBossObj");
-	ObjMgr->AddObject(m_MidCannon2, "MidBossObj");
+	ObjMgr->AddObject(m_MidDecor2, "Enemy");
+	ObjMgr->AddObject(m_MidCannon2, "Enemy");
 
 
 	m_Phase = 1;

@@ -83,7 +83,6 @@ void Enemy1::Update(float deltaTime, float Time)
 			SetDestroy(true);
 	}
 	ObjMgr->CollisionCheak(this, "Enemy");
-	ObjMgr->CollisionCheak(this, "Bullet");
 	ObjMgr->CollisionCheak(this, "CatchBox");
 
 	if (m_HP <= 0)
@@ -108,14 +107,6 @@ void Enemy1::OnCollision(Object* other)
 			m_Tag = "Bullet";
 			m_Atk = m_Atk * 2;
 		}
-	}
-	if (other->m_Tag == "Bullet" && m_Tag == "Enemy")
-	{
-		float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
-		float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
-		m_HP -= other->m_Atk;
-		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
-		other->SetDestroy(true);
 	}
 	if (other->m_Tag == "Enemy" && m_Tag == "Bullet")
 	{

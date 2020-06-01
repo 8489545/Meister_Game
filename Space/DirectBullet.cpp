@@ -24,7 +24,7 @@ void DirectBullet::Update(float delatTime, float Time)
 	{
       	SetDestroy(true);
 	}
-	ObjMgr->CollisionCheak(this, "MidBossObj");
+	ObjMgr->CollisionCheak(this, "Enemy");
 }
 
 void DirectBullet::Render()
@@ -34,7 +34,7 @@ void DirectBullet::Render()
 
 void DirectBullet::OnCollision(Object* other)
 {
-	if (other->m_Tag == "MidBossObj")
+	if (other->m_Tag == "Enemy")
 	{
 		other->m_HP -= m_Atk;
 
