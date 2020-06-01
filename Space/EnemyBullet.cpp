@@ -68,7 +68,7 @@ void EnemyBullet::Update(float deltaTime, float Time)
 	ObjMgr->CollisionCheak(this, "Bomb");
 	ObjMgr->CollisionCheak(this, "ColBox");
 
-	if (m_PlayerGuidance)
+	if (!m_PlayerGuidance)
 	{
 		Dire = ArrivePos - StartPos;
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MiddleBoss.h"
+#include"EnemyBullet.h"
 
 //Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/")
 
@@ -59,6 +60,7 @@ MiddleBoss::MiddleBoss()
 
 
 	m_Phase = 1;
+	m_Atk = 33;
 
 	m_LeftDes1->m_Visible = false;
 	m_RightDes1->m_Visible = false;
@@ -100,23 +102,15 @@ void MiddleBoss::Phase1()
 	}
 	else
 	{
-		m_MidDecor1Tick->m_FireDelay = 0.5f;
+		m_MidDecor1Tick->m_FireDelay = 0.2f;
 		m_MidDecor1Tick->m_LastFireTick += dt;
 
-		Vec2 MidCannonEnd;
-		MidCannonEnd.x = m_MidDecor1->m_Position.x - 50 + cos(m_MidDecor1->m_Rotation) * m_MidDecor1->m_Size.x;
-		MidCannonEnd.y = m_MidDecor1->m_Position.y + sin(m_MidDecor1->m_Rotation) * m_MidDecor1->m_Size.x;
-
-		if (m_MidDecor1Tick->m_FireDelay <= m_MidDecor1Tick->m_LastFireTick)
-		{
-			//ObjMgr->AddObject(new );
-		}
 
 		if (!m_MidDecorRot)
 		{
 			m_MidDecor1->m_Rotation -= D3DXToRadian(30) * dt;
 
-			if (m_MidDecor1->m_Rotation <= D3DXToRadian(-90))
+			if (m_MidDecor1->m_Rotation <= D3DXToRadian(-30))
 				m_MidDecorRot = true;
 
 		}
@@ -124,8 +118,14 @@ void MiddleBoss::Phase1()
 		{
 			m_MidDecor1->m_Rotation += D3DXToRadian(30) * dt;
 
-			if (m_MidDecor1->m_Rotation >= D3DXToRadian(90))
+			if (m_MidDecor1->m_Rotation >= D3DXToRadian(30))
 				m_MidDecorRot = false;
+		}
+
+		if (m_MidDecor1Tick->m_FireDelay <= m_MidDecor1Tick->m_LastFireTick && m_MidDecor1->m_HP >= 0)
+		{
+			ObjMgr->AddObject(new EnemyBullet(m_MidDecor1->m_Position, m_Atk, 400, D3DXToDegree(m_MidDecor1->m_Rotation) - 180, false, 0, false), "EnemyBullet");
+			m_MidDecor1Tick->m_LastFireTick = 0.f;
 		}
 
 		if (m_LeftCannon1->m_HP <= 0)
