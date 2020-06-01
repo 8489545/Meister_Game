@@ -69,6 +69,8 @@ MiddleBoss::MiddleBoss()
 	m_LeftCannon1->m_HP = 7500.f;
 	m_RightCannon1->m_HP = 7500.f;
 	m_MidDecor1->m_HP = 20000.f;
+
+	m_MidDecor1Tick = new FireTick();
 }
 
 
@@ -98,9 +100,17 @@ void MiddleBoss::Phase1()
 	}
 	else
 	{
+		m_MidDecor1Tick->m_FireDelay = 0.5f;
+		m_MidDecor1Tick->m_LastFireTick += dt;
+
 		Vec2 MidCannonEnd;
 		MidCannonEnd.x = m_MidDecor1->m_Position.x - 50 + cos(m_MidDecor1->m_Rotation) * m_MidDecor1->m_Size.x;
 		MidCannonEnd.y = m_MidDecor1->m_Position.y + sin(m_MidDecor1->m_Rotation) * m_MidDecor1->m_Size.x;
+
+		if (m_MidDecor1Tick->m_FireDelay <= m_MidDecor1Tick->m_LastFireTick)
+		{
+			ObjMgr->AddObject(new);
+		}
 
 		if (!m_MidDecorRot)
 		{

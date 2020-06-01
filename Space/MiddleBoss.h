@@ -1,4 +1,9 @@
 #pragma once
+struct FireTick
+{
+	float m_FireDelay;
+	float m_LastFireTick;
+};
 class MiddleBoss : public Object
 {
 	Sprite* m_Body;
@@ -38,6 +43,8 @@ public:
 
 	int m_Phase;
 	bool m_MidDecorRot;
+
+	FireTick* m_MidDecor1Tick;
 
 	void Update(float deltaTime, float Time);
 	void Render();
