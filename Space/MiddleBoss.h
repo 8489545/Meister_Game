@@ -37,6 +37,7 @@ public:
 	~MiddleBoss();
 
 	int m_Phase;
+	bool m_MidDecorRot;
 
 	void Update(float deltaTime, float Time);
 	void Render();

@@ -31,9 +31,13 @@ MiddleBoss::MiddleBoss()
 	m_MidCannon2 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/Cannon.png");
 
 	m_LeftDes1 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/leftDes1.png");
+	m_RightDes1= Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/rightDes1.png");
+	m_MidDes1 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/midDes1.png");
 	
 
 	ObjMgr->AddObject(m_LeftDes1, "Effect");
+	ObjMgr->AddObject(m_RightDes1, "Effect");
+	ObjMgr->AddObject(m_MidDes1, "Effect");
 
 	ObjMgr->AddObject(m_LeftCannon1, "MidBossObj");
 	ObjMgr->AddObject(m_RightCannon1, "MidBossObj");
@@ -56,9 +60,15 @@ MiddleBoss::MiddleBoss()
 
 	m_Phase = 1;
 
-	m_LeftCannon1->m_HP = 1.f;
-	m_RightCannon1->m_HP = 1;
-	m_MidDecor1->m_HP = 1;
+	m_LeftDes1->m_Visible = false;
+	m_RightDes1->m_Visible = false;
+	m_MidDes1->m_Visible = false;
+
+	m_MidDecorRot = false;
+
+	m_LeftCannon1->m_HP = 7500.f;
+	m_RightCannon1->m_HP = 7500.f;
+	m_MidDecor1->m_HP = 20000.f;
 }
 
 
@@ -86,22 +96,43 @@ void MiddleBoss::Phase1()
 	{
 		m_Position.y += 100 * dt;
 	}
+	else
+	{
+		Vec2 MidCannonEnd;
+		MidCannonEnd.x = m_MidDecor1->m_Position.x - 50 + cos(m_MidDecor1->m_Rotation) * m_MidDecor1->m_Size.x;
+		MidCannonEnd.y = m_MidDecor1->m_Position.y + sin(m_MidDecor1->m_Rotation) * m_MidDecor1->m_Size.x;
 
-	if (m_LeftCannon1->m_HP <= 0)
-	{
-    	ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
-		m_LeftCannon1->SetDestroy(true);
+		if (!m_MidDecorRot)
+		{
+			m_MidDecor1->m_Rotation -= D3DXToRadian(30) * dt;
 
-	}
-	if (m_RightCannon1->m_HP <= 0)
-	{
-		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
-		m_RightCannon1->SetDestroy(true);
-	}
-	if (m_MidDecor1->m_HP <= 0)
-	{
-		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
-		m_MidDecor1->SetDestroy(true);
+			if (m_MidDecor1->m_Rotation <= D3DXToRadian(-90))
+				m_MidDecorRot = true;
+
+		}
+		else if (m_MidDecorRot)
+		{
+			m_MidDecor1->m_Rotation += D3DXToRadian(30) * dt;
+
+			if (m_MidDecor1->m_Rotation >= D3DXToRadian(90))
+				m_MidDecorRot = false;
+		}
+
+		if (m_LeftCannon1->m_HP <= 0)
+		{
+			m_LeftCannon1->SetDestroy(true);
+			m_LeftDes1->m_Visible = true;
+		}
+		if (m_RightCannon1->m_HP <= 0)
+		{
+			m_RightCannon1->SetDestroy(true);
+			m_RightDes1->m_Visible = true;
+		}
+		if (m_MidDecor1->m_HP <= 0)
+		{
+			m_MidDecor1->SetDestroy(true);
+			m_MidDes1->m_Visible = true;
+		}
 	}
 }	  
 
@@ -126,4 +157,6 @@ void MiddleBoss::SetObjectsPosition()
 	m_MidCannon2->SetPosition(m_Position.x - 20, m_Position.y - 280);
 
 	m_LeftDes1->SetPosition(m_Position.x - 90, m_Position.y + 415);
+	m_RightDes1->SetPosition(m_Position.x + 50, m_Position.y + 420);
+	m_MidDes1->SetPosition(m_Position.x - 21, m_Position.y + 320);
 }
