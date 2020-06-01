@@ -1,42 +1,56 @@
 #include "stdafx.h"
 #include "EnemyBullet.h"
 
-EnemyBullet::EnemyBullet(Vec2 Pos, float atk,float speed)
+EnemyBullet::EnemyBullet(Vec2 Pos, float atk, float speed, float angle, bool isrand, int randrange, bool playerguidance)
 {
 	m_Bullet = Sprite::Create(L"Painting/Object/Bullet/EnemyBullet.png");
 	m_Bullet->SetParent(this);
 
-	int randx = (rand() % 200);
-	int randy = (rand() % 200);
-
-	int sign = rand() % 3;
-
-	switch (sign)
+	if (isrand)
 	{
-	case 0:
-		break;
-	case 1:
-		randx *= -1;
-		break;
-	case 2:
-		randy *= 1;
-		break;
-	case 3:
-		randx *= -1;
-		randy *= -1;
-		break;
-	default:
-		break;
-	}
-	
+		int randx = (rand() % randrange);
+		int randy = (rand() % randrange);
 
-	Vec2 RandPos(randx,randy);
+		int sign = rand() % 3;
+
+		switch (sign)
+		{
+		case 0:
+			break;
+		case 1:
+			randx *= -1;
+			break;
+		case 2:
+			randy *= 1;
+			break;
+		case 3:
+			randx *= -1;
+			randy *= -1;
+			break;
+		default:
+			break;
+		}
+
+
+		Vec2 RandPos(randx, randy);
+		ArrivePos = GameMgr::GetInst()->m_PlayerPos + RandPos;
+	}
+	if (!isrand && playerguidance)
+	{
+		ArrivePos = GameMgr::GetInst()->m_PlayerPos;
+	}
 
 	m_Position = Pos;
 	StartPos = Pos;
-	ArrivePos = GameMgr::GetInst()->m_PlayerPos + RandPos;
 	m_Speed = speed;
 	m_Atk = atk;
+	m_Rotation = D3DXToRadian(angle - 90);
+	if (!playerguidance)
+	{
+		m_Rotation = D3DXToRadian(angle - 90);
+		m_Speed = speed;
+		ArrivePos = Vec2(cos(m_Rotation), sin(m_Rotation));
+	}
 
 	Dire = ArrivePos - StartPos;
 
@@ -53,6 +67,14 @@ void EnemyBullet::Update(float deltaTime, float Time)
 	ObjMgr->CollisionCheak(this, "Shield");
 	ObjMgr->CollisionCheak(this, "Bomb");
 	ObjMgr->CollisionCheak(this, "ColBox");
+
+	if (m_PlayerGuidance)
+	{
+		Dire = ArrivePos - StartPos;
+
+		D3DXVec2Normalize(&Dire, &ArrivePos);
+	}
+
 	Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
 
 	if (m_Position.y >= 1200)

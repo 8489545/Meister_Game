@@ -57,7 +57,7 @@ void Enemy1::Update(float deltaTime, float Time)
 
 	if (m_LastFireTime >= m_FireDelay && m_NowTime <= m_HoldingTime && m_Tag != "Bullet")
 	{
-		ObjMgr->AddObject(new EnemyBullet(Vec2(m_Position.x, m_Position.y + 60), m_Atk, 700), "EnemyBullet");
+		ObjMgr->AddObject(new EnemyBullet(Vec2(m_Position.x, m_Position.y + 60), m_Atk, 700,0,true,200,true), "EnemyBullet");
 		m_LastFireTime = 0.f;
 	}
 	if (m_NowTime >= m_HoldingTime && m_Tag != "Bullet")

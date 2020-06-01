@@ -109,7 +109,7 @@ void MiddleBoss::Phase1()
 
 		if (m_MidDecor1Tick->m_FireDelay <= m_MidDecor1Tick->m_LastFireTick)
 		{
-			ObjMgr->AddObject(new);
+			//ObjMgr->AddObject(new );
 		}
 
 		if (!m_MidDecorRot)
