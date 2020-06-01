@@ -13,7 +13,7 @@ Bomb::Bomb()
 
 	m_FireDelay = 0.2f;
 	m_LastFireTime = 0.f;
-	m_Atk = 200.f;
+	m_Atk = GameMgr::GetInst()->m_PlayerStatus.m_Atk;
 }
 
 Bomb::~Bomb()

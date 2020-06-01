@@ -3,7 +3,7 @@ class EnemyBullet : public Object
 {
 	Sprite* m_Bullet;
 public:
-	EnemyBullet(Vec2 Pos, float atk,float speed,float angle,bool isrand,int randrange,bool playerguidance);
+	EnemyBullet(Vec2 Pos, float atk,float speed,float angle,bool isrand,int randrange,bool playerguidance,std::wstring filename = L"EnemyBullet");
 	~EnemyBullet();
 
 	Vec2 StartPos, ArrivePos, Dire;

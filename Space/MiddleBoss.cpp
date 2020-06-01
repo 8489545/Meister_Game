@@ -68,11 +68,13 @@ MiddleBoss::MiddleBoss()
 
 	m_MidDecorRot = false;
 
-	m_LeftCannon1->m_HP = 7500.f;
-	m_RightCannon1->m_HP = 7500.f;
-	m_MidDecor1->m_HP = 20000.f;
+	m_LeftCannon1->m_HP = 15000.f;
+	m_RightCannon1->m_HP = 15000.f;
+	m_MidDecor1->m_HP = 35000.f;
 
 	m_MidDecor1Tick = new FireTick();
+	m_LeftCannon1Tick = new FireTick();
+	m_RightCannon1Tick = new FireTick();
 }
 
 
@@ -102,13 +104,19 @@ void MiddleBoss::Phase1()
 	}
 	else
 	{
-		m_MidDecor1Tick->m_FireDelay = 0.2f;
+		m_MidDecor1Tick->m_FireDelay = 0.1f;
 		m_MidDecor1Tick->m_LastFireTick += dt;
+
+		m_LeftCannon1Tick->m_FireDelay = 0.5f;
+		m_LeftCannon1Tick->m_LastFireTick += dt;
+
+		m_RightCannon1Tick->m_FireDelay = 0.5f;
+		m_RightCannon1Tick->m_LastFireTick += dt;
 
 
 		if (!m_MidDecorRot)
 		{
-			m_MidDecor1->m_Rotation -= D3DXToRadian(30) * dt;
+			m_MidDecor1->m_Rotation -= D3DXToRadian(60) * dt;
 
 			if (m_MidDecor1->m_Rotation <= D3DXToRadian(-30))
 				m_MidDecorRot = true;
@@ -116,7 +124,7 @@ void MiddleBoss::Phase1()
 		}
 		else if (m_MidDecorRot)
 		{
-			m_MidDecor1->m_Rotation += D3DXToRadian(30) * dt;
+			m_MidDecor1->m_Rotation += D3DXToRadian(60) * dt;
 
 			if (m_MidDecor1->m_Rotation >= D3DXToRadian(30))
 				m_MidDecorRot = false;
@@ -124,8 +132,18 @@ void MiddleBoss::Phase1()
 
 		if (m_MidDecor1Tick->m_FireDelay <= m_MidDecor1Tick->m_LastFireTick && m_MidDecor1->m_HP >= 0)
 		{
-			ObjMgr->AddObject(new EnemyBullet(m_MidDecor1->m_Position, m_Atk, 400, D3DXToDegree(m_MidDecor1->m_Rotation) - 180, false, 0, false), "EnemyBullet");
+			ObjMgr->AddObject(new EnemyBullet(m_MidDecor1->m_Position, m_Atk, 500, D3DXToDegree(m_MidDecor1->m_Rotation) - 180, false, 0, false), "EnemyBullet");
 			m_MidDecor1Tick->m_LastFireTick = 0.f;
+		}
+		if (m_LeftCannon1Tick->m_FireDelay <= m_LeftCannon1Tick->m_LastFireTick && m_LeftCannon1->m_HP >= 0)
+		{
+			ObjMgr->AddObject(new EnemyBullet(m_LeftCannon1->m_Position, m_Atk, 400, 0, false, 0, true), "EnemyBullet");
+			m_LeftCannon1Tick->m_LastFireTick = 0.f;
+		}
+		if (m_RightCannon1Tick->m_FireDelay <= m_RightCannon1Tick->m_LastFireTick && m_RightCannon1->m_HP >= 0)
+		{
+			ObjMgr->AddObject(new EnemyBullet(m_RightCannon1->m_Position, m_Atk, 400, 0, false, 0, true), "EnemyBullet");
+			m_RightCannon1Tick->m_LastFireTick = 0.f;
 		}
 
 		if (m_LeftCannon1->m_HP <= 0)

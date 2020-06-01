@@ -45,6 +45,8 @@ public:
 	bool m_MidDecorRot;
 
 	FireTick* m_MidDecor1Tick;
+	FireTick* m_LeftCannon1Tick;
+	FireTick* m_RightCannon1Tick;
 
 	void Update(float deltaTime, float Time);
 	void Render();
