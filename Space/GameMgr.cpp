@@ -2,6 +2,7 @@
 #include "GameMgr.h"
 #include "Player.h"
 #include "UI.h"
+#include"Item.h"
 
 GameMgr::GameMgr()
 {
@@ -55,6 +56,11 @@ void GameMgr::SetLimit(float xmax, float xmin, float ymax, float ymin)
 	XMIN = xmin;
 	YMAX = ymax;
 	YMIN = ymin;
+}
+
+void GameMgr::SpawnItem(Vec2 Pos)
+{
+	ObjMgr->AddObject(new Item(Pos), "ITEM");
 }
 
 void GameMgr::UnlockSkill()

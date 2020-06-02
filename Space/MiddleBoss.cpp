@@ -107,11 +107,28 @@ void MiddleBoss::Phase1()
 		m_MidDecor1Tick->m_FireDelay = 0.1f;
 		m_MidDecor1Tick->m_LastFireTick += dt;
 
-		m_LeftCannon1Tick->m_FireDelay = 0.5f;
+		m_LeftCannon1Tick->m_FireDelay = 2.0f;
 		m_LeftCannon1Tick->m_LastFireTick += dt;
 
-		m_RightCannon1Tick->m_FireDelay = 0.5f;
+		m_RightCannon1Tick->m_FireDelay = 2.0f;
 		m_RightCannon1Tick->m_LastFireTick += dt;
+
+		Vec2 A = m_LeftCannon1->m_Position;
+		Vec2 A2 = m_RightCannon1->m_Position;
+		Vec2 B = GameMgr::GetInst()->m_PlayerPos;
+		Vec2 C;
+		Vec2 C2;
+
+		C = A - B;
+		C2 = A2 - B;
+		D3DXVec2Normalize(&C, &C);
+		D3DXVec2Normalize(&C2, &C2);
+
+		float angle = acos(C.x) * -1;
+		float angle2 = acos(C2.x) * -1;
+
+		m_LeftCannon1->m_Rotation = angle + D3DXToRadian(90);
+		m_RightCannon1->m_Rotation = angle2 + D3DXToRadian(90);
 
 
 		if (!m_MidDecorRot)
@@ -137,27 +154,30 @@ void MiddleBoss::Phase1()
 		}
 		if (m_LeftCannon1Tick->m_FireDelay <= m_LeftCannon1Tick->m_LastFireTick && m_LeftCannon1->m_HP >= 0)
 		{
-			ObjMgr->AddObject(new EnemyBullet(m_LeftCannon1->m_Position, m_Atk, 400, 0, false, 0, true), "EnemyBullet");
+			ObjMgr->AddObject(new EnemyBullet(m_LeftCannon1->m_Position, m_Atk, 700, 0, false, 0, true,L"BigBullet"), "EnemyBullet");
 			m_LeftCannon1Tick->m_LastFireTick = 0.f;
 		}
 		if (m_RightCannon1Tick->m_FireDelay <= m_RightCannon1Tick->m_LastFireTick && m_RightCannon1->m_HP >= 0)
 		{
-			ObjMgr->AddObject(new EnemyBullet(m_RightCannon1->m_Position, m_Atk, 400, 0, false, 0, true), "EnemyBullet");
+			ObjMgr->AddObject(new EnemyBullet(m_RightCannon1->m_Position, m_Atk, 700, 0, false, 0, true, L"BigBullet"), "EnemyBullet");
 			m_RightCannon1Tick->m_LastFireTick = 0.f;
 		}
 
 		if (m_LeftCannon1->m_HP <= 0)
 		{
+			GameMgr::GetInst()->SpawnItem(m_LeftCannon1->m_Position);
 			m_LeftCannon1->SetDestroy(true);
 			m_LeftDes1->m_Visible = true;
 		}
 		if (m_RightCannon1->m_HP <= 0)
 		{
+			GameMgr::GetInst()->SpawnItem(m_RightCannon1->m_Position);
 			m_RightCannon1->SetDestroy(true);
 			m_RightDes1->m_Visible = true;
 		}
 		if (m_MidDecor1->m_HP <= 0)
 		{
+			GameMgr::GetInst()->SpawnItem(m_MidDecor1->m_Position);
 			m_MidDecor1->SetDestroy(true);
 			m_MidDes1->m_Visible = true;
 		}
