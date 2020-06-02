@@ -163,20 +163,23 @@ void MiddleBoss::Phase1()
 			m_RightCannon1Tick->m_LastFireTick = 0.f;
 		}
 
-		if (m_LeftCannon1->m_HP <= 0)
+		if (m_LeftCannon1->m_HP <= 0 && m_LeftDes1->m_Visible == false)
 		{
+			GameMgr::GetInst()->m_AcqExp += 50;
 			GameMgr::GetInst()->SpawnItem(m_LeftCannon1->m_Position);
 			m_LeftCannon1->SetDestroy(true);
 			m_LeftDes1->m_Visible = true;
 		}
-		if (m_RightCannon1->m_HP <= 0)
+		if (m_RightCannon1->m_HP <= 0 && m_RightDes1->m_Visible == false)
 		{
+			GameMgr::GetInst()->m_AcqExp += 50;
 			GameMgr::GetInst()->SpawnItem(m_RightCannon1->m_Position);
 			m_RightCannon1->SetDestroy(true);
 			m_RightDes1->m_Visible = true;
 		}
-		if (m_MidDecor1->m_HP <= 0)
+		if (m_MidDecor1->m_HP <= 0 && m_MidDes1->m_Visible == false)
 		{
+			GameMgr::GetInst()->m_AcqExp += 100;
 			GameMgr::GetInst()->SpawnItem(m_MidDecor1->m_Position);
 			m_MidDecor1->SetDestroy(true);
 			m_MidDes1->m_Visible = true;
