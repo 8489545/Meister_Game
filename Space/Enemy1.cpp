@@ -17,6 +17,7 @@ Enemy1::Enemy1(Vec2 Pos)
 	m_HoldingTime = 7.f;
 	m_NowTime = 0.f;
 	m_Distance = 0.f;
+	m_State = 2;
 
 	m_RandYPos = (rand() % 450) + 50;
 	m_RandXPos = (rand() % 400);

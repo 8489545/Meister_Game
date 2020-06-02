@@ -122,7 +122,7 @@ void Player::OnCollision(Object* other)
 	if (other->m_Tag == "Enemy")
 	{
 		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
 		{
 			m_HP -= other->m_Atk / 2;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");

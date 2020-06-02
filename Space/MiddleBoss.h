@@ -52,6 +52,7 @@ public:
 	void Render();
 
 	void Phase1();
+	void Phase2();
 
 
 	void SetObjectsPosition();

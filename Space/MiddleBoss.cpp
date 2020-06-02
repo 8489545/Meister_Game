@@ -85,9 +85,11 @@ MiddleBoss::~MiddleBoss()
 void MiddleBoss::Update(float deltaTime, float Time)
 {
 	if (m_Phase == 1)
-	{
 		Phase1();
-	}
+	if(m_Phase == 2)
+		Phase2();
+
+
 	SetObjectsPosition();
 }
 
@@ -184,8 +186,21 @@ void MiddleBoss::Phase1()
 			m_MidDecor1->SetDestroy(true);
 			m_MidDes1->m_Visible = true;
 		}
+
+		if(m_LeftCannon1->m_HP <= 0 && m_RightCannon1->m_HP <= 0 && m_MidDecor1->m_HP <= 0)
+		{
+			m_Phase = 2;
+		}
 	}
-}	  
+}
+
+void MiddleBoss::Phase2()
+{
+	if (m_Position.y <= 100)
+	{
+		m_Position.y += 100 * dt;
+	}
+}
 
 void MiddleBoss::SetObjectsPosition()
 {
