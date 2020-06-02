@@ -43,10 +43,16 @@ public:
 
 	int m_Phase;
 	bool m_MidDecorRot;
+	bool m_LeftCannon2Rot;
+	bool m_RightCannon2Rot;
 
 	FireTick* m_MidDecor1Tick;
 	FireTick* m_LeftCannon1Tick;
 	FireTick* m_RightCannon1Tick;
+
+	FireTick* m_MidCannonTick;
+	FireTick* m_LeftCannon2Tick;
+	FireTick* m_RightCannon2Tick;
 
 	void Update(float deltaTime, float Time);
 	void Render();
