@@ -6,6 +6,7 @@
 #include"Bomb.h"
 #include"Enemy1.h"
 #include"Item.h"
+#include"Laser.h"
 
 Player::Player()
 {
@@ -93,6 +94,8 @@ void Player::Update(float deltaTime, float Time)
 		m_Exp += 50;
 	if (INPUT->GetKey('S') == KeyState::DOWN)
 		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "ITEM");
+	if (INPUT->GetKey('Q') == KeyState::DOWN)
+		ObjMgr->AddObject(new Laser(m_Position, 1, m_Atk, 0.3, 0.5f), "Bullet");
 	if (INPUT->GetKey('A') == KeyState::DOWN)
 	{
 		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");

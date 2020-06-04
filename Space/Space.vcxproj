@@ -32,6 +32,7 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Laser.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MiddleBoss.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -67,6 +68,7 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MiddleBoss.h" />
     <ClInclude Include="Object.h" />
