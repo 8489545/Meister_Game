@@ -42,7 +42,6 @@ Item::~Item()
 
 void Item::Update(float deltaTime, float Time)
 {
-	printf("%s\n", m_Tag.c_str());
 	m_Position.y += 200 * dt;
 }
 

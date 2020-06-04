@@ -59,6 +59,7 @@ public:
 
 	void Phase1();
 	void Phase2();
+	void Phase3();
 
 
 	void SetObjectsPosition();

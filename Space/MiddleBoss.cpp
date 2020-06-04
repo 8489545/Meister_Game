@@ -68,7 +68,7 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_MidCannon2, "Enemy");
 
 
-	m_Phase = 2;
+	m_Phase = 1;
 	m_Atk = 33;
 
 	m_LeftDes1->m_Visible = false;
@@ -81,15 +81,15 @@ MiddleBoss::MiddleBoss()
 
 	m_MidDecorRot = false;
 
-	m_LeftCannon1->m_HP = 1;
-	m_RightCannon1->m_HP = 1;
-	m_MidDecor1->m_HP = 1;
+	m_LeftCannon1->m_HP = 15.f;
+	m_RightCannon1->m_HP = 15.f;
+	m_MidDecor1->m_HP = 20.f;
 
-	m_LeftCannon2->m_HP = 1;
-	m_RightCannon2->m_HP = 1;
-	m_MidCannon->m_HP = 1;
-	m_RightDecor->m_HP = 1;
-	m_LeftDecor->m_HP = 1;
+	m_LeftCannon2->m_HP = 20.f;
+	m_RightCannon2->m_HP = 20.f;
+	m_MidCannon->m_HP = 250.f;
+	m_RightDecor->m_HP = 300.f;
+	m_LeftDecor->m_HP = 300.f;
 
 	m_MidDecor1Tick = new FireTick();
 	m_LeftCannon1Tick = new FireTick();
@@ -212,8 +212,6 @@ void MiddleBoss::Phase1()
 
 		if(m_LeftCannon1->m_HP <= 0 && m_RightCannon1->m_HP <= 0 && m_MidDecor1->m_HP <= 0)
 		{
-			m_LeftDecor->m_HP = 1;
-			m_RightDecor->m_HP = 1;
 			m_Phase = 2;
 		}
 	}
@@ -223,17 +221,17 @@ void MiddleBoss::Phase2()
 {
 	if (m_Position.y <= 100)
 	{
-		m_Position.y += 500 * dt;
+		m_Position.y += 100 * dt;
 	}
 	else
 	{
 		m_MidCannonTick->m_FireDelay = 1.0f;
 		m_MidCannonTick->m_LastFireTick += dt;
 
-		m_LeftCannon2Tick->m_FireDelay = 0.5f;
+		m_LeftCannon2Tick->m_FireDelay = 0.2f;
 		m_LeftCannon2Tick->m_LastFireTick += dt;
 
-		m_RightCannon2Tick->m_FireDelay = 0.5f;
+		m_RightCannon2Tick->m_FireDelay = 0.2f;
 		m_RightCannon2Tick->m_LastFireTick += dt;
 
 		Vec2 A = m_MidCannon->m_Position;
@@ -327,8 +325,17 @@ void MiddleBoss::Phase2()
 
 		if (m_LeftCannon2->m_HP <= 0 && m_RightCannon2->m_HP <= 0 && m_MidCannon->m_HP <= 0 && m_LeftDecor->m_HP <= 0 && m_RightDecor->m_HP <= 0)
 		{
+			printf("adsf");
 			m_Phase = 3;
 		}
+	}
+}
+
+void MiddleBoss::Phase3()
+{
+	if (m_Position.y <= 350)
+	{
+		m_Position.y += 100 * dt;
 	}
 }
 
@@ -357,6 +364,6 @@ void MiddleBoss::SetObjectsPosition()
 	m_MidDes1->SetPosition(m_Position.x - 21, m_Position.y + 320);
 
 	m_LeftDes2->SetPosition(m_Position.x - 178, m_Position.y + 215);
-	//m_RightDes2->SetPosition(m_Position.x + 50, m_Position.y + 305);
+	m_RightDes2->SetPosition(m_Position.x + 115, m_Position.y + 215);
 	m_MidDes2->SetPosition(m_Position.x - 21, m_Position.y + 120);
 }
