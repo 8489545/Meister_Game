@@ -152,7 +152,7 @@ void Player::OnCollision(Object* other)
 		}
 		if (other->m_State == 2)
 		{
-			GameMgr::GetInst()->m_AcqExp = m_MAXExp - m_Exp;
+			GameMgr::GetInst()->m_AcqExp += m_MAXExp - m_Exp;
 			other->SetDestroy(true);
 		}
 	}

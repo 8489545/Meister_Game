@@ -111,6 +111,8 @@ void MiddleBoss::Update(float deltaTime, float Time)
 		Phase1();
 	if(m_Phase == 2)
 		Phase2();
+	if(m_Phase == 3)
+		Phase3();
 
 
 	SetObjectsPosition();
@@ -325,7 +327,6 @@ void MiddleBoss::Phase2()
 
 		if (m_LeftCannon2->m_HP <= 0 && m_RightCannon2->m_HP <= 0 && m_MidCannon->m_HP <= 0 && m_LeftDecor->m_HP <= 0 && m_RightDecor->m_HP <= 0)
 		{
-			printf("adsf");
 			m_Phase = 3;
 		}
 	}
@@ -333,9 +334,9 @@ void MiddleBoss::Phase2()
 
 void MiddleBoss::Phase3()
 {
-	if (m_Position.y <= 350)
+	if (m_Position.y <= 450)
 	{
-		m_Position.y += 100 * dt;
+		m_Position.y += 150 * dt;
 	}
 }
 
