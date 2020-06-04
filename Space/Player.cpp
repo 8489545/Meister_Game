@@ -67,6 +67,7 @@ void Player::Init()
 	m_SSkillMAXCooldown = 25.f;
 	m_CatchBox->m_Visible = false;
 	m_Layer = 1;
+	m_InvinTick = 0.f;
 
 	GameMgr::GetInst()->m_PlayerShotType = SHOTTYPE::DIRECT;
 
@@ -88,6 +89,7 @@ void Player::Update(float deltaTime, float Time)
 	LevelUP();
 	Skill();
 	ColCheak();
+	Invincibility();
 	m_ColBox->m_Position = m_Position;
 	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
@@ -110,37 +112,46 @@ void Player::Render()
 
 void Player::OnCollision(Object* other)
 {
-	if (other->m_Tag == "EnemyBullet")
+	if (!m_PlayerInvincibility)
 	{
-		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		if (other->m_Tag == "EnemyBullet")
 		{
-			float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
-			float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
-			m_HP -= other->m_Atk / 2;
-			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
-			other->SetDestroy(true);
+			RECT rc;
+			if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+			{
+				float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
+				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
+				m_HP -= other->m_Atk / 2;
+				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+				other->SetDestroy(true);
+				if (!m_PlayerInvincibility)
+					m_PlayerInvincibility = true;
+			}
 		}
-	}
-	if (other->m_Tag == "Laser")
-	{
-		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
+		if (other->m_Tag == "Laser")
 		{
-			float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
-			float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
-			m_HP -= other->m_Atk / 2;
-			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+			RECT rc;
+			if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
+			{
+				float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
+				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
+				m_HP -= other->m_Atk / 2;
+				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+				if(!m_PlayerInvincibility)
+					m_PlayerInvincibility = true;
+			}
 		}
-	}
-	if (other->m_Tag == "Enemy")
-	{
-		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
+		if (other->m_Tag == "Enemy")
 		{
-			m_HP -= other->m_Atk / 2;
-			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
-			other->SetDestroy(true);
+			RECT rc;
+			if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
+			{
+				m_HP -= other->m_Atk / 2;
+				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
+				other->SetDestroy(true);
+				if (!m_PlayerInvincibility)
+					m_PlayerInvincibility = true;
+			}
 		}
 	}
 
@@ -318,6 +329,22 @@ void Player::ColCheak()
 	ObjMgr->CollisionCheak(this, "Enemy");
 	ObjMgr->CollisionCheak(this, "ITEM");
 	ObjMgr->CollisionCheak(this, "Laser");
+}
+
+void Player::Invincibility()
+{
+	const float InvinTime = 1.f;
+
+	if (m_PlayerInvincibility)
+	{
+		m_InvinTick += dt;
+
+		if (m_InvinTick > InvinTime)
+		{
+			m_InvinTick = 0.f;
+			m_PlayerInvincibility = false;
+		}
+	}
 }
 
 void Player::LevelUP()

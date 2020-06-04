@@ -35,10 +35,12 @@ public:
 	float m_SSkillMAXCooldown;
 
 	bool m_willLevelUPReward;
+	bool m_PlayerInvincibility;
 
 	float m_FireDelay;
 	float m_LastFireTick;
 	float m_NowTick;
+	float m_InvinTick;
 
 	void Init();
 	void Release();
@@ -53,6 +55,7 @@ public:
 	void DeliveringInformation();
 	void Skill();
 	void ColCheak();
+	void Invincibility();
 
 	void LevelUP();
 };
