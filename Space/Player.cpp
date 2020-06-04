@@ -95,7 +95,7 @@ void Player::Update(float deltaTime, float Time)
 	if (INPUT->GetKey('S') == KeyState::DOWN)
 		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "ITEM");
 	if (INPUT->GetKey('Q') == KeyState::DOWN)
-		ObjMgr->AddObject(new Laser(m_Position, 1, m_Atk, 0.3, 0.5f), "Bullet");
+		ObjMgr->AddObject(new Laser(m_Position, 1, m_Atk, 0.3, 0.5f), "Laser");
 	if (INPUT->GetKey('A') == KeyState::DOWN)
 	{
 		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");
@@ -120,6 +120,17 @@ void Player::OnCollision(Object* other)
 			m_HP -= other->m_Atk / 2;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 			other->SetDestroy(true);
+		}
+	}
+	if (other->m_Tag == "Laser")
+	{
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
+		{
+			float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
+			float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
+			m_HP -= other->m_Atk / 2;
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 		}
 	}
 	if (other->m_Tag == "Enemy")
@@ -306,6 +317,7 @@ void Player::ColCheak()
 	ObjMgr->CollisionCheak(this, "EnemyBullet");
 	ObjMgr->CollisionCheak(this, "Enemy");
 	ObjMgr->CollisionCheak(this, "ITEM");
+	ObjMgr->CollisionCheak(this, "Laser");
 }
 
 void Player::LevelUP()
