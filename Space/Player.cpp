@@ -119,7 +119,7 @@ void Player::OnCollision(Object* other)
 			{
 				float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
 				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
-				m_HP -= other->m_Atk / 2;
+				m_HP -= other->m_Atk;
 				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 				other->SetDestroy(true);
 				if (!m_PlayerInvincibility)
@@ -133,7 +133,7 @@ void Player::OnCollision(Object* other)
 			{
 				float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
 				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
-				m_HP -= other->m_Atk / 2;
+				m_HP -= other->m_Atk;
 				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
 				if(!m_PlayerInvincibility)
 					m_PlayerInvincibility = true;
@@ -144,7 +144,7 @@ void Player::OnCollision(Object* other)
 			RECT rc;
 			if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision) && other->m_State == 2)
 			{
-				m_HP -= other->m_Atk / 2;
+				m_HP -= other->m_Atk;
 				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, m_Position), "Effect");
 				other->SetDestroy(true);
 				if (!m_PlayerInvincibility)
@@ -364,7 +364,7 @@ void Player::LevelUP()
 		{
 		case 2:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_AtkIncrease += m_Atk * 0.2;
+			m_AtkIncrease += m_Atk * 10.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_MAXExp = 200;

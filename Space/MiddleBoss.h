@@ -47,6 +47,8 @@ public:
 	bool m_RightCannon2Rot;
 	bool m_MidCannon2Rot;
 
+	bool m_isDestroy;
+
 	FireTick* m_MidDecor1Tick;
 	FireTick* m_LeftCannon1Tick;
 	FireTick* m_RightCannon1Tick;
@@ -58,6 +60,8 @@ public:
 	FireTick* m_MidCannon2Tick;
 	FireTick* m_LeftBigCannonTick;
 	FireTick* m_RightBigCannonTick;
+
+	FireTick* m_DestroyTick;
 
 	void Update(float deltaTime, float Time);
 	void Render();

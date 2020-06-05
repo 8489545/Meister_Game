@@ -91,6 +91,8 @@ MiddleBoss::MiddleBoss()
 	m_RightCannon2Rot = false;
 	m_MidCannon2Rot = false;
 
+	m_isDestroy = false;
+
 	m_MidDecor1Tick = new FireTick();
 	m_LeftCannon1Tick = new FireTick();
 	m_RightCannon1Tick = new FireTick();
@@ -102,6 +104,8 @@ MiddleBoss::MiddleBoss()
 	m_MidCannon2Tick = new FireTick();
 	m_LeftBigCannonTick = new FireTick();
 	m_RightBigCannonTick = new FireTick();
+
+	m_DestroyTick = new FireTick();
 
 	GameMgr::GetInst()->m_ScrollingStop = true;
 }
@@ -420,11 +424,41 @@ void MiddleBoss::Phase3()
 			GameMgr::GetInst()->SpawnItem(m_RightBigCannon->m_Position);
 			m_RightBigCannon->SetDestroy(true);
 		}
+
+		if (m_MidCannon2->m_HP <= 0 && m_LeftBigCannon->m_HP <= 0 && m_RightBigCannon->m_HP <= 0)
+		{
+			m_isDestroy = true;
+			Destroy();
+		}
 	}
 }
 
 void MiddleBoss::Destroy()
 {
+	if (m_isDestroy)
+	{
+		m_DestroyTick->m_FireDelay = 0.3f;
+		m_DestroyTick->m_LastFireTick += dt;
+
+		if (m_Position.y <= 1800)
+		{
+			m_Position.y += 100.f * dt;
+
+			if (m_DestroyTick->m_LastFireTick >= m_DestroyTick->m_FireDelay)
+			{
+				float X = 960;
+				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
+				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion2/", 1, 25, 2, Vec2(X, randy)), "Effect");
+				m_DestroyTick->m_LastFireTick = 0.f;
+			}
+		}
+		else
+		{
+			SetDestroy(true);
+			GameMgr::GetInst()->m_ScrollingStop = false;
+		}
+
+	}
 }
 
 void MiddleBoss::SetObjectsPosition()
