@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MiddleBoss.h"
 #include"EnemyBullet.h"
+#include"Laser.h"
 
 //Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/")
 
@@ -39,6 +40,8 @@ MiddleBoss::MiddleBoss()
 	m_RightDes2 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/rightDes2.png");
 	m_MidDes2 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/midDes2.png");
 
+	m_MidDes3 = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/midDes3.png");
+
 	
 
 	ObjMgr->AddObject(m_LeftDes1, "Effect");
@@ -48,6 +51,8 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_LeftDes2, "Effect");
 	ObjMgr->AddObject(m_RightDes2, "Effect");
 	ObjMgr->AddObject(m_MidDes2, "Effect");
+
+	ObjMgr->AddObject(m_MidDes3, "Effect");
 
 	ObjMgr->AddObject(m_LeftCannon1, "Enemy");
 	ObjMgr->AddObject(m_RightCannon1, "Enemy");
@@ -64,7 +69,7 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_LeftBigCannon, "Enemy");
 	ObjMgr->AddObject(m_RightBigCannon, "Enemy");
 
-	ObjMgr->AddObject(m_MidDecor2, "Enemy");
+	ObjMgr->AddObject(m_MidDecor2, "Effect");
 	ObjMgr->AddObject(m_MidCannon2, "Enemy");
 
 
@@ -79,17 +84,12 @@ MiddleBoss::MiddleBoss()
 	m_RightDes2->m_Visible = false;
 	m_MidDes2->m_Visible = false;
 
+	m_MidDes3->m_Visible = false;
+
 	m_MidDecorRot = false;
-
-	m_LeftCannon1->m_HP = 15.f;
-	m_RightCannon1->m_HP = 15.f;
-	m_MidDecor1->m_HP = 20.f;
-
-	m_LeftCannon2->m_HP = 20.f;
-	m_RightCannon2->m_HP = 20.f;
-	m_MidCannon->m_HP = 250.f;
-	m_RightDecor->m_HP = 300.f;
-	m_LeftDecor->m_HP = 300.f;
+	m_LeftCannon2Rot = false;
+	m_RightCannon2Rot = false;
+	m_MidCannon2Rot = false;
 
 	m_MidDecor1Tick = new FireTick();
 	m_LeftCannon1Tick = new FireTick();
@@ -98,6 +98,10 @@ MiddleBoss::MiddleBoss()
 	m_MidCannonTick = new FireTick();
 	m_LeftCannon2Tick = new FireTick();
 	m_RightCannon2Tick = new FireTick();
+
+	m_MidCannon2Tick = new FireTick();
+	m_LeftBigCannonTick = new FireTick();
+	m_RightBigCannonTick = new FireTick();
 }
 
 
@@ -114,7 +118,6 @@ void MiddleBoss::Update(float deltaTime, float Time)
 	if(m_Phase == 3)
 		Phase3();
 
-
 	SetObjectsPosition();
 }
 
@@ -127,6 +130,10 @@ void MiddleBoss::Phase1()
 {
 	if (m_Position.y <= -250)
 	{
+		m_LeftCannon1->m_HP = 15000.f;
+		m_RightCannon1->m_HP = 15000.f;
+		m_MidDecor1->m_HP = 20000.f;
+
 		m_Position.y += 100 * dt;
 	}
 	else
@@ -223,6 +230,12 @@ void MiddleBoss::Phase2()
 {
 	if (m_Position.y <= 100)
 	{
+		m_LeftCannon2->m_HP = 20000.f;
+		m_RightCannon2->m_HP = 20000.f;
+		m_MidCannon->m_HP = 25000.f;
+		m_RightDecor->m_HP = 30000.f;
+		m_LeftDecor->m_HP = 30000.f;
+
 		m_Position.y += 100 * dt;
 	}
 	else
@@ -336,8 +349,80 @@ void MiddleBoss::Phase3()
 {
 	if (m_Position.y <= 450)
 	{
+		m_MidCannon2->m_HP = 20000.f;
+		m_LeftBigCannon->m_HP = 20000.f;
+		m_RightBigCannon->m_HP = 20000.f;
+
 		m_Position.y += 150 * dt;
 	}
+	else
+	{
+		m_MidCannon2Tick->m_FireDelay = 0.1f;
+		m_MidCannon2Tick->m_LastFireTick += dt;
+
+		m_LeftBigCannonTick->m_FireDelay = 10.f;
+		m_LeftBigCannonTick->m_LastFireTick += dt;
+
+		m_RightBigCannonTick->m_FireDelay = 10.f;
+		m_RightBigCannonTick->m_LastFireTick += dt;
+
+
+		if (!m_MidCannon2Rot)
+		{
+			m_MidCannon2->m_Rotation -= D3DXToRadian(100) * dt;
+
+			if (m_MidCannon2->m_Rotation <= D3DXToRadian(-30))
+				m_MidCannon2Rot = true;
+
+		}
+		else if (m_MidCannon2Rot)
+		{
+			m_MidCannon2->m_Rotation += D3DXToRadian(100) * dt;
+
+			if (m_MidCannon2->m_Rotation >= D3DXToRadian(30))
+				m_MidCannon2Rot = false;
+		}
+
+		if (m_MidCannon2Tick->m_FireDelay <= m_MidCannon2Tick->m_LastFireTick && m_MidCannon2->m_HP >= 0)
+		{
+			ObjMgr->AddObject(new EnemyBullet(m_MidCannon2->m_Position, m_Atk, 500, D3DXToDegree(m_MidCannon2->m_Rotation) - 180, false, 0, false), "EnemyBullet");
+			m_MidCannon2Tick->m_LastFireTick = 0.f;
+		}
+		if (m_LeftBigCannonTick->m_FireDelay <= m_LeftBigCannonTick->m_LastFireTick && m_LeftBigCannon->m_HP >= 0)
+		{
+			ObjMgr->AddObject(new Laser(m_LeftBigCannon->m_Position, 3, m_Atk, 1, 0.5), "Laser");
+			m_LeftBigCannonTick->m_LastFireTick = 0.f;
+		}
+		if (m_RightBigCannonTick->m_FireDelay <= m_RightBigCannonTick->m_LastFireTick && m_RightBigCannon->m_HP >= 0)
+		{
+			ObjMgr->AddObject(new Laser(m_RightBigCannon->m_Position, 3, m_Atk, 1, 0.5), "Laser");
+			m_RightBigCannonTick->m_LastFireTick = 0.f;
+		}
+
+		if (m_MidCannon2->m_HP <= 0 && !m_MidDes3->m_Visible)
+		{
+			GameMgr::GetInst()->m_AcqExp += 100;
+			GameMgr::GetInst()->SpawnItem(m_MidCannon2->m_Position);
+			m_MidCannon2->SetDestroy(true);
+			m_MidDes3->m_Visible = true;
+		}
+		if (m_LeftBigCannon->m_HP <= 0 && !m_LeftBigCannon->m_Destroy)
+		{
+			GameMgr::GetInst()->m_AcqExp += 200;
+			GameMgr::GetInst()->SpawnItem(m_MidCannon2->m_Position);
+			m_LeftBigCannon->SetDestroy(true);
+		}
+		if (m_RightBigCannon->m_HP <= 0 && !m_RightBigCannon->m_Destroy)
+		{
+			GameMgr::GetInst()->m_AcqExp += 200;
+			GameMgr::GetInst()->SpawnItem(m_RightBigCannon->m_Position);
+			m_RightBigCannon->SetDestroy(true);
+		}
+	}
+}
+
+void MiddleBoss::Destroy()
+{
 }
 
 void MiddleBoss::SetObjectsPosition()
@@ -367,4 +452,6 @@ void MiddleBoss::SetObjectsPosition()
 	m_LeftDes2->SetPosition(m_Position.x - 178, m_Position.y + 215);
 	m_RightDes2->SetPosition(m_Position.x + 115, m_Position.y + 215);
 	m_MidDes2->SetPosition(m_Position.x - 21, m_Position.y + 120);
+
+	m_MidDes3->SetPosition(m_Position.x - 21, m_Position.y + -260);
 }

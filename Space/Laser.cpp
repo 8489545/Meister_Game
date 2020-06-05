@@ -13,7 +13,7 @@ Laser::Laser(Vec2 Pos, float laserDuration, float atk, float appearTime,float si
 
 	m_Position = Pos;
 
-	m_Position.y -= m_Laser->m_Size.y / 2;
+	m_Position.y += m_Laser->m_Size.y / 2;
 
 	m_LaserDuration = laserDuration;
 	m_Atk = atk;
