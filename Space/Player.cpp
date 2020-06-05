@@ -117,6 +117,8 @@ void Player::OnCollision(Object* other)
 			RECT rc;
 			if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
 			{
+				m_Player->B = 50;
+				m_Player->G = 50;
 				float randx = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
 				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
 				m_HP -= other->m_Atk / 2;

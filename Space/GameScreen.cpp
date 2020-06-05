@@ -39,14 +39,17 @@ void GameScreen::Release()
 
 void GameScreen::Update(float deltaTime, float time)
 {
-	m_GameScreen1->m_Position.y += 500 * dt;
-	m_GameScreen2->m_Position.y += 500 * dt;
+	if (!GameMgr::GetInst()->m_ScrollingStop)
+	{
+		m_GameScreen1->m_Position.y += 500 * dt;
+		m_GameScreen2->m_Position.y += 500 * dt;
+	}
 
-	if (m_GameScreen1->m_Position.y >= 1080 + (m_GameScreen1->m_Size.y / 2))
+	if (m_GameScreen1->m_Position.y >= 1080 + (m_GameScreen1->m_Size.y / 2) && !GameMgr::GetInst()->m_ScrollingStop)
 	{
 		m_GameScreen1->m_Position.y = m_GameScreen2->m_Position.y - 1080;
 	}
-	if (m_GameScreen2->m_Position.y >= 1080 + (m_GameScreen2->m_Size.y / 2))
+	if (m_GameScreen2->m_Position.y >= 1080 + (m_GameScreen2->m_Size.y / 2) && !GameMgr::GetInst()->m_ScrollingStop)
 	{
 		m_GameScreen2->m_Position.y = m_GameScreen1->m_Position.y - 1080;
 	}

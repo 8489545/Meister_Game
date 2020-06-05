@@ -17,6 +17,7 @@ void GameMgr::Init()
 	m_CreatePlayer = false;
 	m_FirstSkill = false;
 	m_SecendSkill = false;
+	m_ScrollingStop = false;
 	m_FirstSkillCooldown = 0;
 	m_SecendSkillCooldown = 0;
 	m_PlayerShotType = SHOTTYPE::DIRECT;

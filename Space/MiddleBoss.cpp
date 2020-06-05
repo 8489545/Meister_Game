@@ -102,6 +102,8 @@ MiddleBoss::MiddleBoss()
 	m_MidCannon2Tick = new FireTick();
 	m_LeftBigCannonTick = new FireTick();
 	m_RightBigCannonTick = new FireTick();
+
+	GameMgr::GetInst()->m_ScrollingStop = true;
 }
 
 

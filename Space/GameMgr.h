@@ -35,6 +35,8 @@ public:
 	bool m_FirstSkill;
 	bool m_SecendSkill;
 
+	bool m_ScrollingStop;
+
 	float m_FirstSkillCooldown;
 	float m_SecendSkillCooldown;
 	float m_FirstSkillMaxCooldown;
