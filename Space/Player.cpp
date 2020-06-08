@@ -56,7 +56,8 @@ void Player::Init()
 	m_HP = m_MAXHP;
 	m_Exp = 0;
 	m_Level = 1;
-	m_Atk = 60;
+	m_DirectBasicAtk = 100.f;
+	m_SpreadBasicAtk = m_DirectBasicAtk * 0.66f;
 	m_Speed = 300.f;
 	m_RPMIncrease = 0.f;
 
@@ -243,12 +244,12 @@ void Player::ChangeFireMode()
 	if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::DIRECT)
 	{
 		m_RPM = 400.f + m_RPMIncrease;
-		m_Atk = 60 + m_AtkIncrease;
+		m_Atk = m_DirectBasicAtk + m_AtkIncrease;
 	}
 	else if (GameMgr::GetInst()->m_PlayerShotType == SHOTTYPE::SPREAD)
 	{
 		m_RPM = 250.f + (m_RPMIncrease * 0.375f);
-		m_Atk = 45 + (m_AtkIncrease * 0.333f);
+		m_Atk = m_SpreadBasicAtk + (m_AtkIncrease * 0.333f);
 		
 	}
 	m_FireDelay = (60.f / m_RPM);
@@ -364,7 +365,7 @@ void Player::LevelUP()
 		{
 		case 2:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_AtkIncrease += m_Atk * 10.2;
+			m_AtkIncrease += m_Atk * 0.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_MAXExp = 200;

@@ -21,8 +21,6 @@ Laser::Laser(Vec2 Pos, float laserDuration, float atk, float appearTime,float si
 	m_SizeSpeed = sizeSpeed;
 
 	m_LaserAppeared = false;
-
-	printf("%f \n", m_Position.x);
 }
 
 Laser::~Laser()
