@@ -4,7 +4,7 @@
 #include"SpreadBullet.h"
 #include"Shield.h"
 #include"Bomb.h"
-#include"Enemy1.h"
+#include"Enemy2.h"
 #include"Item.h"
 #include"Laser.h"
 
@@ -99,7 +99,7 @@ void Player::Update(float deltaTime, float Time)
 		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "ITEM");
 	if (INPUT->GetKey('A') == KeyState::DOWN)
 	{
-		ObjMgr->AddObject(new Enemy1(Vec2(1920 / 2, -100)), "Enemy");
+		ObjMgr->AddObject(new Enemy2(Vec2(1920 / 2, -100)), "Enemy");
 	}
 }
 

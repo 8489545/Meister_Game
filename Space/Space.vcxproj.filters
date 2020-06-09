@@ -129,6 +129,9 @@
     <ClCompile Include="Laser.cpp">
       <Filter>Game\Object\OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy2.cpp">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -225,6 +228,9 @@
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Laser.h">
+      <Filter>Game\Object\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy2.h">
       <Filter>Game\Object\OBJ</Filter>
     </ClInclude>
   </ItemGroup>
