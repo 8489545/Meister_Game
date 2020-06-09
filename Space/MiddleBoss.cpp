@@ -396,7 +396,7 @@ void MiddleBoss::Phase3()
 		m_MidCannon2Tick->m_FireDelay = 0.2f;
 		m_MidCannon2Tick->m_LastFireTick += dt;
 
-		m_LeftBigCannonTick->m_FireDelay = 0.1f;
+		m_LeftBigCannonTick->m_FireDelay = 0.3f;
 		m_LeftBigCannonTick->m_LastFireTick += dt;
 
 		m_RightBigCannonTick->m_FireDelay = 0.1f;
@@ -420,7 +420,7 @@ void MiddleBoss::Phase3()
 		}
 
 		m_RightBigCannon->m_Rotation += D3DXToRadian(60) * dt;
-		m_LeftBigCannon->m_Rotation -= D3DXToRadian(60) * dt;
+		m_LeftBigCannon->m_Rotation -= D3DXToRadian(90) * dt;
 
 		if (m_MidCannon2Tick->m_FireDelay <= m_MidCannon2Tick->m_LastFireTick && m_MidCannon2->m_HP >= 0)
 		{
