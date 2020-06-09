@@ -53,6 +53,7 @@ public:
 	void SetPlayerStatus(int level, int exp, int hp, float speed, int atk, float rpm);
 	void SetLimit(float xmax,float xmin,float ymax,float ymin);
 	void SpawnItem(Vec2 Pos);
+	void SpawnMiddleBoss();
 
 	void UnlockSkill();
 };

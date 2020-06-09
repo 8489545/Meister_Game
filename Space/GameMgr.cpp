@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "UI.h"
 #include"Item.h"
+#include"MiddleBoss.h"
 
 GameMgr::GameMgr()
 {
@@ -62,6 +63,11 @@ void GameMgr::SetLimit(float xmax, float xmin, float ymax, float ymin)
 void GameMgr::SpawnItem(Vec2 Pos)
 {
 	ObjMgr->AddObject(new Item(Pos), "ITEM");
+}
+
+void GameMgr::SpawnMiddleBoss()
+{
+	ObjMgr->AddObject(new MiddleBoss(), "MiddleBoss");
 }
 
 void GameMgr::UnlockSkill()
