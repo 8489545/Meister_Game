@@ -45,7 +45,11 @@ MiddleBoss::MiddleBoss()
 	m_MidBossWarning = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/Warning.png");
 	m_MidBossWarning->SetPosition(1920 / 2, -300);
 
+	m_MidBossClear = Sprite::Create(L"Painting/Object/Enemy/MiddleBoss/Clear.png");
+	m_MidBossClear->SetPosition(1920 / 2, -300);
+
 	ObjMgr->AddObject(m_MidBossWarning, "UI");
+	ObjMgr->AddObject(m_MidBossClear, "UI");
 
 	ObjMgr->AddObject(m_LeftDes1, "Effect");
 	ObjMgr->AddObject(m_RightDes1, "Effect");
@@ -97,6 +101,7 @@ MiddleBoss::MiddleBoss()
 	m_isDestroy = false;
 
 	m_WarningTick = 0.f;
+	m_EndTick = 0.f;
 
 	m_MidDecor1Tick = new FireTick();
 	m_LeftCannon1Tick = new FireTick();
@@ -121,6 +126,7 @@ MiddleBoss::~MiddleBoss()
 
 void MiddleBoss::Update(float deltaTime, float Time)
 {
+	printf("%d \n", m_Phase);
 	if (m_Phase == 0)
 		Start();
 	if (m_Phase == 1)
@@ -129,6 +135,8 @@ void MiddleBoss::Update(float deltaTime, float Time)
 		Phase2();
 	if(m_Phase == 3)
 		Phase3();
+	if (m_Phase == 4)
+		End();
 
 	SetObjectsPosition();
 }
@@ -154,12 +162,36 @@ void MiddleBoss::Start()
 
 			if (m_MidBossWarning->m_Position.y >= 1300)
 			{
+				m_WarningTick = 0.f;
 				m_MidBossWarning->SetDestroy(true);
 				GameMgr::GetInst()->m_ScrollingStop = true;
-				m_Phase = 3;
+				m_Phase = 1;
 			}
 		}
 	}
+}
+
+void MiddleBoss::End()
+{
+	if(m_MidBossClear->m_Position.y >= 1080 / 2)
+	{
+		m_EndTick += dt;
+
+		if (m_EndTick >= 3.f)
+		{
+			m_MidBossClear->m_Position.y += 600 * dt;
+
+			if (m_MidBossClear->m_Position.y >= 1300)
+			{
+				m_MidBossClear->SetDestroy(true);
+				GameMgr::GetInst()->m_ScrollingStop = false;
+				m_Phase = 5;
+				SetDestroy(true);
+			}
+		}
+	}
+	else
+		m_MidBossClear->m_Position.y += 600 * dt;
 }
 
 void MiddleBoss::Phase1()
@@ -473,7 +505,11 @@ void MiddleBoss::Destroy()
 		m_DestroyTick->m_FireDelay = 0.3f;
 		m_DestroyTick->m_LastFireTick += dt;
 
-		if (m_Position.y <= 1800)
+		if (m_Position.y >= 1800.f)
+		{
+			m_Phase = 4;
+		}
+		else if (m_Position.y < 1800.f)
 		{
 			m_Position.y += 100.f * dt;
 
@@ -484,11 +520,6 @@ void MiddleBoss::Destroy()
 				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion2/", 1, 25, 2, Vec2(X, randy)), "Effect");
 				m_DestroyTick->m_LastFireTick = 0.f;
 			}
-		}
-		else
-		{
-			SetDestroy(true);
-			GameMgr::GetInst()->m_ScrollingStop = false;
 		}
 
 	}
