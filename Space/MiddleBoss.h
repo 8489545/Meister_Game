@@ -37,11 +37,16 @@ class MiddleBoss : public Object
 	Sprite* m_MidDes1;
 	Sprite* m_MidDes2;
 	Sprite* m_MidDes3;
+
+	Sprite* m_MidBossWarning;
 public:
 	MiddleBoss();
 	~MiddleBoss();
 
 	int m_Phase;
+
+	float m_WarningTick;
+
 	bool m_MidDecorRot;
 	bool m_LeftCannon2Rot;
 	bool m_RightCannon2Rot;
@@ -65,6 +70,8 @@ public:
 
 	void Update(float deltaTime, float Time);
 	void Render();
+
+	void Start();
 
 	void Phase1();
 	void Phase2();
