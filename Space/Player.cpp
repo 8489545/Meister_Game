@@ -95,12 +95,9 @@ void Player::Update(float deltaTime, float Time)
 	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
 		m_Exp += 50;
-	if (INPUT->GetKey('S') == KeyState::DOWN)
-		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "ITEM");
-	if (INPUT->GetKey('A') == KeyState::DOWN)
-	{
+	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
 		ObjMgr->AddObject(new EliteEnemy2(Vec2(1920 / 2, -100)), "Enemy");
-	}
+
 }
 
 void Player::Render()
@@ -332,7 +329,7 @@ void Player::ColCheak()
 
 void Player::Invincibility()
 {
-	const float InvinTime = 1.f;
+	const float InvinTime = 0.5f;
 
 	if (m_PlayerInvincibility)
 	{

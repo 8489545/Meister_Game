@@ -80,6 +80,8 @@ void ObjectMgr::Render()
 	{
 		if (iter->m_Tag == "UI")
 			iter->m_Layer = 3;
+		if (iter->m_Tag == "Effect")
+			iter->m_Layer = 2;
 		(iter)->Render();
 	}
 }
