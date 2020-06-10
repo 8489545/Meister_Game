@@ -10,7 +10,7 @@ Enemy2::Enemy2(Vec2 Pos)
 	m_Position = Pos;
 
 	m_Speed = 400.f;
-	m_HP = 450.f;
+	m_HP = 700.f;
 	m_Atk = 50.f;
 
 	m_LastFireTick = 0.f;
@@ -20,6 +20,8 @@ Enemy2::Enemy2(Vec2 Pos)
 
 	m_MoveWaitingTime = 2.f;
 	m_LastMoveTime = 0.f;
+	m_NowTime = 0.f;
+	m_HoldingTime = 10.f;
 }
 
 Enemy2::~Enemy2()
@@ -57,6 +59,7 @@ void Enemy2::Update(float deltaTime, float Time)
 {
 	m_LastMoveTime += dt;
 	m_LastFireTick += dt;
+	m_NowTime += dt;
 
 	if (m_Position.y <= 100)
 	{
@@ -67,10 +70,43 @@ void Enemy2::Update(float deltaTime, float Time)
 		Move();
 	}
 
-	if (m_LastFireTick >= m_FireDelay)
+	if (m_LastFireTick >= m_FireDelay && m_Tag != "Bullet")
 	{
 		ObjMgr->AddObject(new EnemyBullet(Vec2(m_Position.x, m_Position.y + 60), m_Atk, 400, 0, true, 50, true), "EnemyBullet");
 		m_LastFireTick = 0.f;
+	}
+
+	if (m_NowTime >= m_HoldingTime && m_Tag != "Bullet")
+	{
+		if (m_Enemy->B > 0 && m_Enemy->G > 0)
+		{
+			m_Enemy->B -= 5;
+			m_Enemy->G -= 5;
+		}
+		if (m_Enemy->B == 0 && m_Enemy->G == 0)
+			m_Position.y += m_Speed * 3 * dt;
+
+		if (m_Position.y >= 1200)
+			SetDestroy(true);
+	}
+
+	if (m_Tag == "Bullet")
+	{
+		m_Rotation = D3DXToRadian(180);
+		m_Position.y -= m_Speed * 6 * dt;
+
+		if (m_Position.y <= -100)
+			SetDestroy(true);
+	}
+
+	ObjMgr->CollisionCheak(this, "Enemy");
+	ObjMgr->CollisionCheak(this, "CatchBox");
+
+	if (m_HP <= 0)
+	{
+		GameMgr::GetInst()->m_AcqExp += 20;
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
+		SetDestroy(true);
 	}
 }
 
@@ -81,4 +117,18 @@ void Enemy2::Render()
 
 void Enemy2::OnCollision(Object* other)
 {
+	if (other->m_Tag == "CatchBox" && m_Enemy->B == 0 && m_Enemy->G == 0)
+	{
+		if (INPUT->GetKey(VK_SPACE) == KeyState::DOWN)
+		{
+			m_Tag = "Bullet";
+			m_Atk = m_Atk * 5;
+		}
+	}
+	if (other->m_Tag == "Enemy" && m_Tag == "Bullet")
+	{
+		other->m_HP -= m_Atk;
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
+		SetDestroy(true);
+	}
 }

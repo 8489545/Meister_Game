@@ -11,6 +11,8 @@ public:
 
 	float m_LastFireTick;
 	float m_FireDelay;
+	float m_NowTime;
+	float m_HoldingTime;
 
 	Vec2 m_RandomPosition;
 	float m_MoveWaitingTime;

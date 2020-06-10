@@ -365,7 +365,7 @@ void Player::LevelUP()
 		{
 		case 2:
 			m_MAXHP += m_MAXHP * 0.2;
-			m_AtkIncrease += m_Atk * 10.2;
+			m_AtkIncrease += m_Atk * 0.2;
 			m_RPMIncrease += m_RPM * 0.2;
 			m_HP = m_MAXHP;
 			m_MAXExp = 200;
