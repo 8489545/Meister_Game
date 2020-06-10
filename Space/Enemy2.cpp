@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Enemy2.h"
 #include"EnemyBullet.h"
+#include"Item.h"
 
 Enemy2::Enemy2(Vec2 Pos)
 {
@@ -104,6 +105,9 @@ void Enemy2::Update(float deltaTime, float Time)
 
 	if (m_HP <= 0)
 	{
+		if ((rand() % 30) == 0)
+			ObjMgr->AddObject(new Item(m_Position), "ITEM");
+
 		GameMgr::GetInst()->m_AcqExp += 20;
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
 		SetDestroy(true);
