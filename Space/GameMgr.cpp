@@ -4,6 +4,10 @@
 #include "UI.h"
 #include"Item.h"
 #include"MiddleBoss.h"
+#include"Enemy1.h"
+#include"Enemy2.h"
+#include"EliteEnemy1.h"
+#include"EliteEnemy2.h"
 
 GameMgr::GameMgr()
 {
@@ -77,6 +81,26 @@ void GameMgr::SpawnItem(Vec2 Pos)
 void GameMgr::SpawnMiddleBoss()
 {
 	ObjMgr->AddObject(new MiddleBoss(), "MiddleBoss");
+}
+
+void GameMgr::SpawnEnemy1(Vec2 Pos = Vec2(1920 / 2,-100))
+{
+	ObjMgr->AddObject(new Enemy1(Pos), "Enemy");
+}
+
+void GameMgr::SpawnEnemy2(Vec2 Pos = Vec2(1920 / 2, -100))
+{
+	ObjMgr->AddObject(new Enemy2(Pos), "Enemy");
+}
+
+void GameMgr::SpawnEliteEnemy1(Vec2 Pos = Vec2(1920 / 2, -100))
+{
+	ObjMgr->AddObject(new EliteEnemy1(Pos), "Enemy");
+}
+
+void GameMgr::SpawnEliteEnemy2(Vec2 Pos = Vec2(1920 / 2, -100))
+{
+	ObjMgr->AddObject(new EliteEnemy2(Pos), "Enemy");
 }
 
 void GameMgr::UnlockSkill()

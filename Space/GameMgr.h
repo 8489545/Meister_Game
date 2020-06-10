@@ -58,6 +58,11 @@ public:
 	void SpawnItem(Vec2 Pos);
 	void SpawnMiddleBoss();
 
+	void SpawnEnemy1(Vec2 Pos);
+	void SpawnEnemy2(Vec2 Pos);
+	void SpawnEliteEnemy1(Vec2 Pos);
+	void SpawnEliteEnemy2(Vec2 Pos);
+
 	void UnlockSkill();
 };
 
