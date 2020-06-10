@@ -48,6 +48,12 @@ void GameMgr::CreateUI()
 	m_CreateUI = true;
 }
 
+void GameMgr::ReleasePlayer()
+{
+	ObjMgr->DeleteObject("Player");
+	m_CreatePlayer = false;
+}
+
 void GameMgr::ReleaseUI()
 {
 	UI::GetInst()->Release();

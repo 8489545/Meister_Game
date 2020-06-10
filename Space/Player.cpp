@@ -45,7 +45,7 @@ void Player::Init()
 	m_Player = m_Front;
 	m_Player->SetParent(this);
 
-	SetPosition(1920 / 2, 900);
+	SetPosition(1920 / 2, 1200);
 
 	m_FirstSkillAcq = false;
 	m_SecendSkillAcq = false;
@@ -181,6 +181,10 @@ void Player::OnCollision(Object* other)
 
 void Player::Move()
 {
+	if (m_Position.y >= GameMgr::GetInst()->YMAX)
+	{
+		m_Position.y -= 100.f * dt;
+	}
 	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_Position.x >= GameMgr::GetInst()->XMIN)
 	{
 		m_Position.x -= m_Speed * dt;

@@ -27,6 +27,9 @@ void GameScreen2::Init()
 
 	m_RBox->m_Layer = 1;
 	m_LBox->m_Layer = 1;
+
+	GameMgr::GetInst()->CreatePlayer();
+	GameMgr::GetInst()->CreateUI();
 }
 
 void GameScreen2::Release()

@@ -71,6 +71,8 @@ void GameScreen::Update(float deltaTime, float time)
 
 	if (INPUT->GetKey(VK_F3) == KeyState::DOWN)
 	{
+		GameMgr::GetInst()->ReleasePlayer();
+		GameMgr::GetInst()->ReleaseUI();
 		SceneDirector::GetInst()->ChangeScene(new GameScreen2());
 	}
 }

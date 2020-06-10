@@ -49,6 +49,7 @@ public:
 	void CreatePlayer();
 	void CreateUI();
 
+	void ReleasePlayer();
 	void ReleaseUI();
 
 	void ChangeFireMode();
