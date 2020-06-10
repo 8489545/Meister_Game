@@ -17,6 +17,7 @@ public:
 	float m_LastMoveTime;
 
 	void Move();
+	void Shot();
 
 	void Update(float deltaTime, float Time);
 	void Render();

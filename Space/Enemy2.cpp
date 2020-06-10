@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Enemy2.h"
+#include"EnemyBullet.h"
 
 Enemy2::Enemy2(Vec2 Pos)
 {
@@ -48,6 +49,10 @@ void Enemy2::Move()
 	}
 }
 
+void Enemy2::Shot()
+{
+}
+
 void Enemy2::Update(float deltaTime, float Time)
 {
 	m_LastMoveTime += dt;
@@ -60,6 +65,12 @@ void Enemy2::Update(float deltaTime, float Time)
 	else if (m_LastMoveTime >= m_MoveWaitingTime)
 	{
 		Move();
+	}
+
+	if (m_LastFireTick >= m_FireDelay)
+	{
+		ObjMgr->AddObject(new EnemyBullet(Vec2(m_Position.x, m_Position.y + 60), m_Atk, 400, 0, true, 50, true), "EnemyBullet");
+		m_LastFireTick = 0.f;
 	}
 }
 
