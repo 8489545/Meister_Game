@@ -24,6 +24,7 @@ public:
 	float XMAX, XMIN, YMAX, YMIN;
 
 	bool m_CreatePlayer;
+	bool m_CreateUI;
 	SHOTTYPE m_PlayerShotType;
 
 	PlayerStatus m_PlayerStatus;
@@ -47,6 +48,8 @@ public:
 
 	void CreatePlayer();
 	void CreateUI();
+
+	void ReleaseUI();
 
 	void ChangeFireMode();
 

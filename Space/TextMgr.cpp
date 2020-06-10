@@ -40,19 +40,29 @@ bool TextMgr::Init(int height, bool bold, bool italic, const std::string& fontna
 
 int TextMgr::print(const std::string& str, int x, int y)
 {
-	if (m_pFont == NULL)
-		return 0;
+	if (m_pFont != nullptr)
+	{
+		m_FontRect.top = y;
+		m_FontRect.left = x;
 
-	m_FontRect.top = y;
-	m_FontRect.left = x;
-
-	Vec2 rCenter = Vec2((float)x, (float)y);
-	D3DXMatrixTransformation2D(&m_wMat, NULL, 0.0f, NULL, &rCenter, m_Angle, NULL);
-	Renderer::GetInst()->GetSprite()->SetTransform(&m_wMat);
-	return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(), str.c_str(), -1, &m_FontRect, DT_LEFT, m_Color);
+		Vec2 rCenter = Vec2((float)x, (float)y);
+		D3DXMatrixTransformation2D(&m_wMat, NULL, 0.0f, NULL, &rCenter, m_Angle, NULL);
+		Renderer::GetInst()->GetSprite()->SetTransform(&m_wMat);
+		return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(), str.c_str(), -1, &m_FontRect, DT_LEFT, m_Color);
+	}
+	return 0;
 }
 
 void TextMgr::SetColor(int a, int r, int g, int b)
 {
 	m_Color = D3DCOLOR_ARGB(a, r, g, b);
+}
+
+void TextMgr::Release()
+{
+	if (m_pFont != nullptr)
+	{
+		m_pFont->Release();
+		m_pFont = nullptr;
+	}
 }

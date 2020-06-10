@@ -55,6 +55,8 @@ void UI::Init()
 
 void UI::Release()
 {
+	ObjMgr->DeleteObject("UI");
+	m_UIText->Release();
 }
 
 void UI::Update()

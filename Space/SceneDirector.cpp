@@ -33,7 +33,7 @@ void SceneDirector::Update(float deltaTime, float time)
 	if (m_CurrentScene)
 		m_CurrentScene->Update(deltaTime, time);
 
-	if (GameMgr::GetInst()->m_CreatePlayer)
+	if (GameMgr::GetInst()->m_CreateUI)
 		UI::GetInst()->Update();
 
 }
@@ -44,7 +44,7 @@ void SceneDirector::Render()
 		m_CurrentScene->Render();
 	ObjMgr->Render();
 
-	if(GameMgr::GetInst()->m_CreatePlayer)
+	if(GameMgr::GetInst()->m_CreateUI)
 		UI::GetInst()->Render();
 
 }

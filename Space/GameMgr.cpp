@@ -19,6 +19,7 @@ void GameMgr::Init()
 	m_FirstSkill = false;
 	m_SecendSkill = false;
 	m_ScrollingStop = false;
+	m_CreateUI = false;
 	m_FirstSkillCooldown = 0;
 	m_SecendSkillCooldown = 0;
 	m_PlayerShotType = SHOTTYPE::DIRECT;
@@ -40,6 +41,14 @@ void GameMgr::CreatePlayer()
 void GameMgr::CreateUI()
 {
 	UI::GetInst()->Init();
+	m_CreateUI = true;
+}
+
+void GameMgr::ReleaseUI()
+{
+	UI::GetInst()->Release();
+	UI::GetInst()->ReleaseInst();
+	m_CreateUI = false;
 }
 
 void GameMgr::ChangeFireMode()

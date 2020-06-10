@@ -62,6 +62,11 @@ void GameScreen::Update(float deltaTime, float time)
 		m_isStart = true;
 		INPUT->ButtonDown(false);
 	}
+
+	if (INPUT->GetKey('O') == KeyState::DOWN)
+	{
+		GameMgr::GetInst()->ReleaseUI();
+	}
 }
 
 void GameScreen::Render()
