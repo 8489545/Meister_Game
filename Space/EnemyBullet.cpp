@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "EnemyBullet.h"
 
-EnemyBullet::EnemyBullet(Vec2 Pos, float atk, float speed, float angle, bool isrand, int randrange, bool playerguidance, std::wstring filename)
+EnemyBullet::EnemyBullet(Vec2 Pos, float atk, float speed, float angle /* degree */, bool isrand, int randrange, bool playerguidance, std::wstring filename)
 {
 	m_Bullet = Sprite::Create(L"Painting/Object/Bullet/"+ filename + L".png");
 	m_Bullet->SetParent(this);

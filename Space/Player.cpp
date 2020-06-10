@@ -4,7 +4,7 @@
 #include"SpreadBullet.h"
 #include"Shield.h"
 #include"Bomb.h"
-#include"Enemy2.h"
+#include"EliteEnemy1.h"
 #include"Item.h"
 #include"Laser.h"
 
@@ -56,7 +56,7 @@ void Player::Init()
 	m_HP = m_MAXHP;
 	m_Exp = 0;
 	m_Level = 1;
-	m_DirectBasicAtk = 100.f;
+	m_DirectBasicAtk = 50.f;
 	m_SpreadBasicAtk = m_DirectBasicAtk * 0.66f;
 	m_Speed = 300.f;
 	m_RPMIncrease = 0.f;
@@ -99,7 +99,7 @@ void Player::Update(float deltaTime, float Time)
 		ObjMgr->AddObject(new Item(Vec2(1920 / 2, 300)), "ITEM");
 	if (INPUT->GetKey('A') == KeyState::DOWN)
 	{
-		ObjMgr->AddObject(new Enemy2(Vec2(1920 / 2, -100)), "Enemy");
+		ObjMgr->AddObject(new EliteEnemy1(Vec2(1920 / 2, -100)), "Enemy");
 	}
 }
 

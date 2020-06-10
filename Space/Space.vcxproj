@@ -26,6 +26,7 @@
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DirectBullet.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
+    <ClCompile Include="EliteEnemy1.cpp" />
     <ClCompile Include="Enemy1.cpp" />
     <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="DirectBullet.h" />
     <ClInclude Include="EffectMgr.h" />
+    <ClInclude Include="EliteEnemy1.h" />
     <ClInclude Include="Enemy1.h" />
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="EnemyBullet.h" />
