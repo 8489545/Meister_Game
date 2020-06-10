@@ -16,6 +16,7 @@ public:
 	bool m_isStart;
 	bool m_CompleteTutorials;
 
+	void EnemySpawn();
 	void Update(float deltaTime, float time);
 	void Render();
 };

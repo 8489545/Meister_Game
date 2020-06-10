@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameScreen.h"
 #include"MiddleBoss.h"
+#include"GameScreen2.h"
 
 void GameScreen::Init()
 {
@@ -36,6 +37,11 @@ void GameScreen::Release()
 {
 }
 
+void GameScreen::EnemySpawn()
+{
+
+}
+
 void GameScreen::Update(float deltaTime, float time)
 {
 	if (!GameMgr::GetInst()->m_ScrollingStop)
@@ -63,9 +69,9 @@ void GameScreen::Update(float deltaTime, float time)
 		INPUT->ButtonDown(false);
 	}
 
-	if (INPUT->GetKey('O') == KeyState::DOWN)
+	if (INPUT->GetKey(VK_F3) == KeyState::DOWN)
 	{
-		GameMgr::GetInst()->ReleaseUI();
+		SceneDirector::GetInst()->ChangeScene(new GameScreen2());
 	}
 }
 
