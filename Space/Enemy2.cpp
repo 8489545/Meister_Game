@@ -11,14 +11,14 @@ Enemy2::Enemy2(Vec2 Pos)
 
 	m_Speed = 400.f;
 	m_HP = 700.f;
-	m_Atk = 50.f;
+	m_Atk = 45.f;
 
 	m_LastFireTick = 0.f;
-	m_FireDelay = 0.5f;
+	m_FireDelay = 1.0f;
 
 	m_RandomPosition = Vec2((rand() % 600) + 660, (rand() % 700));
 
-	m_MoveWaitingTime = 2.f;
+	m_MoveWaitingTime = 3.f;
 	m_LastMoveTime = 0.f;
 	m_NowTime = 0.f;
 	m_HoldingTime = 10.f;
@@ -122,7 +122,7 @@ void Enemy2::OnCollision(Object* other)
 		if (INPUT->GetKey(VK_SPACE) == KeyState::DOWN)
 		{
 			m_Tag = "Bullet";
-			m_Atk = m_Atk * 5;
+			m_Atk = m_Atk * 10;
 		}
 	}
 	if (other->m_Tag == "Enemy" && m_Tag == "Bullet")
