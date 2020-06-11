@@ -8,6 +8,7 @@
 #include"Enemy2.h"
 #include"EliteEnemy1.h"
 #include"EliteEnemy2.h"
+#include"FinalBoss.h"
 
 GameMgr::GameMgr()
 {
@@ -87,6 +88,11 @@ void GameMgr::SpawnItem(Vec2 Pos)
 void GameMgr::SpawnMiddleBoss()
 {
 	ObjMgr->AddObject(new MiddleBoss(), "MiddleBoss");
+}
+
+void GameMgr::SpawnFinalBoss()
+{
+	ObjMgr->AddObject(new FinalBoss(), "FianlBoss");
 }
 
 void GameMgr::SpawnEnemy1(Vec2 Pos = Vec2(1920 / 2,-100))

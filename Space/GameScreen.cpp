@@ -19,8 +19,8 @@ void GameScreen::Init()
 	m_LBox = Sprite::Create(L"Painting/GameScreen/BlackBox.png");
 	m_LBox->SetPosition(3180 / 2, 1080 / 2);
 
-	ObjMgr->AddObject(m_RBox, "Obj");
-	ObjMgr->AddObject(m_LBox, "Obj");
+	//ObjMgr->AddObject(m_RBox, "Obj");
+	//ObjMgr->AddObject(m_LBox, "Obj");
 
 	m_RBox->m_Layer = 1;
 	m_LBox->m_Layer = 1;
@@ -31,6 +31,8 @@ void GameScreen::Init()
 
 	m_isStart = false;
 	m_CompleteTutorials = false;
+
+	GameMgr::GetInst()->SpawnFinalBoss();
 }
 
 void GameScreen::Release()
