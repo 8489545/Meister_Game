@@ -42,13 +42,21 @@ FinalBoss::FinalBoss()
 	m_RWingCol->m_Visible = false;
 	m_TailWingCol->m_Visible = false;
 
-	ObjMgr->AddObject(m_LProp1, "Effect");
-	ObjMgr->AddObject(m_LProp2, "Effect");
-	ObjMgr->AddObject(m_LProp3, "Effect");
+	ObjMgr->AddObject(m_LProp1, "Decor");
+	ObjMgr->AddObject(m_LProp2, "Decor");
+	ObjMgr->AddObject(m_LProp3, "Decor");
 
-	ObjMgr->AddObject(m_RProp1, "Effect");
-	ObjMgr->AddObject(m_RProp2, "Effect");
-	ObjMgr->AddObject(m_RProp3, "Effect");
+	ObjMgr->AddObject(m_RProp1, "Decor");
+	ObjMgr->AddObject(m_RProp2, "Decor");
+	ObjMgr->AddObject(m_RProp3, "Decor");
+
+	m_LProp1->m_Layer = 1;
+	m_LProp2->m_Layer = 1;
+	m_LProp3->m_Layer = 1;
+
+	m_RProp1->m_Layer = 1;
+	m_RProp2->m_Layer = 1;
+	m_RProp3->m_Layer = 1;
 
 	ObjMgr->AddObject(m_BodyCol, "BossCol");
 	ObjMgr->AddObject(m_LWingCol, "BossCol");
