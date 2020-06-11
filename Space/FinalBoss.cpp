@@ -11,6 +11,11 @@ FinalBoss::FinalBoss()
 	m_RWingCol = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/WingCol.png");
 	m_TailWingCol = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/TailWingCol.png");
 
+	m_BodyCol->m_Visible = false;
+	m_LWingCol->m_Visible = false;
+	m_RWingCol->m_Visible = false;
+	m_TailWingCol->m_Visible = false;
+
 	ObjMgr->AddObject(m_BodyCol, "BossCol");
 	ObjMgr->AddObject(m_LWingCol, "BossCol");
 	ObjMgr->AddObject(m_RWingCol, "BossCol");
@@ -27,8 +32,18 @@ void FinalBoss::CollisionCheak()
 {
 }
 
+void FinalBoss::Collision()
+{
+	m_Body->B = 0;
+	m_Body->G = 0;
+}
+
 void FinalBoss::Update(float deltatime, float Time)
 {
+	if(m_Body->B < 255)
+		m_Body->B += 17;
+	if (m_Body->G < 255)
+		m_Body->G += 17;
 	SetObjectsPosition();
 
 	ObjMgr->CollisionCheak(this,"Bullet");
@@ -50,6 +65,7 @@ void FinalBoss::OnCollision(Object* other)
 			float randy = (rand() % (int)m_BodyCol->m_Size.y) + m_BodyCol->m_Position.y - m_BodyCol->m_Size.y / 2;
 			m_HP -= other->m_Atk;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+			Collision();
 			other->SetDestroy(true);
 		}
 		if (IntersectRect(&rc, &m_LWingCol->m_Collision, &other->m_Collision))
@@ -58,6 +74,7 @@ void FinalBoss::OnCollision(Object* other)
 			float randy = (rand() % (int)m_LWingCol->m_Size.y) + m_LWingCol->m_Position.y - m_LWingCol->m_Size.y / 2;
 			m_HP -= other->m_Atk;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+			Collision();
 			other->SetDestroy(true);
 		}
 		if (IntersectRect(&rc, &m_RWingCol->m_Collision, &other->m_Collision))
@@ -66,6 +83,7 @@ void FinalBoss::OnCollision(Object* other)
 			float randy = (rand() % (int)m_RWingCol->m_Size.y) + m_RWingCol->m_Position.y - m_RWingCol->m_Size.y / 2;
 			m_HP -= other->m_Atk;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+			Collision();
 			other->SetDestroy(true);
 		}
 		if (IntersectRect(&rc, &m_TailWingCol->m_Collision, &other->m_Collision))
@@ -74,6 +92,7 @@ void FinalBoss::OnCollision(Object* other)
 			float randy = (rand() % (int)m_TailWingCol->m_Size.y) + m_TailWingCol->m_Position.y - m_TailWingCol->m_Size.y / 2;
 			m_HP -= other->m_Atk;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+			Collision();
 			other->SetDestroy(true);
 		}
 
@@ -83,6 +102,7 @@ void FinalBoss::OnCollision(Object* other)
 			float randy = (rand() % (int)m_TailWingCol->m_Size.y) + m_TailWingCol->m_Position.y - m_TailWingCol->m_Size.y / 2;
 			m_HP -= other->m_Atk;
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion/", 1, 9, 5, Vec2(randx, randy)), "Effect");
+			Collision();
 			other->SetDestroy(true);
 		}
 	}

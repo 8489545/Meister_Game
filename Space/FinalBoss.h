@@ -12,6 +12,7 @@ public:
 	~FinalBoss();
 
 	void CollisionCheak();
+	void Collision();
 
 	void Update(float deltatime,float Time);
 	void Render();
