@@ -14,6 +14,16 @@ class FinalBoss : public Object
 	Animation* m_RProp1;
 	Animation* m_RProp2;
 	Animation* m_RProp3;
+
+	Sprite* m_LCannon1;
+	Sprite* m_LCannon2;
+	Sprite* m_LCannon3;
+
+	Sprite* m_MidCannon;
+
+	Sprite* m_RCannon1;
+	Sprite* m_RCannon2;
+	Sprite* m_RCannon3;
 public:
 	FinalBoss();
 	~FinalBoss();

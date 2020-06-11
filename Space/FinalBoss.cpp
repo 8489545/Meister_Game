@@ -13,6 +13,14 @@ FinalBoss::FinalBoss()
 	m_RWingCol = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/WingCol.png");
 	m_TailWingCol = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/TailWingCol.png");
 
+	m_LCannon1 = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+	m_LCannon2 = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+	m_LCannon3 = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+	m_MidCannon = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+	m_RCannon1 = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+	m_RCannon2 = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+	m_RCannon3 = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Cannon.png");
+
 	m_LProp1 = new Animation();
 	m_LProp2 = new Animation();
 	m_LProp3 = new Animation();
@@ -50,6 +58,15 @@ FinalBoss::FinalBoss()
 	ObjMgr->AddObject(m_RProp2, "Decor");
 	ObjMgr->AddObject(m_RProp3, "Decor");
 
+	ObjMgr->AddObject(m_LCannon1, "Decor");
+	ObjMgr->AddObject(m_LCannon1, "Decor");
+	ObjMgr->AddObject(m_LCannon1, "Decor");
+	ObjMgr->AddObject(m_MidCannon, "Decor");
+	ObjMgr->AddObject(m_RCannon1, "Decor");
+	ObjMgr->AddObject(m_RCannon2, "Decor");
+	ObjMgr->AddObject(m_RCannon3, "Decor");
+
+
 	m_LProp1->m_Layer = 1;
 	m_LProp2->m_Layer = 1;
 	m_LProp3->m_Layer = 1;
@@ -57,6 +74,14 @@ FinalBoss::FinalBoss()
 	m_RProp1->m_Layer = 1;
 	m_RProp2->m_Layer = 1;
 	m_RProp3->m_Layer = 1;
+
+	m_LCannon1->m_Layer = 1;
+	m_LCannon1->m_Layer = 1;
+	m_LCannon1->m_Layer = 1;
+	m_MidCannon->m_Layer = 1;
+	m_RCannon1->m_Layer = 1;
+	m_RCannon2->m_Layer = 1;
+	m_RCannon3->m_Layer = 1;
 
 	ObjMgr->AddObject(m_BodyCol, "BossCol");
 	ObjMgr->AddObject(m_LWingCol, "BossCol");
