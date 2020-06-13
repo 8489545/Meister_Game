@@ -57,9 +57,13 @@ public:
 	void Pattern3();
 	void Collision();
 
+	void SetCannonRot();
+
 	void Update(float deltatime,float Time);
 	void Render();
 	void OnCollision(Object* other);
+
+	float GetVec2Angle(Vec2 A, Vec2 B);
 
 	void SetObjectsPosition();
 };

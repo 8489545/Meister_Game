@@ -133,6 +133,7 @@ FinalBoss::FinalBoss()
 	m_Pattern1MoveTime = 0.f;
 	m_Speed = 400.f;
 	m_Pattern1RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
+	m_Atk = 40.f;
 
 	m_HP = 300000.f;
 }
@@ -200,6 +201,13 @@ void FinalBoss::Pattern1()
 			m_Pattern1MoveTime = 0.f;
 		}
 	}
+
+
+	if (m_LCannon1Tick->m_FireDelay <= m_MidCannonTick->m_LastFireTick)
+	{
+		ObjMgr->AddObject(new EnemyBullet(m_LCannon1->m_Position, m_Atk, 500, D3DXToDegree(m_LCannon1->m_Rotation), false, 0, false), "EnemyBullet");
+		m_LCannon1Tick->m_LastFireTick = 0.f;
+	}
 }
 
 void FinalBoss::Pattern2()
@@ -216,6 +224,19 @@ void FinalBoss::Collision()
 	m_Body->G = 0; 
 }
 
+void FinalBoss::SetCannonRot()
+{
+	Vec2 B = GameMgr::GetInst()->m_PlayerPos;
+
+
+	m_LCannon1->m_Rotation = GetVec2Angle(m_LCannon1->m_Position, B) + D3DXToRadian(90);
+	/*m_LCannon2->m_Rotation = GetVec2Angle(m_LCannon2->m_Position, B) + D3DXToRadian(90);
+	m_LCannon3->m_Rotation = GetVec2Angle(m_LCannon3->m_Position, B) + D3DXToRadian(90);
+	m_RCannon1->m_Rotation = GetVec2Angle(m_RCannon1->m_Position, B) + D3DXToRadian(90);
+	m_RCannon2->m_Rotation = GetVec2Angle(m_RCannon2->m_Position, B) + D3DXToRadian(90);
+	m_RCannon3->m_Rotation = GetVec2Angle(m_RCannon3->m_Position, B) + D3DXToRadian(90);*/
+}
+
 void FinalBoss::Update(float deltatime, float Time)
 {
 	if(m_Body->B < 255)
@@ -227,6 +248,8 @@ void FinalBoss::Update(float deltatime, float Time)
 		Start();
 	if (m_Phase == 1)
 		AppearMove();
+
+	SetCannonRot();
 
 	if (m_Phase == 2)
 	{
@@ -241,7 +264,7 @@ void FinalBoss::Update(float deltatime, float Time)
 
 		if (!m_isPatternProgress)
 		{
-			m_RandomPattern = (rand() % 1) + 1;
+			m_RandomPattern = (rand() % 3) + 1;
 			m_PatternChangeTick = 10.f;
 			m_isPatternProgress = true;
 		}
@@ -253,6 +276,14 @@ void FinalBoss::Update(float deltatime, float Time)
 				if (m_RandomPattern == 1)
 				{
 					Pattern1();
+				}
+				if (m_RandomPattern == 2)
+				{
+					Pattern2();
+				}
+				if (m_RandomPattern == 3)
+				{
+					Pattern3();
 				}
 			}
 			if (m_PatternChangeTick < 0)
@@ -324,6 +355,27 @@ void FinalBoss::OnCollision(Object* other)
 			other->SetDestroy(true);
 		}
 	}
+}
+
+float FinalBoss::GetVec2Angle(Vec2 A, Vec2 B)
+{
+	Vec2 C;
+	
+	C = B - A;
+	D3DXVec2Normalize(&C, &C);
+
+	float Angle;
+
+	Vec2 UA;
+	Vec2 UB;
+
+	D3DXVec2Normalize(&UA, &A);
+	D3DXVec2Normalize(&UB, &B);
+
+	if (D3DXVec2CCW(&UA, &UB) >= 0.f)
+		return acos(C.x);
+	else if (D3DXVec2CCW(&UA, &UB) < 0.f)
+		return -acos(C.x);
 }
 
 void FinalBoss::SetObjectsPosition()
