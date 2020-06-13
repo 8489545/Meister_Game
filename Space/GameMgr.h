@@ -51,6 +51,7 @@ public:
 
 	void ReleasePlayer();
 	void ReleaseUI();
+	void GameEnd();
 
 	void ChangeFireMode();
 

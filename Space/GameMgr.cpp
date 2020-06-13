@@ -9,6 +9,7 @@
 #include"EliteEnemy1.h"
 #include"EliteEnemy2.h"
 #include"FinalBoss.h"
+#include"MainScene.h"
 
 GameMgr::GameMgr()
 {
@@ -60,6 +61,15 @@ void GameMgr::ReleaseUI()
 	UI::GetInst()->Release();
 	UI::GetInst()->ReleaseInst();
 	m_CreateUI = false;
+}
+
+void GameMgr::GameEnd()
+{
+	ReleaseUI();
+	ObjMgr->Release();
+	Init();
+
+	SceneDirector::GetInst()->ChangeScene(new MainScene());
 }
 
 void GameMgr::ChangeFireMode()

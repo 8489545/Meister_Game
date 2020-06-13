@@ -26,6 +26,7 @@ class FinalBoss : public Object
 	Sprite* m_RCannon3;
 
 	Sprite* m_Warning;
+	Sprite* m_End;
 public:
 	FinalBoss();
 	~FinalBoss();
@@ -42,6 +43,7 @@ public:
 	int m_RandomPattern;
 
 	float m_WarningTick;
+	float m_EndTick;
 	float m_PatternChangeTick;
 	float m_MoveTime;
 	float m_Speed;

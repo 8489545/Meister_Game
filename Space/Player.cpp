@@ -7,6 +7,7 @@
 #include"EliteEnemy2.h"
 #include"Item.h"
 #include"Laser.h"
+#include"MainScene.h"
 
 Player::Player()
 {
@@ -97,6 +98,11 @@ void Player::Update(float deltaTime, float Time)
 		m_Exp += 50;
 	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
 		ObjMgr->AddObject(new EliteEnemy2(Vec2(1920 / 2, -100)), "Enemy");
+
+	if (m_HP <= 0)
+	{
+		GameMgr::GetInst()->GameEnd();
+	}
 
 }
 

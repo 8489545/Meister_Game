@@ -48,6 +48,8 @@ FinalBoss::FinalBoss()
 
 	m_Warning = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Warning.png");
 	m_Warning->SetPosition(1920 / 2, -300);
+	m_End = Sprite::Create(L"Painting/Object/Enemy/FinalBoss/Clear.png");
+	m_End->SetPosition(1920 / 2, -300);
 
 	m_BodyCol->m_Visible = false;
 	m_LWingCol->m_Visible = false;
@@ -55,6 +57,7 @@ FinalBoss::FinalBoss()
 	m_TailWingCol->m_Visible = false;
 
 	ObjMgr->AddObject(m_Warning, "UI");
+	ObjMgr->AddObject(m_End, "UI");
 
 	ObjMgr->AddObject(m_LProp1, "Decor");
 	ObjMgr->AddObject(m_LProp2, "Decor");
@@ -133,7 +136,8 @@ FinalBoss::FinalBoss()
 	m_MoveTime = 0.f;
 	m_Speed = 400.f;
 	m_RandPos = Vec2((rand() % 900) + 360, (rand() % 500));
-	m_Atk = 40.f;
+	m_Atk = 20.f;
+	m_EndTick = 0.f;
 
 	m_HP = 1000000;
 }
@@ -220,12 +224,12 @@ void FinalBoss::Pattern2()
 void FinalBoss::Pattern3()
 {
 	SetCannonRot();
-	m_LCannon1Tick->m_FireDelay = 0.5f;
-	m_RCannon1Tick->m_FireDelay = 0.5f;
-	m_LCannon2Tick->m_FireDelay = 0.5f;
-	m_RCannon2Tick->m_FireDelay = 0.5f;
-	m_LCannon3Tick->m_FireDelay = 0.5f;
-	m_RCannon3Tick->m_FireDelay = 0.5f;
+	m_LCannon1Tick->m_FireDelay = 0.8f;
+	m_RCannon1Tick->m_FireDelay = 0.8f;
+	m_LCannon2Tick->m_FireDelay = 0.8f;
+	m_RCannon2Tick->m_FireDelay = 0.8f;
+	m_LCannon3Tick->m_FireDelay = 0.8f;
+	m_RCannon3Tick->m_FireDelay = 0.8f;
 
 	Shot(m_LCannon1Tick, m_LCannon1->m_Position, m_Atk, 300, 0, true, 500, true);
 	Shot(m_LCannon2Tick, m_LCannon2->m_Position, m_Atk, 300, 0, true, 500, true);
@@ -243,7 +247,25 @@ void FinalBoss::Collision()
 
 void FinalBoss::End()
 {
+	if (m_End->m_Position.y >= 1080 / 2)
+	{
+		m_EndTick += dt;
 
+		if (m_EndTick >= 3.f)
+		{
+			m_End->m_Position.y += 600 * dt;
+
+			if (m_End->m_Position.y >= 1300)
+			{
+				m_End->SetDestroy(true);
+				GameMgr::GetInst()->m_ScrollingStop = false;
+				m_Phase = 4;
+				SetDestroy(true);
+			}
+		}
+	}
+	else
+		m_End->m_Position.y += 600 * dt;
 }
 
 void FinalBoss::SetCannonRot()
@@ -346,6 +368,10 @@ void FinalBoss::Update(float deltatime, float Time)
 
 		if (m_HP <= 0)
 			m_Phase = 3;
+	}
+	if (m_Phase == 3)
+	{
+		End();
 	}
 
 	SetObjectsPosition();
