@@ -56,6 +56,7 @@ public:
 	void Pattern2();
 	void Pattern3();
 	void Collision();
+	void End();
 
 	void SetCannonRot();
 
@@ -64,7 +65,7 @@ public:
 	void OnCollision(Object* other);
 
 	float GetVec2Angle(Vec2 A, Vec2 B);
-	void Shot(FireTick *fire, Vec2 Pos, float atk, float speed, float angle, bool isrand, int randrange, bool playerguidance,std::wstring filename);
+	void Shot(FireTick *fire, Vec2 Pos, float atk, float speed, float angle, bool isrand, int randrange, bool playerguidance,std::wstring filename = L"EnemyBullet");
 	void SetObjectsPosition();
 };
 

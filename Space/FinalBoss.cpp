@@ -132,10 +132,10 @@ FinalBoss::FinalBoss()
 	m_PatternChangeTick = 0.f;
 	m_MoveTime = 0.f;
 	m_Speed = 400.f;
-	m_RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
+	m_RandPos = Vec2((rand() % 900) + 360, (rand() % 500));
 	m_Atk = 40.f;
 
-	m_HP = 300000.f;
+	m_HP = 1000000;
 }
 
 FinalBoss::~FinalBoss()
@@ -177,28 +177,73 @@ void FinalBoss::AppearMove()
 
 void FinalBoss::Pattern1()
 {
-	Shot(m_LCannon1Tick, m_LCannon1->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
-	Shot(m_LCannon2Tick, m_LCannon2->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
-	Shot(m_LCannon3Tick, m_LCannon3->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
-	Shot(m_RCannon1Tick, m_RCannon1->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
-	Shot(m_RCannon2Tick, m_RCannon2->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
-	Shot(m_RCannon3Tick, m_RCannon3->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
+	m_LCannon1Tick->m_FireDelay = 1.0f;
+	m_LCannon2Tick->m_FireDelay = 1.0f;
+	m_LCannon3Tick->m_FireDelay = 1.0f;
+	m_RCannon1Tick->m_FireDelay = 1.0f;
+	m_RCannon2Tick->m_FireDelay = 1.0f;
+	m_RCannon3Tick->m_FireDelay = 1.0f;
+
+	SetCannonRot();
+	Shot(m_LCannon1Tick, m_LCannon1->m_Position, m_Atk, 800, 0, false, 0, true, L"BigBullet");
+	Shot(m_LCannon2Tick, m_LCannon2->m_Position, m_Atk, 800, 0, false, 0, true, L"BigBullet");
+	Shot(m_LCannon3Tick, m_LCannon3->m_Position, m_Atk, 800, 0, false, 0, true, L"BigBullet");
+	Shot(m_RCannon1Tick, m_RCannon1->m_Position, m_Atk, 800, 0, false, 0, true, L"BigBullet");
+	Shot(m_RCannon2Tick, m_RCannon2->m_Position, m_Atk, 800, 0, false, 0, true, L"BigBullet");
+	Shot(m_RCannon3Tick, m_RCannon3->m_Position, m_Atk, 800, 0, false, 0, true, L"BigBullet");
 }
 
 void FinalBoss::Pattern2()
 {
-	printf("P2\n");
+	m_LCannon1->m_Rotation += D3DXToRadian(200) * dt;
+	m_LCannon2->m_Rotation += D3DXToRadian(150) * dt;
+	m_LCannon3->m_Rotation += D3DXToRadian(100) * dt;
+	m_RCannon1->m_Rotation += D3DXToRadian(100) * dt;
+	m_RCannon2->m_Rotation += D3DXToRadian(150) * dt;
+	m_RCannon3->m_Rotation += D3DXToRadian(200) * dt;
+
+	m_LCannon1Tick->m_FireDelay = 0.2;
+	m_RCannon1Tick->m_FireDelay = 0.2;
+	m_LCannon2Tick->m_FireDelay = 0.2;
+	m_RCannon2Tick->m_FireDelay = 0.2;
+	m_LCannon3Tick->m_FireDelay = 0.2;
+	m_RCannon3Tick->m_FireDelay = 0.2;
+
+	Shot(m_LCannon1Tick, m_LCannon1->m_Position, m_Atk, 500, D3DXToDegree(m_LCannon1->m_Rotation), false, 0, false);
+	Shot(m_LCannon2Tick, m_LCannon2->m_Position, m_Atk, 500, D3DXToDegree(m_LCannon2->m_Rotation), false, 0, false);
+	Shot(m_LCannon3Tick, m_LCannon3->m_Position, m_Atk, 500, D3DXToDegree(m_LCannon3->m_Rotation), false, 0, false);
+	Shot(m_RCannon1Tick, m_RCannon1->m_Position, m_Atk, 500, D3DXToDegree(m_RCannon1->m_Rotation), false, 0, false);
+	Shot(m_RCannon2Tick, m_RCannon2->m_Position, m_Atk, 500, D3DXToDegree(m_RCannon2->m_Rotation), false, 0, false);
+	Shot(m_RCannon3Tick, m_RCannon3->m_Position, m_Atk, 500, D3DXToDegree(m_RCannon3->m_Rotation), false, 0, false);
 }
 
 void FinalBoss::Pattern3()
 {
-	printf("P3\n");
+	SetCannonRot();
+	m_LCannon1Tick->m_FireDelay = 0.5f;
+	m_RCannon1Tick->m_FireDelay = 0.5f;
+	m_LCannon2Tick->m_FireDelay = 0.5f;
+	m_RCannon2Tick->m_FireDelay = 0.5f;
+	m_LCannon3Tick->m_FireDelay = 0.5f;
+	m_RCannon3Tick->m_FireDelay = 0.5f;
+
+	Shot(m_LCannon1Tick, m_LCannon1->m_Position, m_Atk, 300, 0, true, 500, true);
+	Shot(m_LCannon2Tick, m_LCannon2->m_Position, m_Atk, 300, 0, true, 500, true);
+	Shot(m_LCannon3Tick, m_LCannon3->m_Position, m_Atk, 300, 0, true, 500, true);
+	Shot(m_RCannon1Tick, m_RCannon1->m_Position, m_Atk, 300, 0, true, 500, true);
+	Shot(m_RCannon2Tick, m_RCannon2->m_Position, m_Atk, 300, 0, true, 500, true);
+	Shot(m_RCannon3Tick, m_RCannon3->m_Position, m_Atk, 300, 0, true, 500, true);
 }
 
 void FinalBoss::Collision()
 {
 	m_Body->B = 0;
 	m_Body->G = 0; 
+}
+
+void FinalBoss::End()
+{
+
 }
 
 void FinalBoss::SetCannonRot()
@@ -225,8 +270,6 @@ void FinalBoss::Update(float deltatime, float Time)
 		Start();
 	if (m_Phase == 1)
 		AppearMove();
-
-	SetCannonRot();
 
 	if (m_Phase == 2)
 	{
@@ -258,7 +301,7 @@ void FinalBoss::Update(float deltatime, float Time)
 			}
 			else
 			{
-				m_RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
+				m_RandPos = Vec2((rand() % 900) + 360, (rand() % 500));
 				m_MoveTime = 0.f;
 			}
 		}
@@ -274,7 +317,7 @@ void FinalBoss::Update(float deltatime, float Time)
 		if (!m_isPatternProgress)
 		{
 			m_RandomPattern = (rand() % 3) + 1;
-			m_PatternChangeTick = 10.f;
+			m_PatternChangeTick = 30.f;
 			m_isPatternProgress = true;
 		}
 		if (m_isPatternProgress)
@@ -300,6 +343,9 @@ void FinalBoss::Update(float deltatime, float Time)
 				m_isPatternProgress = false;
 			}
 		}
+
+		if (m_HP <= 0)
+			m_Phase = 3;
 	}
 
 	SetObjectsPosition();
