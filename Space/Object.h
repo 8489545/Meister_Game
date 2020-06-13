@@ -1,4 +1,9 @@
 #pragma once
+struct FireTick
+{
+	float m_FireDelay;
+	float m_LastFireTick;
+};
 class Object
 {
 public:

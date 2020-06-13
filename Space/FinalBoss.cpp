@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FinalBoss.h"
+#include "EnemyBullet.h"
 
 //200% > 150%
 
@@ -94,11 +95,46 @@ FinalBoss::FinalBoss()
 	ObjMgr->AddObject(m_TailWingCol, "BossCol");
 
 	SetPosition(1920 / 2, -500);
-	m_WarningTick = 0.f;
 
+	m_LCannon1Tick = new FireTick();
+	m_LCannon2Tick = new FireTick();
+	m_LCannon3Tick = new FireTick();
+	m_MidCannonTick = new FireTick();
+	m_RCannon1Tick = new FireTick();
+	m_RCannon2Tick = new FireTick();
+	m_RCannon3Tick = new FireTick();
+
+	m_LCannon1Tick->m_LastFireTick = 0.f;
+	m_LCannon1Tick->m_FireDelay = 1.0f;
+
+	m_LCannon2Tick->m_LastFireTick = 0.f;
+	m_LCannon2Tick->m_FireDelay = 1.0f;
+
+	m_LCannon3Tick->m_LastFireTick = 0.f;
+	m_LCannon3Tick->m_FireDelay = 1.0f;
+
+	m_MidCannonTick->m_LastFireTick = 0.f;
+	m_MidCannonTick->m_FireDelay = 0.1f;
+
+	m_RCannon1Tick->m_LastFireTick = 0.f;
+	m_RCannon1Tick->m_FireDelay = 1.0f;
+
+	m_RCannon2Tick->m_LastFireTick = 0.f;
+	m_RCannon2Tick->m_FireDelay = 1.0f;
+
+	m_RCannon3Tick->m_LastFireTick = 0.f;
+	m_RCannon3Tick->m_FireDelay = 1.0f;
+
+	m_WarningTick = 0.f;
 	m_Phase = 0;
 	m_RandomPattern = 0;
 	m_isPatternProgress = false;
+	m_PatternChangeTick = 0.f;
+	m_Pattern1MoveTime = 0.f;
+	m_Speed = 400.f;
+	m_Pattern1RandPos = Vec2((rand() % 600) + 660, (rand() % 700));
+
+	m_HP = 300000.f;
 }
 
 FinalBoss::~FinalBoss()
@@ -138,6 +174,42 @@ void FinalBoss::AppearMove()
 		m_Phase = 2;
 }
 
+void FinalBoss::Pattern1()
+{
+	m_Pattern1MoveTime += dt;
+
+	if (m_Pattern1MoveTime >= 3.f)
+	{
+		Vec2 A, B, Dire;
+		const int EPSILON = 40;
+
+		A = m_Position;
+		B = m_Pattern1RandPos;
+
+		Dire = B - A;
+
+		D3DXVec2Normalize(&Dire, &Dire);
+
+		if (abs(m_Position.x - m_Pattern1RandPos.x) > EPSILON&& abs(m_Position.y - m_Pattern1RandPos.y) > EPSILON)
+		{
+			Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
+		}
+		else
+		{
+			m_Pattern1RandPos = Vec2((rand() % 600) + 660, (rand() % 700));
+			m_Pattern1MoveTime = 0.f;
+		}
+	}
+}
+
+void FinalBoss::Pattern2()
+{
+}
+
+void FinalBoss::Pattern3()
+{
+}
+
 void FinalBoss::Collision()
 {
 	m_Body->B = 0;
@@ -158,9 +230,35 @@ void FinalBoss::Update(float deltatime, float Time)
 
 	if (m_Phase == 2)
 	{
+		m_MidCannonTick->m_LastFireTick += dt;
+		m_MidCannon->m_Rotation += D3DXToRadian(150) * dt;
+
+		if (m_MidCannonTick->m_FireDelay <= m_MidCannonTick->m_LastFireTick && m_HP >= 0)
+		{
+			ObjMgr->AddObject(new EnemyBullet(m_MidCannon->m_Position, m_Atk, 500, D3DXToDegree(m_MidCannon->m_Rotation), false, 0, false), "EnemyBullet");
+			m_MidCannonTick->m_LastFireTick = 0.f;
+		}
+
 		if (!m_isPatternProgress)
 		{
-			m_RandomPattern = (rand() % 3) + 1;
+			m_RandomPattern = (rand() % 1) + 1;
+			m_PatternChangeTick = 10.f;
+			m_isPatternProgress = true;
+		}
+		if (m_isPatternProgress)
+		{
+			m_PatternChangeTick -= dt;
+			if (m_PatternChangeTick >= 0)
+			{
+				if (m_RandomPattern == 1)
+				{
+					Pattern1();
+				}
+			}
+			if (m_PatternChangeTick < 0)
+			{
+				m_isPatternProgress = false;
+			}
 		}
 	}
 

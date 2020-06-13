@@ -1,9 +1,4 @@
 #pragma once
-struct FireTick
-{
-	float m_FireDelay;
-	float m_LastFireTick;
-};
 class MiddleBoss : public Object
 {
 	Sprite* m_Body;

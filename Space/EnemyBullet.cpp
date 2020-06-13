@@ -85,9 +85,9 @@ void EnemyBullet::Update(float deltaTime, float Time)
 		Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
 	}
 
-	if (m_Position.x >= GameMgr::GetInst()->XMAX + 500)
+	if (m_Position.x >= GameMgr::GetInst()->XMAX + 960)
 		SetDestroy(true);
-	if (m_Position.x <= GameMgr::GetInst()->XMIN - 500)
+	if (m_Position.x <= GameMgr::GetInst()->XMIN - 960)
 		SetDestroy(true);
 	if (m_Position.y >= GameMgr::GetInst()->YMAX + 100)
 		SetDestroy(true);

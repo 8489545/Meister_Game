@@ -29,16 +29,32 @@ class FinalBoss : public Object
 public:
 	FinalBoss();
 	~FinalBoss();
+	
+	FireTick* m_LCannon1Tick;
+	FireTick* m_LCannon2Tick;
+	FireTick* m_LCannon3Tick;
+	FireTick* m_MidCannonTick;
+	FireTick* m_RCannon1Tick;
+	FireTick* m_RCannon2Tick;
+	FireTick* m_RCannon3Tick;
 
 	int m_Phase;
 	int m_RandomPattern;
 
 	float m_WarningTick;
+	float m_PatternChangeTick;
+	float m_Pattern1MoveTime;
+	float m_Speed;
 
 	bool m_isPatternProgress;
+
+	Vec2 m_Pattern1RandPos;
 	
 	void Start();
 	void AppearMove();
+	void Pattern1();
+	void Pattern2();
+	void Pattern3();
 	void Collision();
 
 	void Update(float deltatime,float Time);
