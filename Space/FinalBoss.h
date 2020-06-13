@@ -43,12 +43,12 @@ public:
 
 	float m_WarningTick;
 	float m_PatternChangeTick;
-	float m_Pattern1MoveTime;
+	float m_MoveTime;
 	float m_Speed;
 
 	bool m_isPatternProgress;
 
-	Vec2 m_Pattern1RandPos;
+	Vec2 m_RandPos;
 	
 	void Start();
 	void AppearMove();
@@ -64,7 +64,7 @@ public:
 	void OnCollision(Object* other);
 
 	float GetVec2Angle(Vec2 A, Vec2 B);
-
+	void Shot(FireTick *fire, Vec2 Pos, float atk, float speed, float angle, bool isrand, int randrange, bool playerguidance,std::wstring filename);
 	void SetObjectsPosition();
 };
 

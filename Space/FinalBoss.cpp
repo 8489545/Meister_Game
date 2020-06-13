@@ -130,9 +130,9 @@ FinalBoss::FinalBoss()
 	m_RandomPattern = 0;
 	m_isPatternProgress = false;
 	m_PatternChangeTick = 0.f;
-	m_Pattern1MoveTime = 0.f;
+	m_MoveTime = 0.f;
 	m_Speed = 400.f;
-	m_Pattern1RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
+	m_RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
 	m_Atk = 40.f;
 
 	m_HP = 300000.f;
@@ -177,45 +177,22 @@ void FinalBoss::AppearMove()
 
 void FinalBoss::Pattern1()
 {
-	m_Pattern1MoveTime += dt;
-
-	if (m_Pattern1MoveTime >= 3.f)
-	{
-		Vec2 A, B, Dire;
-		const int EPSILON = 40;
-
-		A = m_Position;
-		B = m_Pattern1RandPos;
-
-		Dire = B - A;
-
-		D3DXVec2Normalize(&Dire, &Dire);
-
-		if (abs(m_Position.x - m_Pattern1RandPos.x) > EPSILON&& abs(m_Position.y - m_Pattern1RandPos.y) > EPSILON)
-		{
-			Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
-		}
-		else
-		{
-			m_Pattern1RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
-			m_Pattern1MoveTime = 0.f;
-		}
-	}
-
-
-	if (m_LCannon1Tick->m_FireDelay <= m_MidCannonTick->m_LastFireTick)
-	{
-		ObjMgr->AddObject(new EnemyBullet(m_LCannon1->m_Position, m_Atk, 500, D3DXToDegree(m_LCannon1->m_Rotation), false, 0, false), "EnemyBullet");
-		m_LCannon1Tick->m_LastFireTick = 0.f;
-	}
+	Shot(m_LCannon1Tick, m_LCannon1->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
+	Shot(m_LCannon2Tick, m_LCannon2->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
+	Shot(m_LCannon3Tick, m_LCannon3->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
+	Shot(m_RCannon1Tick, m_RCannon1->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
+	Shot(m_RCannon2Tick, m_RCannon2->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
+	Shot(m_RCannon3Tick, m_RCannon3->m_Position, m_Atk, 800, 0, false, false, true, L"BigBullet");
 }
 
 void FinalBoss::Pattern2()
 {
+	printf("P2\n");
 }
 
 void FinalBoss::Pattern3()
 {
+	printf("P3\n");
 }
 
 void FinalBoss::Collision()
@@ -230,11 +207,11 @@ void FinalBoss::SetCannonRot()
 
 
 	m_LCannon1->m_Rotation = GetVec2Angle(m_LCannon1->m_Position, B) + D3DXToRadian(90);
-	/*m_LCannon2->m_Rotation = GetVec2Angle(m_LCannon2->m_Position, B) + D3DXToRadian(90);
+	m_LCannon2->m_Rotation = GetVec2Angle(m_LCannon2->m_Position, B) + D3DXToRadian(90);
 	m_LCannon3->m_Rotation = GetVec2Angle(m_LCannon3->m_Position, B) + D3DXToRadian(90);
 	m_RCannon1->m_Rotation = GetVec2Angle(m_RCannon1->m_Position, B) + D3DXToRadian(90);
 	m_RCannon2->m_Rotation = GetVec2Angle(m_RCannon2->m_Position, B) + D3DXToRadian(90);
-	m_RCannon3->m_Rotation = GetVec2Angle(m_RCannon3->m_Position, B) + D3DXToRadian(90);*/
+	m_RCannon3->m_Rotation = GetVec2Angle(m_RCannon3->m_Position, B) + D3DXToRadian(90);
 }
 
 void FinalBoss::Update(float deltatime, float Time)
@@ -253,7 +230,39 @@ void FinalBoss::Update(float deltatime, float Time)
 
 	if (m_Phase == 2)
 	{
+		m_LCannon1Tick->m_LastFireTick += dt;
+		m_LCannon2Tick->m_LastFireTick += dt;
+		m_LCannon3Tick->m_LastFireTick += dt;
 		m_MidCannonTick->m_LastFireTick += dt;
+		m_RCannon1Tick->m_LastFireTick += dt;
+		m_RCannon2Tick->m_LastFireTick += dt;
+		m_RCannon3Tick->m_LastFireTick += dt;
+
+		m_MoveTime += dt;
+
+		if (m_MoveTime >= 3.f)
+		{
+			Vec2 A, B, Dire;
+			const int EPSILON = 40;
+
+			A = m_Position;
+			B = m_RandPos;
+
+			Dire = B - A;
+
+			D3DXVec2Normalize(&Dire, &Dire);
+
+			if (abs(m_Position.x - m_RandPos.x) > EPSILON&& abs(m_Position.y - m_RandPos.y) > EPSILON)
+			{
+				Translate(Dire.x * m_Speed * dt, Dire.y * m_Speed * dt);
+			}
+			else
+			{
+				m_RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
+				m_MoveTime = 0.f;
+			}
+		}
+
 		m_MidCannon->m_Rotation += D3DXToRadian(150) * dt;
 
 		if (m_MidCannonTick->m_FireDelay <= m_MidCannonTick->m_LastFireTick && m_HP >= 0)
@@ -376,6 +385,16 @@ float FinalBoss::GetVec2Angle(Vec2 A, Vec2 B)
 		return acos(C.x);
 	else if (D3DXVec2CCW(&UA, &UB) < 0.f)
 		return -acos(C.x);
+}
+
+void FinalBoss::Shot(FireTick *fire, Vec2 Pos, float atk, float speed, float angle, bool isrand, int randrange, bool playerguidance, std::wstring filename)
+{
+
+	if (fire->m_FireDelay <= fire->m_LastFireTick)
+	{
+		ObjMgr->AddObject(new EnemyBullet(Pos, atk, speed, angle, isrand, randrange, playerguidance,filename), "EnemyBullet");
+		fire->m_LastFireTick = 0.f;
+	}
 }
 
 void FinalBoss::SetObjectsPosition()
