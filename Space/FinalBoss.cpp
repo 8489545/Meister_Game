@@ -132,7 +132,7 @@ FinalBoss::FinalBoss()
 	m_PatternChangeTick = 0.f;
 	m_Pattern1MoveTime = 0.f;
 	m_Speed = 400.f;
-	m_Pattern1RandPos = Vec2((rand() % 600) + 660, (rand() % 700));
+	m_Pattern1RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
 
 	m_HP = 300000.f;
 }
@@ -196,7 +196,7 @@ void FinalBoss::Pattern1()
 		}
 		else
 		{
-			m_Pattern1RandPos = Vec2((rand() % 600) + 660, (rand() % 700));
+			m_Pattern1RandPos = Vec2((rand() % 900) + 360, (rand() % 700));
 			m_Pattern1MoveTime = 0.f;
 		}
 	}
@@ -219,9 +219,9 @@ void FinalBoss::Collision()
 void FinalBoss::Update(float deltatime, float Time)
 {
 	if(m_Body->B < 255)
-		m_Body->B += 17;
+		m_Body->B += 85;
 	if (m_Body->G < 255)
-		m_Body->G += 17;
+		m_Body->G += 85;
 
 	if (m_Phase == 0)
 		Start();
