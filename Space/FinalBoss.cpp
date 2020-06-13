@@ -139,7 +139,7 @@ FinalBoss::FinalBoss()
 	m_Atk = 20.f;
 	m_EndTick = 0.f;
 
-	m_HP = 1000000;
+	m_HP = 500000;
 }
 
 FinalBoss::~FinalBoss()
