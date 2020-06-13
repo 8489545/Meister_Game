@@ -24,11 +24,21 @@ class FinalBoss : public Object
 	Sprite* m_RCannon1;
 	Sprite* m_RCannon2;
 	Sprite* m_RCannon3;
+
+	Sprite* m_Warning;
 public:
 	FinalBoss();
 	~FinalBoss();
 
-	void CollisionCheak();
+	int m_Phase;
+	int m_RandomPattern;
+
+	float m_WarningTick;
+
+	bool m_isPatternProgress;
+	
+	void Start();
+	void AppearMove();
 	void Collision();
 
 	void Update(float deltatime,float Time);
