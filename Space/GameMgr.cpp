@@ -26,6 +26,8 @@ void GameMgr::Init()
 	m_SecendSkill = false;
 	m_ScrollingStop = false;
 	m_CreateUI = false;
+	m_MiddleBossClear = false;
+	m_FinalBossClear = false;
 	m_FirstSkillCooldown = 0;
 	m_SecendSkillCooldown = 0;
 	m_PlayerShotType = SHOTTYPE::DIRECT;

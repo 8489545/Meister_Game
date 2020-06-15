@@ -38,6 +38,9 @@ public:
 
 	bool m_ScrollingStop;
 
+	bool m_MiddleBossClear;
+	bool m_FinalBossClear;
+
 	float m_FirstSkillCooldown;
 	float m_SecendSkillCooldown;
 	float m_FirstSkillMaxCooldown;

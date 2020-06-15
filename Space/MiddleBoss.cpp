@@ -126,7 +126,6 @@ MiddleBoss::~MiddleBoss()
 
 void MiddleBoss::Update(float deltaTime, float Time)
 {
-	printf("%d \n", m_Phase);
 	if (m_Phase == 0)
 		Start();
 	if (m_Phase == 1)
@@ -185,6 +184,7 @@ void MiddleBoss::End()
 			{
 				m_MidBossClear->SetDestroy(true);
 				GameMgr::GetInst()->m_ScrollingStop = false;
+				GameMgr::GetInst()->m_MiddleBossClear = true;
 				m_Phase = 5;
 				SetDestroy(true);
 			}

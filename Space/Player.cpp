@@ -8,6 +8,8 @@
 #include"Item.h"
 #include"Laser.h"
 #include"MainScene.h"
+#include"GameScreen.h"
+#include"GameScreen2.h"
 
 Player::Player()
 {
@@ -51,6 +53,7 @@ void Player::Init()
 	m_FirstSkillAcq = false;
 	m_SecendSkillAcq = false;
 	m_willLevelUPReward = false;
+	m_CheatPlayerInvin = false;
 
 	m_MAXHP = 100;
 	m_MAXExp = 100;
@@ -92,12 +95,9 @@ void Player::Update(float deltaTime, float Time)
 	Skill();
 	ColCheak();
 	Invincibility();
+	Cheat();
 	m_ColBox->m_Position = m_Position;
 	m_CatchBox->SetPosition(m_Position.x,m_Position.y - m_Size.y / 2);
-	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
-		m_Exp += 50;
-	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
-		ObjMgr->AddObject(new EliteEnemy2(Vec2(1920 / 2, -100)), "Enemy");
 
 	if (m_HP <= 0)
 	{
@@ -350,6 +350,34 @@ void Player::Invincibility()
 			m_InvinTick = 0.f;
 			m_PlayerInvincibility = false;
 		}
+	}
+}
+
+void Player::Cheat()
+{
+	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
+	{
+		if (!m_CheatPlayerInvin)
+			m_CheatPlayerInvin = true;
+		else if (m_CheatPlayerInvin)
+			m_CheatPlayerInvin = false;
+	}
+	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
+		m_Exp += m_MAXExp - m_Exp;
+	if (INPUT->GetKey(VK_F3) == KeyState::DOWN)
+		ObjMgr->AddObject(new Item(Vec2(1920 / 2,-100)), "ITEM");
+	if (INPUT->GetKey(VK_F4) == KeyState::DOWN)
+		m_HP = 0;
+	if (INPUT->GetKey(VK_F5) == KeyState::DOWN)
+	{
+		GameMgr::GetInst()->ReleaseUI();
+		SceneDirector::GetInst()->ChangeScene(new GameScreen());
+		GameMgr::GetInst()->ReleasePlayer();
+	}
+
+	if (m_CheatPlayerInvin)
+	{
+		m_HP = m_MAXHP;
 	}
 }
 

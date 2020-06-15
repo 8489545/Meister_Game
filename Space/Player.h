@@ -40,6 +40,8 @@ public:
 	bool m_willLevelUPReward;
 	bool m_PlayerInvincibility;
 
+	bool m_CheatPlayerInvin;
+
 	float m_FireDelay;
 	float m_LastFireTick;
 	float m_NowTick;
@@ -59,6 +61,7 @@ public:
 	void Skill();
 	void ColCheak();
 	void Invincibility();
+	void Cheat();
 
 	void LevelUP();
 };

@@ -37,8 +37,6 @@ void GameScreen::Init()
 	m_EnemySpawnTime = 5.f;
 	m_PercentOfEliteEnemySpawn = 30;
 	m_RandEnemySpawn = 0;
-
-	GameMgr::GetInst()->SpawnMiddleBoss();
 }
 
 void GameScreen::Release()
@@ -141,12 +139,23 @@ void GameScreen::Update(float deltaTime, float time)
 	if (m_CompleteTutorials)
 	{
 		EnemySpawn();
-	}
 
-	if (INPUT->GetKey(VK_F3) == KeyState::DOWN)
+		if (GameMgr::GetInst()->m_MiddleBossClear)
+		{
+			GameMgr::GetInst()->ReleasePlayer();
+			if (GameMgr::GetInst()->m_CreateUI)
+				GameMgr::GetInst()->ReleaseUI();
+			SceneDirector::GetInst()->ChangeScene(new GameScreen2());
+		}
+	}
+	if (INPUT->GetKey(VK_F6) == KeyState::DOWN)
 	{
+		m_CompleteTutorials = true;
+		m_Tutorials->SetDestroy(true);
+		m_isStart = true;
 		GameMgr::GetInst()->ReleasePlayer();
-		GameMgr::GetInst()->ReleaseUI();
+		if(GameMgr::GetInst()->m_CreateUI)
+			GameMgr::GetInst()->ReleaseUI();
 		SceneDirector::GetInst()->ChangeScene(new GameScreen2());
 	}
 }
