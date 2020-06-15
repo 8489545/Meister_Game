@@ -38,6 +38,7 @@ public:
 	FireTick* m_RCannon1Tick;
 	FireTick* m_RCannon2Tick;
 	FireTick* m_RCannon3Tick;
+	FireTick* m_DestroyTick;
 
 	int m_Phase;
 	int m_RandomPattern;
@@ -49,6 +50,7 @@ public:
 	float m_Speed;
 
 	bool m_isPatternProgress;
+	bool m_isDestroy;
 
 	Vec2 m_RandPos;
 	
@@ -58,6 +60,7 @@ public:
 	void Pattern2();
 	void Pattern3();
 	void Collision();
+	void Destroy();
 	void End();
 
 	void SetCannonRot();

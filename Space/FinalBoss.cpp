@@ -140,6 +140,9 @@ FinalBoss::FinalBoss()
 	m_EndTick = 0.f;
 
 	m_HP = 500000;
+
+	m_isDestroy = false;
+	m_DestroyTick = new FireTick();
 }
 
 FinalBoss::~FinalBoss()
@@ -245,6 +248,33 @@ void FinalBoss::Collision()
 	m_Body->G = 0; 
 }
 
+void FinalBoss::Destroy()
+{
+	if (m_isDestroy)
+	{
+		m_DestroyTick->m_FireDelay = 0.3f;
+		m_DestroyTick->m_LastFireTick += dt;
+
+		if (m_Position.y >= 1800.f)
+		{
+			m_Phase = 4;
+		}
+		else if (m_Position.y < 1800.f)
+		{
+			m_Position.y += 100.f * dt;
+
+			if (m_DestroyTick->m_LastFireTick >= m_DestroyTick->m_FireDelay)
+			{
+				float X = (rand() % (int)m_Size.x) + m_Position.x - m_Size.x / 2;
+				float randy = (rand() % (int)m_Size.y) + m_Position.y - m_Size.y / 2;
+				ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Explosion2/", 1, 25, 2, Vec2(X, randy)), "Effect");
+				m_DestroyTick->m_LastFireTick = 0.f;
+			}
+		}
+
+	}
+}
+
 void FinalBoss::End()
 {
 	if (m_End->m_Position.y >= 1080 / 2)
@@ -259,7 +289,7 @@ void FinalBoss::End()
 			{
 				m_End->SetDestroy(true);
 				GameMgr::GetInst()->m_ScrollingStop = false;
-				m_Phase = 4;
+				m_Phase = 5;
 				SetDestroy(true);
 			}
 		}
@@ -371,8 +401,11 @@ void FinalBoss::Update(float deltatime, float Time)
 	}
 	if (m_Phase == 3)
 	{
-		End();
+		m_isDestroy = true;
+		Destroy();
 	}
+	if(m_Phase == 4)
+		End();
 
 	SetObjectsPosition();
 

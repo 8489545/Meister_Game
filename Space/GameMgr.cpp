@@ -54,6 +54,7 @@ void GameMgr::CreateUI()
 
 void GameMgr::ReleasePlayer()
 {
+	m_AcqExp = 0;
 	ObjMgr->DeleteObject("Player");
 	m_CreatePlayer = false;
 }
