@@ -46,6 +46,8 @@ public:
 	float m_FirstSkillMaxCooldown;
 	float m_SecendSkillMaxCooldown;
 
+	int m_Score;
+
 	void Init();
 	void Release();
 

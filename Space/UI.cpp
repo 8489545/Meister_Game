@@ -73,7 +73,8 @@ void UI::Render()
 					"LEVEL : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Level) + " \n" + 
 					"RPM : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_RPM) + " \n" +
 					"SPEED : " + std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Speed) + " \n" +
-					"EXP : " +std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Exp), 0, 0);
+					"EXP : " +std::to_string(GameMgr::GetInst()->m_PlayerStatus.m_Exp) + " \n"
+					"SCORE : " + std::to_string(GameMgr::GetInst()->m_Score), 0, 0);
 	Renderer::GetInst()->GetSprite()->End();
 
 	m_FSkillGage = m_UIFirstSkillCooldown->m_Size.y / GameMgr::GetInst()->m_FirstSkillMaxCooldown;

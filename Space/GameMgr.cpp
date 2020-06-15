@@ -30,6 +30,7 @@ void GameMgr::Init()
 	m_FinalBossClear = false;
 	m_FirstSkillCooldown = 0;
 	m_SecendSkillCooldown = 0;
+	m_Score = 0;
 	m_PlayerShotType = SHOTTYPE::DIRECT;
 	m_AcqExp = 0;
 
