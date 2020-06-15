@@ -186,6 +186,7 @@ void MiddleBoss::End()
 				GameMgr::GetInst()->m_ScrollingStop = false;
 				GameMgr::GetInst()->m_MiddleBossClear = true;
 				m_Phase = 5;
+				GameMgr::GetInst()->m_Score += 5000;
 				SetDestroy(true);
 			}
 		}

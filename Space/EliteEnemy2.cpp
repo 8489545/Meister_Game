@@ -78,6 +78,7 @@ void EliteEnemy2::Update(float deltaTime, float Time)
 		if ((rand() % 5) == 0)
 			ObjMgr->AddObject(new Item(m_Position), "ITEM");
 		GameMgr::GetInst()->m_AcqExp += 50;
+		GameMgr::GetInst()->m_Score += 200;
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
 		SetDestroy(true);
 	}

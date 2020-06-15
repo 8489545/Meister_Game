@@ -142,6 +142,7 @@ void GameScreen::Update(float deltaTime, float time)
 
 		if (GameMgr::GetInst()->m_MiddleBossClear)
 		{
+			GameMgr::GetInst()->m_Score += GameMgr::GetInst()->m_PlayerStatus.m_HP * 500;
 			GameMgr::GetInst()->ReleasePlayer();
 			if (GameMgr::GetInst()->m_CreateUI)
 				GameMgr::GetInst()->ReleaseUI();

@@ -109,6 +109,7 @@ void Enemy2::Update(float deltaTime, float Time)
 			ObjMgr->AddObject(new Item(m_Position), "ITEM");
 
 		GameMgr::GetInst()->m_AcqExp += 20;
+		GameMgr::GetInst()->m_Score += 50;
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Object/Effect/Big/", 1, 9, 5, m_Position), "Effect");
 		SetDestroy(true);
 	}

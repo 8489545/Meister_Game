@@ -289,6 +289,7 @@ void FinalBoss::End()
 			{
 				m_End->SetDestroy(true);
 				GameMgr::GetInst()->m_ScrollingStop = false;
+				GameMgr::GetInst()->m_Score += 10000;
 				m_Phase = 5;
 				SetDestroy(true);
 			}
