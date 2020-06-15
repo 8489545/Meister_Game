@@ -76,7 +76,7 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_LeftBigCannon, "Enemy");
 	ObjMgr->AddObject(m_RightBigCannon, "Enemy");
 
-	ObjMgr->AddObject(m_MidDecor2, "Effect");
+	ObjMgr->AddObject(m_MidDecor2, "Decor");
 	ObjMgr->AddObject(m_MidCannon2, "Enemy");
 
 
