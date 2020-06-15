@@ -51,15 +51,15 @@ MiddleBoss::MiddleBoss()
 	ObjMgr->AddObject(m_MidBossWarning, "UI");
 	ObjMgr->AddObject(m_MidBossClear, "UI");
 
-	ObjMgr->AddObject(m_LeftDes1, "Effect");
-	ObjMgr->AddObject(m_RightDes1, "Effect");
-	ObjMgr->AddObject(m_MidDes1, "Effect");
+	ObjMgr->AddObject(m_LeftDes1, "Decor");
+	ObjMgr->AddObject(m_RightDes1, "Decor");
+	ObjMgr->AddObject(m_MidDes1, "Decor");
 
-	ObjMgr->AddObject(m_LeftDes2, "Effect");
-	ObjMgr->AddObject(m_RightDes2, "Effect");
-	ObjMgr->AddObject(m_MidDes2, "Effect");
+	ObjMgr->AddObject(m_LeftDes2, "Decor");
+	ObjMgr->AddObject(m_RightDes2, "Decor");
+	ObjMgr->AddObject(m_MidDes2, "Decor");
 
-	ObjMgr->AddObject(m_MidDes3, "Effect");
+	ObjMgr->AddObject(m_MidDes3, "Decor");
 
 	ObjMgr->AddObject(m_LeftCannon1, "Enemy");
 	ObjMgr->AddObject(m_RightCannon1, "Enemy");
