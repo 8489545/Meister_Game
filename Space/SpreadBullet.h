@@ -10,6 +10,7 @@ public:
 
 	float m_Speed;
 
+	void AimHack();
 	void Update(float delatTime, float Time);
 	void Render();
 	void OnCollision(Object* other);

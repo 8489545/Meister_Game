@@ -479,8 +479,6 @@ float FinalBoss::GetVec2Angle(Vec2 A, Vec2 B)
 	C = B - A;
 	D3DXVec2Normalize(&C, &C);
 
-	float Angle;
-
 	Vec2 UA;
 	Vec2 UB;
 

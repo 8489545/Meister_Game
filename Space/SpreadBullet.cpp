@@ -21,13 +21,47 @@ SpreadBullet::~SpreadBullet()
 {
 }
 
+void SpreadBullet::AimHack()
+{
+	Vec2 A, B, C;
+
+	A = m_Position;
+
+	for (auto& iter : ObjMgr->m_Objects)
+	{
+		if (iter->m_Tag == "Enemy")
+		{
+			B = iter->m_Position;
+		}
+	}
+
+	if (B.x <= -1000)
+		B = Vec2(1920 / 2, -100);
+
+	C = B - A;
+
+	D3DXVec2Normalize(&C, &C);
+
+	Vec2 UA;
+	Vec2 UB;
+
+	D3DXVec2Normalize(&UA, &A);
+	D3DXVec2Normalize(&UB, &B);
+
+	D3DXVec2CCW(&UA, &UB);
+	m_Rotation = -acos(C.x) + D3DXToRadian(90);
+	Translate(C.x * m_Speed * dt, C.y * m_Speed * dt);
+}
+
 void SpreadBullet::Update(float delatTime, float Time)
 {
-	m_Dire = m_ArrivePos - m_StartPos;
+	/*m_Dire = m_ArrivePos - m_StartPos;
 
 	D3DXVec2Normalize(&m_Dire, &m_ArrivePos);
 
-	Translate(m_Dire.x * m_Speed * dt, m_Dire.y * m_Speed * dt);
+	Translate(m_Dire.x * m_Speed * dt, m_Dire.y * m_Speed * dt);*/
+
+	AimHack();
 
 	if (m_Position.y <= -100.f)
 	{
