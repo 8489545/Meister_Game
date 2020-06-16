@@ -15,6 +15,11 @@ public:
 	int m_Atk;
 	float m_RPM;
 };
+struct RankingPlayer
+{
+	int score;
+	std::string name;
+};
 class GameMgr : public Singleton<GameMgr>
 {
 public:
@@ -22,6 +27,8 @@ public:
 	~GameMgr();
 
 	float XMAX, XMIN, YMAX, YMIN;
+
+	std::vector<RankingPlayer*> Ranks;
 
 	bool m_CreatePlayer;
 	bool m_CreateUI;

@@ -70,6 +70,10 @@ void InputScoreScene::Update(float deltaTime, float Time)
 
 	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_BackButton) && INPUT->GetButtonDown())
 	{
+		RankingPlayer* player = new RankingPlayer();
+		player->name = name;
+		player->score = GameMgr::GetInst()->m_Score;
+		GameMgr::GetInst()->Ranks.push_back(player);
 		SceneDirector::GetInst()->ChangeScene(new MainScene());
 	}
 }
