@@ -144,6 +144,9 @@
     <ClCompile Include="FinalBoss.cpp">
       <Filter>Game\Object\OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="InputScoreScene.cpp">
+      <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="FinalBoss.h">
       <Filter>Game\Object\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="InputScoreScene.h">
+      <Filter>Game\Object\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

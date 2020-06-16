@@ -23,6 +23,7 @@ inline void SafeDelete(T*& x);
 #include<string>
 #include<sstream>
 #include<cmath>
+#include<conio.h>
 //
 
 #include"Singleton.h"

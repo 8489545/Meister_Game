@@ -36,6 +36,7 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameScreen2.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputScoreScene.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GameScreen2.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InputScoreScene.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="MainScene.h" />
