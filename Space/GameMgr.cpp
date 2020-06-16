@@ -10,6 +10,7 @@
 #include"EliteEnemy2.h"
 #include"FinalBoss.h"
 #include"MainScene.h"
+#include"InputScoreScene.h";
 
 GameMgr::GameMgr()
 {
@@ -80,7 +81,7 @@ void GameMgr::GameEnd()
 	ObjMgr->Release();
 	Init();
 
-	SceneDirector::GetInst()->ChangeScene(new MainScene());
+	SceneDirector::GetInst()->ChangeScene(new InputScoreScene());
 }
 
 void GameMgr::SortRanking()

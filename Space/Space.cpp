@@ -1,6 +1,5 @@
 #include"stdafx.h"
 #include"MainScene.h"
-#include"InputScoreScene.h"
 
 INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 {
@@ -12,7 +11,7 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 #endif
 	App::GetInst()->Init(1920, 1080, 1);
 	GameMgr::GetInst()->Init();
-	SceneDirector::GetInst()->ChangeScene(new InputScoreScene());
+	SceneDirector::GetInst()->ChangeScene(new MainScene());
 	App::GetInst()->Run();
 	return 0;
 }
