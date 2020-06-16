@@ -51,8 +51,8 @@ void DirectBullet::AimHack()
 
 void DirectBullet::Update(float delatTime, float Time)
 {
-	//m_Position.y -= m_Speed * dt;
-	AimHack();
+	m_Position.y -= m_Speed * dt;
+	//AimHack();
 
 	if (m_Position.y <= -100.f)
 	{

@@ -55,13 +55,13 @@ void SpreadBullet::AimHack()
 
 void SpreadBullet::Update(float delatTime, float Time)
 {
-	/*m_Dire = m_ArrivePos - m_StartPos;
+	m_Dire = m_ArrivePos - m_StartPos;
 
 	D3DXVec2Normalize(&m_Dire, &m_ArrivePos);
 
-	Translate(m_Dire.x * m_Speed * dt, m_Dire.y * m_Speed * dt);*/
+	Translate(m_Dire.x * m_Speed * dt, m_Dire.y * m_Speed * dt);
 
-	AimHack();
+	//AimHack();
 
 	if (m_Position.y <= -100.f)
 	{
