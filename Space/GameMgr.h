@@ -67,6 +67,7 @@ public:
 	int m_Score;
 
 	void Init();
+	void RankInit();
 	void Release();
 
 	void CreatePlayer();

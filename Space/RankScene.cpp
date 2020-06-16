@@ -39,6 +39,7 @@ void RankScene::Update(float deltaTime, float Time)
 	
 	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Back) && INPUT->GetButtonDown())
 	{
+		INPUT->ButtonDown(false);
 		SceneDirector::GetInst()->ChangeScene(new MainScene());
 	}
 }

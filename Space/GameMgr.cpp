@@ -31,18 +31,21 @@ void GameMgr::Init()
 	m_FinalBossClear = false;
 	m_FirstSkillCooldown = 0;
 	m_SecendSkillCooldown = 0;
-	m_Score = 0;
 	m_PlayerShotType = SHOTTYPE::DIRECT;
 	m_AcqExp = 0;
 
+	SetPlayerStatus(0, 0, 0, 0, 0, 0);
+}
+
+void GameMgr::RankInit()
+{
 	RankingPlayer* dummy = new RankingPlayer();
 	dummy->name = "UNKNOWN";
 	dummy->score = 0;
 	Ranks.push_back(dummy);
 	Ranks.push_back(dummy);
 	Ranks.push_back(dummy);
-
-	SetPlayerStatus(0, 0, 0, 0, 0, 0);
+	m_Score = 0;
 }
 
 void GameMgr::Release()
