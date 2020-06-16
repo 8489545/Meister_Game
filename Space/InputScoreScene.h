@@ -14,6 +14,7 @@ public:
 	~InputScoreScene();
 
 	bool m_isTextEntered;
+	bool m_OverOne;
 	int m_Key[256];
 	int m_PrevKey[256];
 

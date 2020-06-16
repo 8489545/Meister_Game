@@ -68,13 +68,25 @@ void InputScoreScene::Update(float deltaTime, float Time)
 		}
 	}
 
-	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_BackButton) && INPUT->GetButtonDown())
+	if (name.size() > 0)
 	{
-		RankingPlayer* player = new RankingPlayer();
-		player->name = name;
-		player->score = GameMgr::GetInst()->m_Score;
-		GameMgr::GetInst()->Ranks.push_back(player);
-		SceneDirector::GetInst()->ChangeScene(new MainScene());
+		m_OverOne = true;
+	}
+	else if (name.size() <= 0)
+	{
+		m_OverOne = false;
+	}
+
+	if (m_OverOne)
+	{
+		if (CollisionMgr::GetInst()->MouseWithBoxSize(m_BackButton) && INPUT->GetButtonDown())
+		{
+			RankingPlayer* player = new RankingPlayer();
+			player->name = name;
+			player->score = GameMgr::GetInst()->m_Score;
+			GameMgr::GetInst()->Ranks.push_back(player);
+			SceneDirector::GetInst()->ChangeScene(new MainScene());
+		}
 	}
 }
 
