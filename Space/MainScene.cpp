@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainScene.h"
 #include"GameScreen.h"
+#include"RankScene.h"
 
 MainScene::MainScene()
 {
@@ -44,6 +45,11 @@ void MainScene::Update(float deltaTime, float time)
 	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown())
 	{
 		SceneDirector::GetInst()->ChangeScene(new GameScreen());
+		INPUT->ButtonDown(false);
+	}
+	else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Ranking) && INPUT->GetButtonDown())
+	{
+		SceneDirector::GetInst()->ChangeScene(new RankScene());
 		INPUT->ButtonDown(false);
 	}
 	else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Exit) && INPUT->GetButtonDown())

@@ -26,6 +26,17 @@ public:
 	GameMgr();
 	~GameMgr();
 
+	struct stVECTORsort
+	{
+		bool operator() (const RankingPlayer* pObject1, const RankingPlayer* pObject2) const
+		{
+			if (pObject1->score < pObject2->score)
+				return TRUE;
+
+			return FALSE;
+		}
+	};
+
 	float XMAX, XMIN, YMAX, YMIN;
 
 	std::vector<RankingPlayer*> Ranks;
@@ -64,6 +75,8 @@ public:
 	void ReleasePlayer();
 	void ReleaseUI();
 	void GameEnd();
+
+	void SortRanking();
 
 	void ChangeFireMode();
 

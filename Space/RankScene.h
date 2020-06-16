@@ -1,11 +1,16 @@
 #pragma once
 class RankScene : public Scene
 {
+	Sprite* m_BG;
+	Sprite* m_Rank;
+	Sprite* m_Back;
+
+	TextMgr* m_First;
+	TextMgr* m_Secend;
+	TextMgr* m_Third;
 public:
 	RankScene();
 	~RankScene();
-
-	std::string name;
 
 	void Init();
 	void Release();

@@ -34,6 +34,13 @@ void GameMgr::Init()
 	m_PlayerShotType = SHOTTYPE::DIRECT;
 	m_AcqExp = 0;
 
+	RankingPlayer* dummy = new RankingPlayer();
+	dummy->name = "UNKNOWN";
+	dummy->score = 0;
+	Ranks.push_back(dummy);
+	Ranks.push_back(dummy);
+	Ranks.push_back(dummy);
+
 	SetPlayerStatus(0, 0, 0, 0, 0, 0);
 }
 
@@ -74,6 +81,11 @@ void GameMgr::GameEnd()
 	Init();
 
 	SceneDirector::GetInst()->ChangeScene(new MainScene());
+}
+
+void GameMgr::SortRanking()
+{
+	std::sort(Ranks.begin(), Ranks.end());
 }
 
 void GameMgr::ChangeFireMode()
